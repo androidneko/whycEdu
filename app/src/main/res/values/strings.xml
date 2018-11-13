@@ -1,3 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">yucaiEdu</string>
+
+    <string name="app_name">武汉育才小学</string>
+    <string name="shualema_introduction">刷了么APP是一款全景化支付工具，陆续集合智能手环、银行卡、公交卡等多卡合一，在线查询、空中充值、空中发卡等多项功能于一体的智能产品，开启智能硬件+互联网金融的移动支付新入口。</string>
+    <string name="loading_notice">正在加载...</string>
+    <string name="loading_delete">正在删除...</string>
+    <string name="changepsw">正在连接，请稍候...</string>
+    <string name="setalarm">正在设置，请稍候...</string>
+    <string name="banding">正在绑定，请稍候...</string>
+    <string name="login">正在登录，请稍候...</string>
+    <string name="load_record">正在读取，请稍候...</string>
+    <string name="read_ble">"正在读取手环数据，请稍候..."</string>
+    <string name="open_blance">正在开启中...</string>
+    <string name="loading_noinfo"></string>
+    <string name="recharge_notice">充值中，请稍候...</string>
+    <string name="opencard_notice">激活中，已完成</string>
+    <string name="action_settings">设置</string>
+    <string name="title_recharge">充值收款</string>
+    <string name="analysis_licheng">全天里程</string>
+    <string name="analysis_calo">热量消耗</string>
+    <string name="analysis_step">全天步数</string>
+    <string name="title_transaction_flowing">交易流水</string>
+    <string name="title_performance_statistics">业绩统计</string>
+    <string name="title_setting">设置</string>
+    <string name="device_hint_text">请保证POS机开机并核对屏幕上的设备编号</string>
+    <string name="curr_devices_title">当前连接设备</string>
+    <string name="device_not_conn">未连接设备</string>
+    <string name="select_devices_title">选择其他设备</string>
+    <string name="device_not_find">未搜索到任何配置</string>
+    <string name="shutdown">断开</string>
+    <string name="trade_hint_title">温馨提示</string>
+    <string name="trade_icon_hint_title">如果您使用的是银行IC卡，请保持插入至交易完成。</string>
+    <string name="today">今天</string>
+    <string name="week">近一周</string>
+    <string name="month">近一月</string>
+    <string name="type">分类</string>
+    <string name="nfc_notice">NFC功能未启用！</string>
+    <string name="nfc_notice_no">您手机不支持NFC功能！</string>
+    <string name="ble_not_supported">您手机蓝牙芯片不支持手环连接</string>
+    <string name="quit_binding"><u>先不绑定了</u></string>
+
+    <!-- 查询 -->
+    <string name="query_title">余额查询</string>
+
+    <!-- 充值 -->
+
+    <string name="qc">钱包充值</string>
+    <string name="read_card">读取卡号</string>
+    <string name="pay_online">在线支付</string>
+    <string name="finishqc">完成充值</string>
+    <string name="toast_1">请将卡紧贴在手机背后</string>
+    <string name="toast_2">并点击按钮开始读卡</string>
+    <string name="cardnum">卡号：</string>
+    <string name="qcBalance">充值金额：</string>
+    <string name="balance_now">您当前的金额：</string>
+    <string name="qcfail">请检查网络连接状态或支付卡片余额。</string>
+
+    <!-- 充值记录 -->
+
+    <string name="qchistory">我的充值记录</string>
+    <string name="exchangehistory">卡内交易记录</string>
+    <string name="hint_nfc">NFC功能尚未开启，请开启NFC功能</string>
+
+    <!-- 蓝牙页面 -->
+    <string name="bluetooth_toast_1">正在搜索手环，请确保手机开启</string>
+    <string name="bluetooth_toast_2">蓝牙功能...</string>
+    <string name="bluetooth_now_title">当前连接设备</string>
+    <string name="bluetooth_ohter">选择其他设备</string>
+
+    <!-- 注册 -->
+
+    <string name="regist_name_title">用户名</string>
+    <string name="regist_phone_title">手机号码</string>
+    <string name="regist_nikename_title">昵    称</string>
+    <string name="regist_yzm_title">验证码</string>
+    <string name="regist_pwd_title">设置密码</string>
+    <string name="regist_pwd2_title">确认密码</string>
+
+    <string name="regist_nikename_hint">请输入昵称</string>
+    <string name="regist_yzm_hint">请输入验证码</string>
+    <string name="regist_phone_hint">请输入手机号</string>
+    <string name="regist_name_hint">请输入手机号码</string>
+    <string name="regist_pwd_hint">请输入登录密码</string>
+    <string name="regist_pwd2_hint">密码由6-20个字母或数字组成</string>
+    <string name="input_style">1234567890abcdefghijklmnopqrstuvwxyz</string>
+
+    <!-- 用户信息 -->
+
+    <string name="user_pic">设置头像</string>
+    <string name="user_name">昵称</string>
+    <string name="user_target">我的目标</string>
+    <string name="user_updatePwd">修改密码</string>
+    <string name="user_phone">手机号</string>
+    <string name="user_exit">退出登录</string>
+    <string name="title_activity_feedback">FeedbackActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="nickname_text">4-20个字符，可由中英文、数字、下划线组成</string>
+
+    <!-- 意见反馈 -->
+    <string name="feedback_content">补充问题描述 或 其他问题反馈</string>
+    <string name="feedback_phone">联系方式</string>
+    <string name="feedback_phone_hint">您的姓名、手机号、邮箱等</string>
+    <string name="feedback_confirm">提交</string>
+    <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
+    <string name="choose_question_title">请选择您遇到的问题</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- 找回密码 -->
+
+    <string name="getpwd_phone">手机号码</string>
+    <string name="getpwd_input_phone">请输入绑定手机号</string>
+
+    <!-- 修改密码 -->
+
+    <string name="update_pwd_before">原密码</string>
+    <string name="update_pwd_before_hint">请输入原密码</string>
+    <string name="update_pwd_now">新密码</string>
+    <string name="update_pwd_now_hint">请输入新密码</string>
+    <string name="update_pwd_now2">重复新密码</string>
+    <string name="update_pwd_now2_hint">请重复输入新密码</string>
+    <string name="update_pwd_notice">密码长度至少6个字符，最多20个字符</string>
+    <string name="title_activity_user_main">UserMainActivity</string>
+    <string name="head">这里是HeadView</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+    <string name="share_msg">我正在手机上用#嘀滴出行#为我的公交卡充值，足不出户便捷服务，充值均返还100%代金券！我已经抢到了你还在等什么？好礼多多戳这里：www.didipay.com.cn</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_select_target">SelectTargetActivity</string>
+
+    <!-- 设置手机号 -->
+    <string name="setphone_phone">请输入手机号</string>
+    <string name="setphone_validatecode">请输入验证码</string>
+
+    <!-- 测量心率 -->
+    <string name="start_rate" formatted="false">尝试戴好手环，测一下心跳的频率吧</string>
+    <string name="stop_rate" formatted="false">正在测量，测量时请戴好设备哦</string>
+    <string name="average_rate" formatted="false">平均心率</string>
+    <string name="empty_rate_record" formatted="false">暂无测量记录</string>
+    <string name="click_history_data" formatted="false">点击图表中的圆点，查看当日平均心率</string>
+    <string name="heart_info" formatted="false">次/分</string>
+    <string name="initial_heart" formatted="false">心率未测量</string>
+    <string name="current_heart" formatted="false">当前心率</string>
+    <string name="get_heart_fail" formatted="false">心率测量失败</string>
+
+    <!-- 微信支付 -->
+    <string name="app_tip" formatted="false">提示</string>
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+
+    <string name="welfare_title">爱公益</string>
+    <string name="welfare_organization">湖北省春晖基金会</string>
+    <string name="welfare_step_start">您的累计步数为</string>
+    <string name="welfare_success_text">您已完成步行捐赠！</string>
+    <string name="welfare_slogan">步行有益 爱在路上\n炫佩手环 感恩有你</string>
+    <string name="welfare_rule_text">每位购买炫佩手环并成功注册的用户，一个月内累计步行达到5万步，炫佩手环向湖北省春晖基金会捐款1元，用于帮助贫困学子完成学业！</string>
+    <string name="welfare_back_home">返回刷了么首页>></string>
+
+    <string name="sleep_time_default">0时0分</string>
+    <string name="title_back">返回</string>
+    <string name="shualeme_agreemment">    天喻聚联用户服务协议（以下简称“本协议”）是武汉天喻聚联网络有限公司（以下简称“天喻聚联公司”）与聚联用户（以下或称为“您”）关于天喻聚联公司提供的相关服务事项所订立的有效合约。\n\n
+    天喻聚联公司在此特别提醒您认真阅读和充分理解本协议各条款，特别是其中所涉及的免除或限制天喻聚联公司责任、限制用户权利、争议解决和法律适用等涉及到与您权益存在或可能存在重大关系的条款，天喻聚联公司将采用字体加黑的方式以提示您注意。请您审慎阅读并选择是否接受本协议（未成年人应在监护人陪同下阅读）。除非您接受本协议所有条款，否则您无权使用天喻聚联公司的相关服务。您一经点击确认或以其他方式选择接受本协议，即视为对本协议的理解和接受，您同意本协议对天喻聚联公司和您具有法律约束力。如果您不同意本协议的任何内容或无法准确理解相关条款，请不用进行后续操作。\n\n
+    一、相关定义\n除本协议另有约定，本协议定义相关术语如下：\n1、聚联平台：指提供本公司相关业务及服务的PC端和移动端，包括但不局限于PC端、微信、手机APP（“刷了么”）等。\n2、第三方平台：第三方合作伙伴应用产品及服务的发布平台，包括但不限于【爱财有道】理财平台等。\n3、第三方应用：第三方平台或者第三方合作伙伴提供的应用、产品及服务，包括但不限于【爱财有道】理财平台的相关应用等。\n4、身份认证要素：指天喻聚联公司在提供服务中用于识别聚联用户身份的信息要素，包括但不限于聚联用户的“刷了么”账户及其密码、数字证书、动态口令、姓名、证件类型、证件号码、签约时留存的手机号码等及法律法规或天喻聚联要求的其他要素。\n\n
+    二、适用范围\n1、天喻聚联公司的各项服务仅面向中华人民共和国境内具有完全民事权利能力和民事行为能力、能够独立承担民事责任的自然人提供。您必须按照天喻聚联公司的要求提供合法、真实、准确及完整的身份信息并及时更新。\n2、如天喻聚联公司发现或有合理理由怀疑您提供的身份信息不合法、不真实、不准确、不完整，天喻聚联公司有权立即中止（或终止）向您提供服务，并拒绝您现在或未来使用服务全部或部分功能，由此给您造成的任何损失由您自行承担；如您未及时更新您的身份信息，而导致天喻聚联公司无法及时为您本协议下的服务或其他相关服务的有关流程及操作发生任何错误，由此给您造成的任何损失均由您自行承担。\n\n
+    三、特别提示\n1、您知悉并同意，天喻聚联公司有权采取各种必要手段对您进行身份验证。同时，天喻聚联公司有权据此决定是否同意为您提供服务以及为您提供服务的范围、种类、范围、业务操作权限及相关额度限制。\n2、您知悉并同意，身份认证要素是天喻聚联公司识别您身份的唯一依据，您应妥善保管您的身份认证要素，不得将您的身份认证要素泄漏给任何第三方或交于任何第三方使用，如因您本人原因导致身份认证要素泄露或被第三方使用，天喻聚联公司对此不承担任何责任。天喻聚联公司将对通过您的上述身份要素所发送的一切指令默认为您本人行为，您应自行对上述指令产生的后果负责。同时，您应对非天喻聚联公司原因造成的账户、密码等信息被冒用、盗用或非法使用所引起的一切风险和损失应自行承担责任。\n3、您知悉并同意，天喻聚联公司在聚联平台上开展的各项宣传、推广或公益等任何活动，其活动的最终解释权归属于天喻聚联公司，其产生的各项交易、活动数据（包括但不限于运动数据、时间数据等）、资料等均以天喻聚联公司系统记录为准。您登录“刷了么”等账号可查询到您的交易明细、运动数据等，但该数据仅供参考用，所有数据应以天喻聚联公司系统数据为准。\n4、天喻聚联公司通过聚联平台向您提供第三方平台链接，您可以通过该链接获取第三方合作伙伴所提供的理财产品的相关信息，您有权自愿选择并根据第三方平台注册会员规则办理第三方会员的注册手续。在您与第三方进行交易时请详知并遵守第三方交易平台的相关规定。如因您本人原因与第三方产生的任何纠纷，天喻聚联公司对此并不承担任何责任。\n5、您知悉并同意，任何理财产品等交易均存在一定的风险，且您自愿承担该风险。天喻聚联公司不对您及/或任何交易提供任何担保或条件，无论是明示、默示或法定的。聚联平台向您提供的包括但不限于第三方平台及其服务或产品信息等各种信息及资料仅供参考，您应依其独立判断做出决策。您据此进行交易并由此产生的风险（包括但不限于法律风险、违约风险、预期收入风险等）由您自行承担，您无权据此向天喻聚联公司提出任何法律主张。任何理财产品等交易的业务咨询、投诉或纠纷处理均由纠纷各方自行处理或处理，概与天喻聚联公司无关。\n6、以上并不能揭示您通过天喻聚联公司聚联平台向您提供第三方平台进行交易的全部风险及市场的全部情形。您在做出交易决策前，应全面了解相关交易，谨慎决策，并自行承担全部风险。\n\n
+    四、信息的授权、使用、共享与保护\n1、为了更好的为您提供各项服务，也为了天喻聚联公司自身的规范管理和风险防控，您同意并授权向天喻聚联公司提供您的个人信息包括但不限于姓名、身份证件号、手机号、邮箱、联系地址、“刷了么”账号、银行卡号、活动记录、活动数据等。您同时也同意并授权天喻聚联公司有权获取您留存在天喻聚联公司的关联公司处的信息和您留存在天喻聚联公司合作伙伴（包括但不限于理财公司、保险公司等，下同）处的信息以及合法留存您信息的自然人、法人以及其他组织处的信息等其他合法途径收集的信息。您同意并授权天喻聚联公司将您的以上信息用于包括但不限于如下用途：\n1.1 创建数据分析模型，为您提供适合于您的服务，并维护、改进这些服务；\n1.2 比较信息的准确性并与第三方进行验证；\n1.3 为使您知晓天喻聚联公司服务情况或了解聚联平台提供的服务，通过电子邮件、微信/QQ/平台系统信息、手机短信和传真等方式向您发送服务状态的通知、营销活动及其他商业性电子信息；\n1.4 预防或阻止非法的活动；\n1.5 经您许可的其他用途。\n2、天喻聚联公司对您的信息承担保密义务，不会为满足第三方的营销目的而向其出售或出租您的重要信息，但在下列情况下将您的信息与第三方共享：\n2.1获得您的同意或授权；\n2.2为了向您提供或推荐天喻聚联公司的关联公司的服务和/或产品的需要，将您的信息提供给天喻聚联公司的关联公司使用，且您同意天喻聚联公司的关联公司通过电子邮件、微信/QQ/平台系统信息、手机短信和传真等方式向您发送服务状态的通知、营销活动及其他商业性电子信息；\n2.3某些服务和/或产品和/或推广活动由天喻聚联公司的合作伙伴提供或由天喻聚联公司与合作伙伴共同提供，天喻聚联公司会与其共享并使用；\n2.4在您违反本协议、及其他协议时，向您的交易对手，天喻聚联公司合作的理财公司、担保机构、保险机构、天喻聚联公司的关联公司等第三方提供；\n2.5 为建立信用体系，向征信机构发送您的信息。您同意并授权天喻聚联公司将您的不良信息发送征信机构且不再另行通知您；\n2.6根据法律法规的规定及有权机关的要求。\n3、天喻聚联公司将根据法律法规规定对您的信息予以保密，但下列情形除外：\n3.1法律、法规、规章及其他规范性文件另有规定；\n3.2本协议另有约定。\n\n
+    五、不可抗力及其他免责事由\n1、在使用天喻聚联公司提供的服务过程中，可能会遇到不可抗力等风险因素，使服务发生中断。不可抗力是指不能预见、不能克服、不能避免且对一方或双方造成重大影响的客观事件，包括但不限于洪水、地震、瘟疫和风暴等自然灾害以及战争、动乱、政府行为等社会事件。出现上述情况时，天喻聚联公司将努力在第一时间与相关单位配合及时进行修复，但由此给您造成的损失天喻聚联公司在法律允许的范围内免责。\n2、在法律允许的范围内，天喻聚联公司对以下情形导致的服务中断或受阻不承担责任：\n2.1受到计算机病毒、木马或其他恶意程序、黑客攻击的破坏；\n2.2用户或天喻聚联公司的电脑软件、系统、硬件和通信线路出现故障；\n2.3用户操作不当；\n2.4用户通过非天喻聚联公司授权的方式使用天喻聚联公司服务；\n2.5银行系统或银行网络出现故障；\n2.6其他天喻聚联公司无法控制或合理预见的情形。\n3.您在使用天喻聚联公司服务的过程中，天喻聚联公司不对下列风险担责：\n（1）来自他人匿名或冒名的含有威胁、诽谤、令人反感或非法内容的信息；\n（2）遭受他人误导、欺骗或其他导致任何心理、生理上的伤害以及经济上的损失。\n4.您在使用天喻聚联公司服务过程中，天喻聚联公司在法律规定的范围内可处理违法违规内容，但其不构成天喻聚联公司的义务或承诺。\n\n
+    六、暂停、中断或终止服务\n1、天喻聚联公司有权基于业务调整或风险管控的需要，暂停、中断或终止向您提供服务。\n2、天喻聚联公司在发现您有可疑交易时或您在天喻聚联公司开展的宣传、推广或公益等任何活动中有恶意攻击、数据作假等任何可疑行为时，有权不经通知暂停、中断或终止向您提供服务。\n3、天喻聚联公司发现您违反本协议约定的，有权暂停、中断或终止向您提供服务。\n\n
+    七、协议变更、解除、提前终止和权利义务的转让\n1、协议变更\n天喻聚联公司有权随时单方面修改本协议条款。您可以在天喻聚联公司官方网站或相关服务页面查阅最新版本的协议条款，不再另行单独通知您。本协议条款变更后，如果您继续使用天喻聚联公司提供的软件或服务，即视为您已接受修改后的协议。如果您不接受修改后的协议，应当停止使用天喻聚联公司提供的软件或服务。经修订的协议一经通知，立即生效。\n2、协议解除与终止\n2.1 您在使用天喻聚联公司服务的过程中，如果有下列情形发生，天喻聚联公司有权单方面解除本协议：\n2.1.1 您的“刷了么”等账户因任何原因注销的；\n2.1.2 冒用他人名义、盗用他人账户使用天喻聚联公司服务的；\n2.1.3 为非法目的使用天喻聚联公司服务的；\n2.1.4 从事任何可能侵害天喻聚联公司平台、软件、资料之行为；\n2.1.5 违反任何法律法规、本协议约定的；\n2.1.6 监管机构认为天喻聚联公司提供的服务不再符合相关监管规定的；\n2.2 除上述原因外，天喻聚联公司有权根据风险及自身业务运营情况需要随时终止向您提供本服务，因此导致您无法使用本服务或服务受到限制的，不视为天喻聚联公司违约。\n3、协议权利义务的转让\n未经天喻聚联公司书面同意，您不得将本协议项下的权利和义务转让给任何第三方。天喻聚联公司有权将其在本协议项下的权利和义务全部或部分转让给第三方，且转让行为无须征得您的同意，但将书面通知您该等转让行为。上述权利义务转让后，天喻聚联公司承诺就受让人履约行为承担连带保证责任，但天喻聚联公司不再存续的情况除外。\n\n
+    八、知识产权保护\n1、天喻聚联公司在服务中提供的内容（包括但不限于网页、源代码、文字、图片、音频、视频、图表等）的知识产权归天喻聚联公司及其关联公司所有，用户在使用天喻聚联公司服务中所产生内容的知识产权归用户或相关权利人与天喻聚联公司共有。\n2、除另有特别声明外，天喻聚联公司提供服务时所依托软件的著作权、专利权及其他知识产权均归天喻聚联公司及其关联公司所有。\n3、天喻聚联公司在服务中所使用的“天喻聚联”和“【爱财有道】”等商业标识，其著作权和商标权归天喻聚联公司及其关联公司所有。\n4、上述知识产权均受到法律保护，未经天喻聚联公司、用户或相关权利人书面许可，任何人不得以任何形式进行使用、修改、复制、公开发布聚联平台及其提供的服务包括但不限于相关程序、内容，或创造相关衍生品。\n5、您因上述原因引起的法律问题纠纷或者对您或第三方造成的损失，天喻聚联不承担任何责任。\n\n
+    九、争议解决\n1、本协议签订地为中华人民共和国湖北省武汉东湖新技术开发区。\n2、本协议适用中华人民共和国法律大陆地区法律，您与任何第三方交易所产生的交易风险应由您自行承担。您无权据此向天喻聚联公司提出任何法律主张。\n3、您和天喻聚联公司因本协议产生任何纠纷或争议的，首先应友好协商解决；协商不成的，您同意将纠纷或争议提交至本协议签订地有管辖权的人民法院解决。\n\n
+    十、通知\n本协议履行过程中，天喻聚联公司向您发出的书面通知方式包括但不限于邮寄纸质通知、网站或平台公告、电子邮件、站内信、微信或QQ消息、手机短信和传真等方式。如天喻聚联公司以邮寄方式向您发出书面通知的，则在天喻聚联公司按照您在网站或“刷了么”账号中留存的通讯地址交邮后的第三个自然日即视为送达。如以天喻聚联公司网站或平台公告、电子邮件、站内信、微信或QQ消息、手机短信和传真电子方式发出书面通知的，则在通知发送成功即视为送达。\n\n
+    十一、其他\n1、在本协议中，除非本协议上下文另有规定：\n1.1 凡提及本协议应包括本协议及其附件，以及对该协议所作的任何修改、修订或补充的文件；\n1.2 凡提及条、款和附件仅指本协议的条、款和附件；\n1.3本协议所有条款的标题仅为阅读方便，本身并无实际涵义，不能作为本协议涵义解释的依据，不对标题之下的内容及范围作任何限定。\n2、本协议的附件及各项补充、修订或变更，为本协议不可分割的组成部分，与本协议正文具有同等法律效力。\n3、 协议任一方通过网络页面点击确认与其他方式（包括但不限于签字或盖章确认等方式）接受本协议具有同等法律效力。\n4、如本协议中的任何条款无论因何种原因完全或部分无效或不具有执行力，则应认为该条款可与本协议相分割，并可被尽可能接近各方意图的、能够保留本协议要求的经济目的的、有效的新条款所取代，而且在此情况下，本协议的其他条款仍然完全有效并具有约束力。\n5、您可拨打天喻聚联服务热线“400-027-3330”或登录天喻聚联官方网站www.shualeme.com.cn或关注“炫佩商城”官方微信服务号咨询。\n6、本协议未尽事宜，由双方协商处理，或者按国家有关法律、法规的规定执行。\n7、本协议由天喻聚联公司制定和解释。\n</string>
+    <string name="zyt_app_name">中银通</string>
+    <string name="zyt_hello_world">Hello world!</string>
+    <string name="zyt_menu_settings">Settings</string>
+    <string name="zyt_entryTitle">接入方式选择</string>
+    <string name="zyt_apk">apk接入</string>
+    <string name="zyt_jar">中银通支付</string>
+    <string name="zyt_payBYAPK">APK接入</string>
+    <string name="zyt_payBYJAR">JAR接入</string>
+    <string name="zyt_app_title">中银通</string>
+    <string name="zyt_back">返回</string>
+    <string name="zyt_ok">确定</string>
+    <string name="zyt_please_wait">正在通讯，请稍后。。。</string>
+    <string name="zyt_original_pwd">原密码</string>
+    <string name="zyt_new_pwd">设置支付密码</string>
+    <string name="zyt_new_pwd_confirm">确认支付密码</string>
+    <string name="Zyt_Reset_Pwd_NewPwd_InputStr">请输入新密码</string>
+    <string name="Zyt_Reset_Pwd_RepeatNewPwd_InputStr">请输入再次输入新密码</string>
+    <string name="TestMain_btnMainTestStr">测试</string>
+    <string name="TestMain_btnRechargeViewStr">充值界面</string>
+    <string name="TestMain_btnRechargeInterfaceStr">充值接口</string>
+    <string name="TestMain_btnRechargeQueryBalanceViewStr">余额查询页面</string>
+    <string name="TestMain_btnQueryBalanceInterfaceStr">余额查询接口</string>
+    <string name="TestMain_btnTransactionRecordViewStr">交易记录查询页面</string>
+    <string name="TestMain_btnTransactionRecordInterfaceStr">交易记录查询接口</string>
+    <string name="TestMain_btnSettingPwdStr">修改密码页面</string>
+    <string name="TestMain_btnResetPwdStr">重置密码页面</string>
+    <string name="TestMain_btnCardInfoStr">卡信息页面</string>
+    <string name="zyt_ResSetPwd_InputCarNumStr">请输入卡号</string>
+    <string name="Zyt_Reset_Pwd_CertificatesNumStr">请输入证件号码</string>
+
+    <string-array name="ZytReSetPwdSelectorDate">
+        <item>身份证</item>
+        <item>职工编号</item>
+        <item>客户号</item>
+        <item>香港身份证</item>
+        <item>护照</item>
+        <item>其它</item>
+    </string-array>
+
+    <string name="network_dismiss">网络异常，请检查网络是否畅通</string>
+    <string name="service_dismiss">服务端返回异常，请检查权限或网络是否正常</string>
+    <string name="love_money">君子爱财，取之有道</string>
+    <string name="notice_read_wallet">请先读取钱包</string>
+    <string name="jd_buy">京东购买</string>
+    <string name="tb_buy">淘宝购买</string>
+    <string name="trudge">炫步暴走大赛</string>
+    <string name="token_error">登陆超时，请退出重新登陆！</string>
+    <string name="no_xz">暂时还未点亮勋章，无法分享</string>
+    <string name="qqhealth_unbind">绑定成功后，你的步数等数据\n将同步至\"QQ运动\"，与好友一起PK吧</string>
+    <string name="qqhealth_bind">已绑定成功，每次设备数据同步时\n将数据同步至\"QQ运动\"</string>
+    <string name="unbind_notice">解绑后数据将无法同步至\"QQ运动\"</string>
+    <string name="open_qq">\"刷了么\"想要打开\"QQ\"</string>
+    <string name="view_query_cache_fail">缓存数据查询失败</string>
+
+    <string name="fw_version_code">versionCode</string>
+    <string name="fw_version_log">versionLog</string>
+    <string name="julian_version_path">julianVersionPath</string>
+    <string name="fw_se_version_code">seVersionCode</string>
+    <string name="se_version_log">seVersionLog</string>
+    <string name="se_julian_version_path">seJulianVersionPath</string>
+    <string name="fin_version">finVersion</string>
+    <string name="run_pm2point5">PM2.5:</string>
+    <string name="request_permissions_prompt">我们需要的一些权限被您拒绝,请您到设置页面手动授权，否则功能无法正常使用！</string>
+    <string name="button_cacel">取消</string>
+    <string name="button_ok">好的</string>
+    <string name="grant_permission_prompt">您必须授权才能正常使用该功能！</string>
+    <string name="gps_not_opend_prompt">GPS还未开启,需要开启GPS\n    才可记录哦~</string>
+    <string name="open_gps_later">稍后开启</string>
+    <string name="open_gps_now">立即开启</string>
+    <string name="default_level">L1</string>
+    <string name="default_level_name">跑步小白</string>
+    <string name="default_run_dis">0km</string>
+    <string name="default_level_des">你太棒了，要坚持哦!</string>
+    <string name="running_entry_title">跑步</string>
+    <string name="gps_title">GPS</string>
+    <string name="run_dis_title">累计跑量</string>
+    <string name="view_record">查看记录</string>
+    <string name="run_now">立即开始</string>
+    <string name="outdoor_run">室外跑步</string>
+    <string name="indoor_run">室内跑步</string>
+    <string name="gps_record">GPS记录</string>
+    <string name="sensor_record">传感器记录</string>
+    <string name="run_pause">暂停</string>
+    <string name="run_continue">继续</string>
+    <string name="run_end">结束</string>
+    <string name="run_go">够!</string>
+    <string name="login_over_time_prompt">登录超时，你的跑步记录已保存，可稍后上传同步。</string>
+    <string name="session_abnormal_prompt">通信会话异常，请重新登录</string>
+    <string name="default_chronometer">00:00:00</string>
+    <string name="run_end_prompt">跑步结束做做拉伸吧</string>
+    <string name="bad_network_prompt">当前网络不佳，跑步数据上传失败(本地记录已保存至您手机，请稍后尝试同步上传数据)</string>
+    <string name="upload_later">稍后上传</string>
+    <string name="retry_now">马上重试</string>
+    <string name="meter">米</string>
+    <string name="minute">分</string>
+    <string name="second">秒</string>
+    <string name="hour">小时</string>
+    <string name="run_data_exception">当前跑步数据异常无法同步</string>
+    <string name="run_dis_too_short">本次运动距离太短，无法保存记录</string>
+    <string name="lack_run_path">运动轨迹信息不全，无法保存记录</string>
+    <string name="exit_run_prompt">您当前正处于跑步模式，确认放弃本次记录？</string>
+    <string name="counter_go">GO!</string>
+    <string name="heart_rate_abnormal">跑步心率已达150次每分钟，适当减速调整配速</string>
+    <string name="altitude">海拔</string>
+    <string name="run_dis_text">全程距离(公里)</string>
+    <string name="con_cal">消耗:千卡</string>
+    <string name="speed_text">配速:分钟/公里</string>
+    <string name="heart_rate_text">心率:次/分钟</string>
+    <string name="counter_prompt">(倒计时，单位秒)</string>
+    <string name="touch_prompt">轻触立刻开始</string>
+    <string name="run_dis_notify">您已完成跑步%1$s公里，用时%2$s，消耗%3$s大卡，平均配速%4$s分钟每公里"</string>
+    <string name="run_speed_text">公里/小时</string>
+    <string name="exit_outdoor_run">室内运动正在进行中，请确认是否退出?</string>
+    <string name="speed">速度</string>
+    <string name="default_min_speed">2公里/小时</string>
+    <string name="default_max_speed">6公里/小时</string>
+    <string name="share_success">分享成功</string>
+    <string name="share_failed">分享失败</string>
+    <string name="share_canceled">分享取消</string>
+    <string name="run_data_cannot_share">您的跑步记录还未上传，无法分享</string>
+    <string name="install_wexin_prompt">请先安装微信</string>
+    <string name="install_qq_prompt">请先安装QQ</string>
+    <string name="run_dis_prompt">我用刷了么跑了%s公里</string>
+    <string name="share_prompt">让生活更简单</string>
+    <string name="share_content">运动的感觉如何？不妨分享出去哦~</string>
+    <string name="wechat">微信</string>
+    <string name="wechat_friend">微信朋友圈</string>
+    <string name="qq">QQ</string>
+    <string name="qq_zone">QQ空间</string>
+    <string name="no_network">当前网络不可用，请检查你的网络设置</string>
+    <string name="clear_record_prompt">还有缓存数据没提交，是否清空当前页面?</string>
+    <string name="button_no">否</string>
+    <string name="button_yes">是</string>
+    <string name="exist">已存在</string>
+    <string name="upload_rundata_sucess">跑步数据上传成功</string>
+    <string name="upload_rundata_failed">您有%d条数据上传失败，请重试</string>
+    <string name="run_record">跑步记录</string>
+    <string name="clear">清空</string>
+    <string name="upload_prompt">你有未同步的跑步记录，现在上传?</string>
+    <string name="syn_now">立即同步</string>
+    <string name="no_pre_data">没有更早之前的数据</string>
+    <string name="record_month">月</string>
+    <string name="no_record">当前跑步记录列表为空!</string>
+    <string name="record_day">日</string>
+    <string name="record_week">周</string>
+    <string name="record_today">今日</string>
+    <string name="total">累计</string>
+    <string name="km">公里</string>
+    <string name="activty">次活动</string>
+    <string name="no_run_record">暂无跑步记录</string>
+    <string name="current_week">本周</string>
+    <string name="current_month">本月</string>
+    <string name="delete">删除</string>
+    <string name="delete_prompt">是否删除该条跑步记录?</string>
+    <string name="discount1">优惠券作为回馈新老用户的奖励，是当用户在刷了么内进行在线充值、购物、积分兑换等交易时，可抵用一定面值金额的券。\n优惠券均有相应使用条件，请遵循优惠券使用规则。</string>
+    <string name="discount2">用户回馈：刷了么会不定期推出新/老用户的优惠回馈，将赠送或下发优惠券。\n积分兑换：可使用刷了么积分兑换优惠券，具体规则详见积分兑换说明。</string>
+    <string name="discount3">当用户在刷了么内进行在线充值、购物、积分兑换等交易时，可以使用符合条件的优惠券：\n1.每笔订单只能使用一张优惠券，每张优惠券只能使用一次。\n2.某些特殊商品不能使用优惠券。\n3.优惠券需在有效期内使用，过期作废。\n4.优惠券不予兑现。\n5.仅显示近3个月的优惠券信息，建议及时使用。</string>
+    <string name="discount4">每张优惠券仅限使用一次，如需退款、退货，不退回原优惠券，仅退回实际支付金额。</string>
+
+
+    <!---钱包相关-->
+    <string name="wallet_title">钱包</string>
+    <string name="order_name_open">刷了么_开卡</string>
+    <string name="order_name_download">刷了么_下载</string>
+    <string name="no_city_prompt">请选择一个城市</string>
+    <string name="unknow">未知</string>
+    <string name="unknow_card_no">卡号未知，请刷新</string>
+    <string name="loading_progress">加载中...</string>
+    <string name="bind_device">绑定设备</string>
+    <string name="reloading">重新加载</string>
+    <string name="system_maintaining">SYSTEM_MAINTAINING</string>
+    <string name="read_wallet_fail">读取钱包失败</string>
+    <string name="sync_fail">同步失败</string>
+    <string name="register_fail">认证失败</string>
+    <string name="get_wallet_fail">获取失败</string>
+    <string name="get_card_no_fail">卡号获取失败</string>
+    <string name="get_card_date_fail">有效期获取失败</string>
+    <string name="get_balance_fail">余额获取失败</string>
+    <string name="delete_sucess">删除成功</string>
+    <string name="delete_fail">删除失败</string>
+    <string name="abnormal_order_prompt">你有未完成的订单\n可直接前往完成该笔订单</string>
+    <string name="loading_fail_prompt1">哎呦，加载失败了</string>
+    <string name="loading_fail_prompt2">1.网络环境是否正常；\n2.蓝牙是否正常开启；\n3.设备是否正常连接。</string>
+    <string name="device_unbind">设备未绑定</string>
+    <string name="device_unbind_prompt">您还没有绑定炫佩智能手环或手表设备，绑定设备\n后可以随时查询通卡应用余额或交易记录，且可享受\n在线充值服务。</string>
+    <string name="open_card_prompt">在线开通%s，激活即可使用。随时随地享受\n充值、查询余额及交易记录的便捷服务，一卡在手畅刷全城。</string>
+    <string name="recharge_success">充值成功</string>
+    <string name="recharge_fail">充值失败</string>
+    <string name="complaint">客服投诉</string>
+    <string name="complaint_query">投诉查询</string>
+    <string name="choose_type">请选择类型</string>
+    <string name="choose_type_prompt">请先选择一种类型</string>
+    <string name="button_confirm">确定</string>
+    <string name="loading_wallet_prompt">正在加载钱包，稍安勿躁..</string>
+    <string name="device_state_normal">设备状态正常</string>
+    <string name="device_state_abnormal">设备状态异常</string>
+    <string name="bluetooth_not_open">蓝牙未开启</string>
+    <string name="wrist_not_bind">手环未绑定</string>
+    <string name="loading_wallet">加载钱包...</string>
+    <string name="power_on_fail">上电失败</string>
+    <string name="read_card_no_fail">读取卡号失败</string>
+    <string name="read_card_date_fail">读取有效期失败</string>
+    <string name="read_balance_fail">读取余额失败</string>
+    <string name="read_card_no_balance_success">读取卡号余额成功</string>
+    <string name="loading_card">加载卡片...</string>
+    <string name="get_card_info_fail1002">获取卡片信息失败1002</string>
+    <string name="query_download_app">查询可添加卡片...</string>
+    <string name="server_config_error">服务端配置信息错误1003</string>
+    <string name="get_card_info_fail1003">获取卡片信息失败1003</string>
+    <string name="sport_wrist_not_support_balance">纯运动手环不支持读取余额</string>
+    <string name="card_state_not_support_balance">当前卡状态不支持读取余额</string>
+    <string name="get_cid_fail">获取手环唯一识别码失败</string>
+    <string name="get_wallet_info_fail">获取钱包信息失败</string>
+    <string name="reading_balance">正在读取余额</string>
+    <string name="syncing_sport_data">正在同步运动数据，请稍候再试</string>
+    <string name="creating_order">创建订单...</string>
+    <string name="querying_order">查询订单...</string>
+    <string name="start_paying">发起支付...</string>
+    <string name="cancel_pay">您已取消支付</string>
+    <string name="abnormal_order_state_unpaid">订单状态异常：未支付</string>
+    <string name="abnormal_order_state">订单状态异常:</string>
+    <string name="pay_fail">支付失败, 原因: </string>
+    <string name="unknow_order">未知的订单行为</string>
+    <string name="recharge_fail1004">充值失败1004</string>
+    <string name="recharge_fail1000">充值失败1000</string>
+    <string name="apply_success">申请成功</string>
+    <string name="active_success">激活成功</string>
+    <string name="recharging">正在充值...</string>
+    <string name="opening_card">正在开卡...</string>
+    <string name="applying">正在申请...</string>
+    <string name="interrupted_bluetooth_disconnected">中断：蓝牙连接已断开</string>
+    <string name="interrupted_bluetooth_unbind">中断：手环已解绑</string>
+    <string name="interrupted_bluetooth_off">中断：蓝牙已关闭</string>
+    <string name="interrupted_network_disconnected">中断：网络连接已断开</string>
+    <string name="request_fail">请求失败</string>
+    <string name="order_list_title">充值订单</string>
+    <string name="card_no_error">卡片与订单信息不一致</string>
+    <string name="refund_fail">退款失败</string>
+    <string name="delete_order_success">订单删除成功</string>
+    <string name="bluetooth_not_on">蓝牙未打开</string>
+    <string name="bluetooth_is_connecting">蓝牙服务正在连接中...</string>
+    <string name="syncing_data">正在同步数据中...</string>
+    <string name="bluetooth_connect_exception">蓝牙连接异常，请稍后再试...</string>
+    <string name="card_no_error2">卡号不一致</string>
+    <string name="dial_number">是否拨打电话号码</string>
+    <string name="card_date">有效期</string>
+    <string name="balance">余额</string>
+    <string name="default_balance">￥0.00</string>
+    <string name="record">交易记录</string>
+    <string name="recharge_title">我要充值</string>
+    <string name="recharge_tipview_title">充值有优惠</string>
+    <string name="complain_title">投诉</string>
+    <string name="pay_password">支付密码</string>
+    <string name="active">激活</string>
+    <string name="apply">申请</string>
+    <string name="sport_wrist_prompt">运动版手环暂不支持钱包功能</string>
+    <string name="load_fail_prompt">哎呦，加载失败了</string>
+    <string name="unbind_device_prompt">您还没有绑定设备，绑定设备后可随时查询\n通卡应用余额/交易记录，且享受在线充值服务。</string>
+    <string name="no_record_list">暂无记录</string>
+    <string name="input_amount_prompt1">请输入您的充值金额：</string>
+    <string name="input_amount_prompt2">请输入充值金额</string>
+    <string name="amount_zero_prompt">充值金额为0，请重新选择</string>
+    <string name="amount_too_large">总金额需小于1000元,请重新选择</string>
+    <string name="discount">折</string>
+    <string name="price">售价</string>
+    <string name="yuan">元</string>
+    <string name="ten_yuan">10元</string>
+    <string name="twenty_yuan">20元</string>
+    <string name="thirty_yuan">30元</string>
+    <string name="fifty_yuan">50元</string>
+    <string name="one_hundred_yuan">100元</string>
+    <string name="two_hundred_yuan">200元</string>
+    <string name="three_hundred_yuan">300元</string>
+    <string name="five_hundred_yuan">500元</string>
+    <string name="price_text">售价%s元</string>
+    <string name="pay_canceled">支付已取消</string>
+    <string name="pay_dialog_title">付款详情</string>
+    <string name="order_info">订单信息</string>
+    <string name="original_amount">原始金额</string>
+    <string name="need_pay">需支付</string>
+    <string name="wechat_pay_prompt">微信支付</string>
+    <string name="ali_pay_prompt">支付宝支付(需收取0.6%的服务费)</string>
+    <string name="yzf_pay_prompt">翼支付</string>
+    <string name="yl_pay_prompt">银联支付</string>
+    <string name="pay_confirm">确认支付</string>
+
+    <!--运动睡眠相关-->
+    <string name="login_time_out">登录超时，请退出重新登录！</string>
+    <string name="sleep_title">睡眠</string>
+    <string name="request_sleep_exception">"请求参数睡觉时间异常</string>
+    <string name="time_exception">您的手机时间与实际时间不一致，请检查手机时间是否正确</string>
+    <string name="wrist_not_connected">手环或手表未连接</string>
+    <string name="completed">已完成</string>
+    <string name="day_target_info">今天距离目标还有：%d步</string>
+    <string name="hour1">时</string>
+    <string name="total_sleep_info">总睡眠时长%1$d时%2$d分</string>
+    <string name="fall_asleep">入睡</string>
+    <string name="wake_up">醒来</string>
+    <string-array name="date_array">
+        <item>日</item>
+        <item>周</item>
+        <item>月</item>
+    </string-array>
+    <string-array name="week_array">
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+        <item>周日</item>
+    </string-array>
+    <string name="default_sleep_info">日均睡眠时长：0时0分</string>
+    <string name="week_target_info">本周达标天数为：%s天</string>
+    <string name="month_target_info">本月达标天数为：%s天</string>
+    <string name="average_sleep_info">日均睡眠时长%1$d时%2$d分</string>
+    <string name="syning_data_prompt">正在同步数据，请稍候</string>
+    <string name="sport_title">运动</string>
+    <string name="wrist_not_bind_prompt">哎哟，还未绑定手环哩！</string>
+    <string name="bind_wrist_prompt">请打开蓝牙并成功绑定手环即可查看哦。</string>
+    <string name="default_sleep_time">入睡 22:00</string>
+    <string name="default_awake_time">醒来 10:00</string>
 </resources>
