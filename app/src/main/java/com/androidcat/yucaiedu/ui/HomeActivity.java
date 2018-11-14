@@ -1,10 +1,11 @@
-package com.androidcat.yucaiedu;
+package com.androidcat.yucaiedu.ui;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.MyPagerAdapter;
 
 import q.rorbin.verticaltablayout.VerticalTabLayout;
