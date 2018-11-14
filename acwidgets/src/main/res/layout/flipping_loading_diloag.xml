@@ -11,7 +11,7 @@
         android:id="@+id/loadingdialog_fiv_icon"
         android:layout_width="35dip"
         android:layout_height="35dip"
-        android:src="@drawable/author_logo" />
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/loadingdialog_htv_text"

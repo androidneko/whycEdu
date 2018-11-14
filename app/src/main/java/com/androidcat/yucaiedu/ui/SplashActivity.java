@@ -5,12 +5,10 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.androidcat.fuelmore.merchant.R;
 import com.androidcat.utilities.Utils;
+import com.androidcat.yucaiedu.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,8 +16,6 @@ import java.util.TimerTask;
 public class SplashActivity extends BaseActivity {
     private final static String TAG = "SplashActivity";
 
-    private View splashLogoView;
-    private View infoView;
     private TextView verInfoTv;
     private Timer timer;
     private TimerTask task;
@@ -38,8 +34,6 @@ public class SplashActivity extends BaseActivity {
         c.fontScale = 1.0f;
         resource.updateConfiguration(c, resource.getDisplayMetrics());
 
-        splashLogoView = findViewById(R.id.splashLogoView);
-        infoView = findViewById(R.id.infoView);
         verInfoTv = (TextView) findViewById(R.id.verInfoTv);
 
         animateSplash();
@@ -48,8 +42,6 @@ public class SplashActivity extends BaseActivity {
     private void animateSplash(){
         String ver = Utils.getVersionName(this);
         verInfoTv.setText("版本：" + ver);
-        splashLogoView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
-        infoView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
     }
 
     private void starttask() {
@@ -65,7 +57,8 @@ public class SplashActivity extends BaseActivity {
                             Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
                             startActivity(intent);
                         } else {
-                            Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
+                            Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
+                            //Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
                         stopTimerTask();

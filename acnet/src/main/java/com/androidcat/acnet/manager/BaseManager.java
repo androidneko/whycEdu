@@ -8,7 +8,7 @@ import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.response.BaseResponse;
 import com.androidcat.acnet.okhttp.MyOkHttp;
 import com.androidcat.acnet.okhttp.callback.RawResponseHandler;
-import com.androidcat.utilities.GsonUtil;
+import com.androidcat.acnet.okhttp.util.GsonUtil;
 import com.androidcat.utilities.LogUtil;
 import com.google.gson.Gson;
 

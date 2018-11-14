@@ -14,7 +14,7 @@ import android.util.Log;
 
 public final class LogUtil {
 
-    private static final String TAG = "TyHce_";
+    private static final String TAG = "ycEdu_";
 
     private static final boolean GLOBAL = true;
     private static final boolean DEBUG = true;

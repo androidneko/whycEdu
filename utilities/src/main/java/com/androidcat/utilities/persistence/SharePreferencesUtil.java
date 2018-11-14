@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.androidcat.utilities.Utils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 //import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
 
@@ -154,7 +156,6 @@ public class SharePreferencesUtil {
         }
         prefs.edit().remove(key).commit();
     }
-/*
     public static boolean setObject(Object obj) {
         if (prefs == null) {
             prefs = new SecurePreferences(context, INIT_KEY, FILE_NAME);
@@ -195,7 +196,6 @@ public class SharePreferencesUtil {
         }
         return objResult;
     }
-*/
     public static void removeObject(Class<?> clazz) {
         if (prefs == null) {
             prefs = new SecurePreferences(context, INIT_KEY, FILE_NAME);

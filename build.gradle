@@ -25,3 +25,22 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// Define versions in a single place
+ext {
+    //version
+    appVersion = '0.2'
+    appVersionCode = 1
+
+    javaMaxHeapSize = '1024m'
+
+    // SDK And Tools
+    minSdkVersion = 21
+    targetSdkVersion = 21
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+
+    //Dependencies
+    supportLibraryVersion = '26.1.0'
+
+}

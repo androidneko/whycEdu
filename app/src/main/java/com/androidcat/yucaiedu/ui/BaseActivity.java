@@ -11,11 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.androidcat.acnet.entity.User;
-import com.androidcat.fuelmore.merchant.FuelMoreApplication;
-import com.androidcat.utilities.log.Logger;
+import com.androidcat.utilities.LogUtil;
 import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.anroidcat.acwidgets.flippingdialog.FlippingLoadingDialog;
 
@@ -43,11 +43,9 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         mLoadingDialog = new FlippingLoadingDialog(this, "正在加载...");
         mLoadingDialog.setCancelable(false);
         user = (User) SharePreferencesUtil.getObject(User.class);
-        FuelMoreApplication.activities.add(this);
     }
 
     @Override
@@ -69,9 +67,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Logger.file(this.getClass().getSimpleName() + "--onDestroy");
+        LogUtil.d(TAG,this.getClass().getSimpleName() + "--onDestroy");
         baseHandler.removeCallbacksAndMessages(null);
-        FuelMoreApplication.activities.remove(this);
     }
 
     protected void exitActivities(){

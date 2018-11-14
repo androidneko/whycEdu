@@ -18,7 +18,6 @@ public class HomeActivity extends AppCompatActivity {
     private MyPagerAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mAdapter = new MyPagerAdapter(getSupportFragmentManager());
