@@ -169,7 +169,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public boolean checkPhoneNumber(String phone) {
-        String telRegex = "[1][34578]\\d{9}";
+        String telRegex = "[1][23456789]\\d{9}";
         if (TextUtils.isEmpty(phone)) {
             return false;
         } else {

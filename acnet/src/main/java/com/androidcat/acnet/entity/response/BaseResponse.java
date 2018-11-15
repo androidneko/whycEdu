@@ -14,6 +14,7 @@ public class BaseResponse {
 
     protected int code;
     protected String message;
+    public String sessionId;
 
     public int getCode() {
         return code;

@@ -9,14 +9,12 @@ import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.request.ChangePswRequest;
 import com.androidcat.acnet.entity.request.FastLoginRequest;
 import com.androidcat.acnet.entity.request.LoginRequest;
-import com.androidcat.acnet.entity.request.NewsListRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
 import com.androidcat.acnet.entity.request.UserRequest;
 import com.androidcat.acnet.entity.request.ValidateCodeRequest;
 import com.androidcat.acnet.entity.response.BaseResponse;
 import com.androidcat.acnet.entity.response.LoginResponse;
-import com.androidcat.acnet.entity.response.NewsResponse;
 import com.androidcat.acnet.entity.response.RegistResponse;
 import com.androidcat.acnet.entity.response.StringContentResponse;
 import com.androidcat.acnet.entity.response.UserInfoResponse;
@@ -242,30 +240,4 @@ public class UserManager extends BaseManager {
         });
     }
 
-    public void getNewsList(){
-        NewsListRequest request = new NewsListRequest();
-        request.setStartid("0");
-        post(InterfaceCodeConst.TYPE_GET_NEWS_LIST, getPostJson(request), new EntityResponseHandler<NewsResponse>() {
-            @Override
-            public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_GET_NEWS_LIST_START);
-            }
-
-            @Override
-            public void onFailure(int statusCode, String error_msg) {
-                Message msg = new Message();
-                msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_GET_NEWS_LIST_FAIL;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, NewsResponse response) {
-                Message msg = new Message();
-                msg.obj = response;
-                msg.what = OptMsgConst.MSG_GET_NEWS_LIST_SUCCESS;
-                handler.sendMessage(msg);
-            }
-        });
-    }
 }

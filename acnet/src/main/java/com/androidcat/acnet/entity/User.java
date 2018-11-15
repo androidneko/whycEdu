@@ -1,7 +1,6 @@
 package com.androidcat.acnet.entity;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
 /**
  * Project: FuelMore
@@ -10,81 +9,19 @@ import android.os.Parcelable;
  * Created at: 2017-8-21 17:43:37
  * add function description here...
  */
-public class User implements Parcelable{
+public class User implements Serializable{
 
-    public String id;
+    public String userId;
     public String userName;
-    public String mobile;
+    public String phonenumber;
     public String token;
-    public String name;
-    public String authority;
-    public String company = "test";
-    public String companyId;
-    public String ciphertext;
-    public String cipherqrcode;
-    public String pointId;
-    public String userRealName;
-    public String integral;
-    public String balance;
-    public String consumptionAmount;
-    public String consumptionCount;
+    public String loginName;
+    public String sex;
+    public String email = "";
+    public String deptId;
+    public String avatar;
 
     public User() {
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.userName);
-        dest.writeString(this.mobile);
-        dest.writeString(this.token);
-        dest.writeString(this.name);
-        dest.writeString(this.authority);
-        dest.writeString(this.company);
-        dest.writeString(this.companyId);
-        dest.writeString(this.ciphertext);
-        dest.writeString(this.cipherqrcode);
-        dest.writeString(this.pointId);
-        dest.writeString(this.userRealName);
-        dest.writeString(this.integral);
-        dest.writeString(this.balance);
-        dest.writeString(this.consumptionAmount);
-        dest.writeString(this.consumptionCount);
-    }
-
-    protected User(Parcel in) {
-        this.id = in.readString();
-        this.userName = in.readString();
-        this.mobile = in.readString();
-        this.token = in.readString();
-        this.name = in.readString();
-        this.authority = in.readString();
-        this.company = in.readString();
-        this.companyId = in.readString();
-        this.ciphertext = in.readString();
-        this.cipherqrcode = in.readString();
-        this.pointId = in.readString();
-        this.userRealName = in.readString();
-        this.integral = in.readString();
-        this.balance = in.readString();
-        this.consumptionAmount = in.readString();
-        this.consumptionCount = in.readString();
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 }

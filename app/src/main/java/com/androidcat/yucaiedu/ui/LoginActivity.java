@@ -1,46 +1,32 @@
-/*
 package com.androidcat.yucaiedu.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.User;
 import com.androidcat.acnet.entity.response.LoginResponse;
 import com.androidcat.acnet.manager.UserManager;
-import com.androidcat.fuelmore.merchant.AppConst;
-import com.androidcat.fuelmore.merchant.R;
-import com.androidcat.fuelmore.merchant.entity.FuelMoreEvent;
 import com.androidcat.utilities.Utils;
 import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.utilities.persistence.SharePreferencesUtil;
+import com.androidcat.yucaiedu.AppConst;
+import com.androidcat.yucaiedu.R;
 import com.anroidcat.acwidgets.ClearEditText;
 
-import de.greenrobot.event.EventBus;
-
-*/
-/**
- * Created by coolbear on 15/4/17.
- *//*
+//import de.greenrobot.event.EventBus;
 
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
     private final static int MSG_LOGIN_CANCLE = 0x0004;
 
-    private Button mLogin = null;
-    private Button mRegist = null;
-    private TextView forget_pwd_btn;
+    private View mLogin = null;
     private ClearEditText usernameTxt;
     private ClearEditText pwdTxt;
-    private View fastLoginView;
     private UserManager loginManager;
     private String mUsername;
     private String pwdtxtbefore;
@@ -49,24 +35,18 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onSingleClick(View v) {
             switch (v.getId()) {
-                case R.id.fastLoginView:
-                    startActivity(new Intent(LoginActivity.this, FastLoginActivity.class));
-                    break;
-                case R.id.forget_pwd_btn:
-                    startActivity(new Intent(LoginActivity.this, ForgetPwdActivity.class));
-                    break;
                 case R.id.vg_login:
                     String nameTxt = usernameTxt.getText().toString().trim();
                     pwdtxtbefore = pwdTxt.getText().toString().trim();
                     if (Utils.isNull(nameTxt)) {
-                        showToast("请输入手机号");
+                        showToast("请输入您的账号");
                         return;
                     }
                     //验证手机号是否合法
-                    if (!checkPhoneNumber(nameTxt)) {
+                    /*if (!checkPhoneNumber(nameTxt)) {
                         showToast("请输入合法的手机号");
                         return;
-                    }
+                    }*/
                     if (Utils.isNull(pwdtxtbefore)) {
                         showToast("请输入密码");
                         return;
@@ -78,9 +58,6 @@ public class LoginActivity extends BaseActivity {
                     String password = pwdtxtbefore;
                     login(nameTxt, password);
                     break;
-                case R.id.user_regist:
-                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                    break;
             }
         }
     };
@@ -90,20 +67,14 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         intLayout();
         setListener();
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
     }
 
     protected void intLayout() {
         setContentView(R.layout.activity_login);
-        mLogin = (Button) findViewById(R.id.vg_login);
-        mRegist = (Button) findViewById(R.id.user_regist);
-        forget_pwd_btn = (TextView) findViewById(R.id.forget_pwd_btn);
+        mLogin =  findViewById(R.id.vg_login);
         usernameTxt = (ClearEditText) findViewById(R.id.usernameTxt);
         pwdTxt = (ClearEditText) findViewById(R.id.pwdTxt);
-        fastLoginView = findViewById(R.id.fastLoginView);
-
-        mLogin.setBackgroundResource(R.drawable.btn_shape_enable);
-        mLogin.setEnabled(false);
     }
 
 
@@ -119,32 +90,7 @@ public class LoginActivity extends BaseActivity {
 
     protected void setListener() {
         loginManager = new UserManager(this, baseHandler);
-        forget_pwd_btn.setOnClickListener(onClickListener);
         mLogin.setOnClickListener(onClickListener);
-        mRegist.setOnClickListener(onClickListener);
-        fastLoginView.setOnClickListener(onClickListener);
-        pwdTxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {
-                    mLogin.setBackgroundResource(R.drawable.button_selector);
-                    mLogin.setEnabled(true);
-                } else {
-                    mLogin.setBackgroundResource(R.drawable.btn_shape_enable);
-                    mLogin.setEnabled(false);
-                }
-            }
-        });
     }
 
     private void login(final String username, final String pwd) {
@@ -199,29 +145,25 @@ public class LoginActivity extends BaseActivity {
         super.onDestroy();
         dismissLoadingDialog();
         cancelToast();
-        EventBus.getDefault().unregister(this);
+        //EventBus.getDefault().unregister(this);
     }
 
     private void saveUser(LoginResponse loginResponse){
         User user = new User();
-        user.id = loginResponse.getContent().getUserId();
-        user.userName = loginResponse.getContent().userName;
-        user.mobile = loginResponse.getContent().userName;
-        user.authority = loginResponse.getContent().getAuthority();
-        user.token = loginResponse.getContent().getUserId();
-        user.companyId = loginResponse.getContent().getCompanyId();
-        user.ciphertext = loginResponse.getContent().getCiphertext();
-        user.cipherqrcode = loginResponse.getContent().getCipherqrcode();
-        user.pointId = loginResponse.content.pointId;
+        user.userId = loginResponse.content.userId;
+        user.userName = loginResponse.content.userName;
+        user.token = loginResponse.sessionId;
+        user.avatar = loginResponse.content.avatar;
+        user.deptId = loginResponse.content.deptId;
         // TODO: 2017-8-21 add more properties here
         SharePreferencesUtil.setObject(user);
     }
 
-    public void onEventMainThread(FuelMoreEvent event){
-        switch (event.code){
-            case FuelMoreEvent.CODE_FINISH_LOGIN:
-                finish();
-                break;
-        }
-    }
-}*/
+//    public void onEventMainThread(FuelMoreEvent event){
+//        switch (event.code){
+//            case FuelMoreEvent.CODE_FINISH_LOGIN:
+//                finish();
+//                break;
+//        }
+//    }
+}
