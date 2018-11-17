@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         viewpager.setAdapter(mAdapter);
 
         tablayout.setupWithViewPager(viewpager);
+        tablayout.setTabAdapter();
     }
 
 }
