@@ -4,6 +4,7 @@
     <color name="cccc">#333333</color>
     <color name="theme_green">#e4eeeb</color>
     <color name="theme_dark_green">#5ba997</color>
+    <color name="theme_select_green">#bce2e8</color>
     <color name="bg_color">#f5f7f9</color>
     <color name="nav_title_normal_color">#656870</color>
     <color name="nav_title_check_color">#48a0dc</color>
@@ -36,12 +37,12 @@
     <color name="gray_zwx1">#E8E8EF</color>
     <color name="gray_heatBeat">#E8E8E8</color>
     <color name="gray_bg">#fafafb</color>
-    <color name="gray_item">#dcdcdc</color>
+    <color name="gray_item">#efefef</color>
 
     <color name="gray_1">#82919C</color>
     <color name="gray_btn">#C0C8DB</color>
     <color name="gray_border">#E7E7E7</color>
-    <color name="gray_line">#e5e5e5</color>
+    <color name="gray_line">#b8b8b8</color>
 
     <color name="green_zwx">#ff8ABF4F</color>
     <color name="pink">#FF6565</color>

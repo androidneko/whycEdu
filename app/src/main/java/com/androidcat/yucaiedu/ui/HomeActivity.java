@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.androidcat.yucaiedu.R;
+import com.androidcat.yucaiedu.adapter.HomeTabAdapter;
 import com.androidcat.yucaiedu.adapter.MyPagerAdapter;
 
 import q.rorbin.verticaltablayout.VerticalTabLayout;
@@ -16,6 +17,8 @@ public class HomeActivity extends AppCompatActivity {
     private VerticalTabLayout tablayout;
 
     private MyPagerAdapter mAdapter;
+    private HomeTabAdapter tabAdapter = new HomeTabAdapter();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         viewpager.setAdapter(mAdapter);
 
         tablayout.setupWithViewPager(viewpager);
-        tablayout.setTabAdapter();
+        tablayout.setTabAdapter(tabAdapter);
     }
 
 }

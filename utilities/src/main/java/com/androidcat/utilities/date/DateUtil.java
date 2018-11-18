@@ -23,6 +23,19 @@ public class DateUtil {
     private static final String ONE_DAY_AGO = "天前";
     private static final String ONE_MONTH_AGO = "月前";
     private static final String ONE_YEAR_AGO = "年前";
+    public static String[] WEEK = {"星期天","星期一","星期二","星期三","星期四","星期五","星期六"};
+    public static final int WEEKDAYS = 7;
+
+    public static String getYMDW(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayIndex = calendar.get(Calendar.DAY_OF_WEEK);
+        if (dayIndex < 1 || dayIndex > WEEKDAYS) {
+            return null;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        return format.format(date) + "    " + WEEK[dayIndex - 1];
+    }
 
     public static String format(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

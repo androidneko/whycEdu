@@ -57,8 +57,8 @@ public class SplashActivity extends BaseActivity {
                             Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
                             startActivity(intent);
                         } else {
-                            //Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
-                            Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
+                            Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
+                            //Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
                         stopTimerTask();
@@ -69,7 +69,7 @@ public class SplashActivity extends BaseActivity {
                 }
             };
         }
-        timer.schedule(task, 2000);
+        timer.schedule(task, 1000);
     }
 
 

@@ -7,7 +7,7 @@ import com.androidcat.yucaiedu.fragment.BaseFragment;
 import com.androidcat.yucaiedu.fragment.SmartFragmentFactory;
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
-    private String[] mTitles = {"日常规考评","校务日志","班级得分","设置"};
+    private String[] mTitles = {"日常规考评","校务日志","分析统计","班级得分","设置"};
     public MyPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -26,5 +26,6 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mTitles[position];
+        //return "";
     }
 }

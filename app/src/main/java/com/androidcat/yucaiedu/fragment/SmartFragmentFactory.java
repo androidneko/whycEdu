@@ -16,9 +16,12 @@ public class SmartFragmentFactory {
                     baseFragment = new SchoolAffairsFragment();
                     break;
                 case 2:
-                    baseFragment = new ClassesScoresFragment();
+                    baseFragment = new AnalyzeFragment();
                     break;
                 case 3:
+                    baseFragment = new ClassesScoresFragment();
+                    break;
+                case 4:
                     baseFragment = new SettingsFragment();
                     break;
             }
