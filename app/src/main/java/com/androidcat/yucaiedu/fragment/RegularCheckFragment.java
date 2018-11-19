@@ -22,4 +22,9 @@ public class RegularCheckFragment extends BaseFragment{
     protected void initDataAfterFindView() {
 
     }
+
+    @Override
+    protected void initDataBeforeViewCreate() {
+
+    }
 }

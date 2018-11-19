@@ -1,6 +1,5 @@
 package com.androidcat.yucaiedu.fragment;
 
-import android.content.Intent;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
@@ -13,13 +12,11 @@ import com.androidcat.acnet.entity.TextMenu;
 import com.androidcat.utilities.LogUtil;
 import com.androidcat.utilities.date.DateUtil;
 import com.androidcat.utilities.listener.OnSingleClickListener;
-import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.ExpandableAdapter;
 import com.bigkoo.pickerview.OptionsPopupWindow;
 import com.bigkoo.pickerview.TimePopupWindow;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,9 +25,8 @@ import java.util.List;
 @ActivityFragmentInject(
         contentViewId = R.layout.fragment_analyze,
         hasNavigationView = false)
-public class AnalyzeFragment extends BaseFragment{
-    private static final String TAG = "AnalyzeFragment";
-
+public class AnalyzeFragmentBk extends BaseFragment{
+    private static final String TAG = "AnalyzeFragmentBk";
     private TextView dateTv;
     private TextView classTv;
     private List<TextMenu> menu = new ArrayList<TextMenu>();
@@ -60,9 +56,9 @@ public class AnalyzeFragment extends BaseFragment{
 
     @Override
     protected void initDataAfterFindView() {
-        LogUtil.d(TAG,"initDataAfterFindView");
         dateTv.setText(DateUtil.getYMDW(new Date()));
         classTv.setText(5+"年级  "+6 + "班");
+        initData();
         adapter = new ExpandableAdapter(getActivity(),menu,subMenu);
         menuList.setAdapter(adapter);
         pickerLintener();
@@ -71,7 +67,7 @@ public class AnalyzeFragment extends BaseFragment{
 
     @Override
     protected void initDataBeforeViewCreate() {
-        initData();
+
     }
 
     /**

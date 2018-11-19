@@ -25,10 +25,9 @@ public class SmartFragmentFactory {
                     baseFragment = new SettingsFragment();
                     break;
             }
-
+            mBaseFragments.put(position, baseFragment);
         }
 
-        mBaseFragments.put(position, baseFragment);
         return baseFragment;
     }
 }

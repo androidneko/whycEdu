@@ -12,12 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidcat.utilities.LogUtil;
+
 /**
  * Created by gyq on 2018/2/28 15:55
  */
 
 public abstract class BaseFragment extends Fragment implements MyToolBarClickListener {
-
+    private final static String TAG = "BaseFragment";
     protected static final int DEFAULT_LOADING_TIME = 2000;
     protected static final int WHAT_LOAD = 1;
     protected static final int WHAT_LOAD_FINISH = 2;
@@ -41,6 +43,7 @@ public abstract class BaseFragment extends Fragment implements MyToolBarClickLis
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtil.d(TAG,"onCreate");
         mActivity = getActivity();
         mContext = getContext();
         if (!getClass().isAnnotationPresent(ActivityFragmentInject.class)) {
@@ -48,11 +51,13 @@ public abstract class BaseFragment extends Fragment implements MyToolBarClickLis
         }
         annotation = getClass().getAnnotation(ActivityFragmentInject.class);
         contentViewId = annotation.contentViewId();
+        initDataBeforeViewCreate();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogUtil.d(TAG,"onCreateView");
         if (mRootView == null) {
             mRootView = View.inflate(mContext, contentViewId, null);
         }
@@ -65,6 +70,7 @@ public abstract class BaseFragment extends Fragment implements MyToolBarClickLis
     }
 
     protected void initViewNData() {
+
         if (annotation.hasToolbar()) {
             //initToolbar();
         }
@@ -81,6 +87,8 @@ public abstract class BaseFragment extends Fragment implements MyToolBarClickLis
     protected abstract void findViewAfterViewCreate();
 
     protected abstract void initDataAfterFindView();
+
+    protected abstract void initDataBeforeViewCreate();
 
 
     @Override
