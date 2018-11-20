@@ -16,20 +16,19 @@
             android:layout_height="match_parent"
             >
             <RelativeLayout
-                android:layout_width="50dp"
+                android:layout_width="62dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:background="@color/white">
 
                 <q.rorbin.verticaltablayout.VerticalTabLayout
                     android:id="@+id/vertical_tab"
-                    android:layout_width="50dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="0dp"
                     app:tab_margin="0dp"
-                    app:tab_height="60dp"
                     app:indicator_color="@color/theme_dark_green"
                     app:tab_mode="scrollable" />
             </RelativeLayout>
@@ -42,13 +41,13 @@
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:visibility="gone"
+        android:layout_width="62dp"
+        android:layout_height="48dp"
+        android:visibility="visible"
         >
         <View
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:background="@drawable/logo"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
