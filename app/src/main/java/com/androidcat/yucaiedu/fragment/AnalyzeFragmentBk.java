@@ -48,7 +48,7 @@ public class AnalyzeFragmentBk extends BaseFragment{
     protected void findViewAfterViewCreate() {
         dateTv = mRootView.findViewById(R.id.dateTv);
         classTv = mRootView.findViewById(R.id.classTv);
-        menuList = mRootView.findViewById(R.id.menuList);
+        //menuList = mRootView.findViewById(R.id.menuList);
         menuList.setCacheColorHint(0); //防止拖动时出现黑色背景
         menuList.setGroupIndicator(null);
         //menuList.setDivider(null);//设置没有分割线

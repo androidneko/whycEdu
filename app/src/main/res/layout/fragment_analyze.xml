@@ -51,10 +51,23 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content" >
                 <RadioButton
-                    android:id="@+id/subMenuTxt"
+                    android:id="@+id/regularRb"
                     android:layout_width="130dp"
                     android:layout_height="45dp"
-                    android:text="日常规统计"
+                    android:text="日常规总计"
+                    android:textColor="@color/black"
+                    android:checked="true"
+                    android:textSize="17sp"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:clickable="true"
+                    android:background="@drawable/while_label_check"
+                    />
+                <RadioButton
+                    android:id="@+id/selfManagerRb"
+                    android:layout_width="130dp"
+                    android:layout_height="35dp"
+                    android:text="自我管理"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:gravity="center"
@@ -63,10 +76,10 @@
                     android:background="@drawable/while_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/subMenuTxt"
+                    android:id="@+id/exerciseManagerRb"
                     android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
+                    android:layout_height="35dp"
+                    android:text="两操管理"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:gravity="center"
@@ -75,10 +88,10 @@
                     android:background="@drawable/while_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/subMenuTxt"
+                    android:id="@+id/safetyManagerRb"
                     android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
+                    android:layout_height="35dp"
+                    android:text="安全文明"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:gravity="center"
@@ -87,10 +100,10 @@
                     android:background="@drawable/while_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/subMenuTxt"
+                    android:id="@+id/healthManagerRb"
                     android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
+                    android:layout_height="35dp"
+                    android:text="卫生节能"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:gravity="center"
@@ -99,10 +112,10 @@
                     android:background="@drawable/while_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/subMenuTxt"
+                    android:id="@+id/classManagerRb"
                     android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
+                    android:layout_height="35dp"
+                    android:text="课堂管理"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:gravity="center"
@@ -111,10 +124,10 @@
                     android:background="@drawable/while_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/subMenuTxt"
+                    android:id="@+id/queueManagerRb"
                     android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
+                    android:layout_height="35dp"
+                    android:text="队列管理"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:gravity="center"
@@ -123,46 +136,10 @@
                     android:background="@drawable/while_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/subMenuTxt"
+                    android:id="@+id/schoolAffairRb"
                     android:layout_width="130dp"
                     android:layout_height="45dp"
-                    android:text="日常规统计"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:clickable="true"
-                    android:background="@drawable/while_label_check"
-                    />
-                <RadioButton
-                    android:id="@+id/subMenuTxt"
-                    android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:clickable="true"
-                    android:background="@drawable/while_label_check"
-                    />
-                <RadioButton
-                    android:id="@+id/subMenuTxt"
-                    android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:clickable="true"
-                    android:background="@drawable/while_label_check"
-                    />
-                <RadioButton
-                    android:id="@+id/subMenuTxt"
-                    android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:text="日常规统计"
+                    android:text="校务统计"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:gravity="center"
@@ -190,5 +167,82 @@
             <!--</RelativeLayout>-->
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="3dp">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="经典诵读"-->
+                            <!--android:textColor="@color/text_black2"/>-->
+                        <!--<View-->
+                            <!--android:layout_width="20dp"-->
+                            <!--android:layout_height="5dp"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:background="@color/blue_4"/>-->
+                    <!--</LinearLayout>-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:gravity="center"-->
+                        <!--android:layout_marginLeft="10dp">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="晨读"-->
+                            <!--android:textColor="@color/text_black2"/>-->
+                        <!--<View-->
+                            <!--android:layout_width="20dp"-->
+                            <!--android:layout_height="5dp"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:background="@color/red_three"/>-->
+                    <!--</LinearLayout>-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:gravity="center"-->
+                        <!--android:layout_marginLeft="10dp">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="晨会"-->
+                            <!--android:textColor="@color/text_black2"/>-->
+                        <!--<View-->
+                            <!--android:layout_width="20dp"-->
+                            <!--android:layout_height="5dp"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:background="@color/orange"/>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
     </LinearLayout>
 </LinearLayout>

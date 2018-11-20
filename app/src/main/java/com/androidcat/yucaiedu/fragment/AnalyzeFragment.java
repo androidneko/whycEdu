@@ -1,29 +1,30 @@
 package com.androidcat.yucaiedu.fragment;
 
-import android.content.Intent;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ExpandableListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.androidcat.acnet.entity.TextMenu;
 import com.androidcat.utilities.LogUtil;
 import com.androidcat.utilities.date.DateUtil;
 import com.androidcat.utilities.listener.OnSingleClickListener;
-import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.R;
-import com.androidcat.yucaiedu.adapter.ExpandableAdapter;
 import com.bigkoo.pickerview.OptionsPopupWindow;
 import com.bigkoo.pickerview.TimePopupWindow;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.Random;
 
 @ActivityFragmentInject(
         contentViewId = R.layout.fragment_analyze,
@@ -31,12 +32,13 @@ import java.util.List;
 public class AnalyzeFragment extends BaseFragment{
     private static final String TAG = "AnalyzeFragment";
 
+    private LineChart chart;
     private TextView dateTv;
     private TextView classTv;
-    private List<TextMenu> menu = new ArrayList<TextMenu>();
-    private List<List<TextMenu>> subMenu = new ArrayList<List<TextMenu>>();
-    private ExpandableAdapter adapter;
-    private ExpandableListView menuList;
+//    private List<TextMenu> menu = new ArrayList<TextMenu>();
+//    private List<List<TextMenu>> subMenu = new ArrayList<List<TextMenu>>();
+//    private ExpandableAdapter adapter;
+//    private ExpandableListView menuList;
 
     TimePopupWindow pwTime;
     OptionsPopupWindow pwOptions2;
@@ -52,21 +54,50 @@ public class AnalyzeFragment extends BaseFragment{
     protected void findViewAfterViewCreate() {
         dateTv = mRootView.findViewById(R.id.dateTv);
         classTv = mRootView.findViewById(R.id.classTv);
-        menuList = mRootView.findViewById(R.id.menuList);
-        menuList.setCacheColorHint(0); //防止拖动时出现黑色背景
-        menuList.setGroupIndicator(null);
-        //menuList.setDivider(null);//设置没有分割线
+        chart = mRootView.findViewById(R.id.chart1);
+        //chart.setOnChartValueSelectedListener(getActivity());
+
+        chart.setDrawGridBackground(false);
+        chart.getDescription().setEnabled(false);
+        chart.setDrawBorders(false);
+
+        chart.getAxisLeft().setEnabled(false);
+        chart.getAxisRight().setDrawAxisLine(false);
+        chart.getAxisRight().setDrawGridLines(false);
+        chart.getXAxis().setDrawAxisLine(false);
+        chart.getXAxis().setDrawGridLines(false);
+
+        // enable touch gestures
+        chart.setTouchEnabled(true);
+
+        // enable scaling and dragging
+        chart.setDragEnabled(true);
+        chart.setScaleEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        chart.setPinchZoom(false);
+
+        Legend l = chart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
     }
+
+    private final int[] colors = new int[] {
+            ColorTemplate.VORDIPLOM_COLORS[0],
+            ColorTemplate.VORDIPLOM_COLORS[1],
+            ColorTemplate.VORDIPLOM_COLORS[2]
+    };
 
     @Override
     protected void initDataAfterFindView() {
         LogUtil.d(TAG,"initDataAfterFindView");
         dateTv.setText(DateUtil.getYMDW(new Date()));
         classTv.setText(5+"年级  "+6 + "班");
-        adapter = new ExpandableAdapter(getActivity(),menu,subMenu);
-        menuList.setAdapter(adapter);
         pickerLintener();
         setListener();
+        setChartData();
     }
 
     @Override
@@ -142,18 +173,18 @@ public class AnalyzeFragment extends BaseFragment{
 
     private void initData() {
         //添加父布局数据
-        menu.add(new TextMenu("校常规统计"));
-        menu.add(new TextMenu("校务统计"));
-        //添加子布局数据
-        for (int j = 0; j < 2; j++) {
-            List<TextMenu> childitem = new ArrayList<TextMenu>();
-            if (j<1){
-                for (int i = 0; i < 5; i++) {
-                    childitem.add(new TextMenu("子数据" + i));
-                }
-            }
-            subMenu.add(childitem);
-        }
+//        menu.add(new TextMenu("校常规统计"));
+//        menu.add(new TextMenu("校务统计"));
+//        //添加子布局数据
+//        for (int j = 0; j < 2; j++) {
+//            List<TextMenu> childitem = new ArrayList<TextMenu>();
+//            if (j<1){
+//                for (int i = 0; i < 5; i++) {
+//                    childitem.add(new TextMenu("子数据" + i));
+//                }
+//            }
+//            subMenu.add(childitem);
+//        }
     }
 
     private void backgroundAlpha(float bgAlpha) {
@@ -168,16 +199,50 @@ public class AnalyzeFragment extends BaseFragment{
             switch (v.getId()) {
                 case R.id.classTv:
                     backgroundAlpha(1.0f);
-                    pwOptions2.showAtLocation(menuList, Gravity.BOTTOM, 0, 0);
+                    pwOptions2.showAtLocation(classTv, Gravity.BOTTOM, 0, 0);
                     pwOptions2.setSelectOptions(4,5);
                     break;
                 case R.id.dateTv:
                     backgroundAlpha(1.0f);
-                    pwTime.showAtLocation(menuList, Gravity.BOTTOM, 0, 0,new Date());
+                    pwTime.showAtLocation(dateTv, Gravity.BOTTOM, 0, 0,new Date());
                     break;
                 default:
                     break;
             }
         }
     };
+
+    private void setChartData(){
+        chart.resetTracking();
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
+        for (int z = 0; z < 3; z++) {
+
+            ArrayList<Entry> values = new ArrayList<>();
+
+            for (int i = 0; i < 7; i++) {
+                double val = new Random().nextInt(100);
+                values.add(new Entry(i, (float) val));
+            }
+
+            LineDataSet d = new LineDataSet(values, "DataSet " + (z + 1));
+            d.setLineWidth(2.5f);
+            d.setCircleRadius(4f);
+
+            int color = colors[z % colors.length];
+            d.setColor(color);
+            d.setCircleColor(color);
+            dataSets.add(d);
+        }
+
+        // make the first DataSet dashed
+        ((LineDataSet) dataSets.get(0)).enableDashedLine(10, 10, 0);
+        ((LineDataSet) dataSets.get(0)).setColors(ColorTemplate.VORDIPLOM_COLORS);
+        ((LineDataSet) dataSets.get(0)).setCircleColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        LineData data = new LineData(dataSets);
+        chart.setData(data);
+        chart.invalidate();
+    }
 }

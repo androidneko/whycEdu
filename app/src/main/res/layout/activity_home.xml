@@ -16,29 +16,25 @@
             android:layout_height="match_parent"
             >
             <RelativeLayout
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:background="@color/white">
 
                 <q.rorbin.verticaltablayout.VerticalTabLayout
                     android:id="@+id/vertical_tab"
-                    android:layout_width="match_parent"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    app:indicator_color="#30000000"
-                    app:indicator_corners="5dp"
-                    app:indicator_gravity="fill"
-                    app:indicator_width="20dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    app:tab_margin="0dp"
                     app:tab_height="60dp"
-                    app:tab_margin="10dp"
+                    app:indicator_color="@color/theme_dark_green"
                     app:tab_mode="scrollable" />
             </RelativeLayout>
 
-            <android.support.v4.view.ViewPager
+            <com.anroidcat.acwidgets.SmartViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -46,12 +42,13 @@
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout
-        android:layout_width="100dp"
-        android:layout_height="80dp"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:visibility="gone"
         >
         <View
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/logo"
             android:layout_centerInParent="true"/>
     </RelativeLayout>

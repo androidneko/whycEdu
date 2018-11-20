@@ -8,12 +8,13 @@ import android.view.WindowManager;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.HomeTabAdapter;
 import com.androidcat.yucaiedu.adapter.MyPagerAdapter;
+import com.anroidcat.acwidgets.SmartViewPager;
 
 import q.rorbin.verticaltablayout.VerticalTabLayout;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ViewPager viewpager;
+    private SmartViewPager viewpager;
     private VerticalTabLayout tablayout;
 
     private MyPagerAdapter mAdapter;
@@ -24,11 +25,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        viewpager = (SmartViewPager) findViewById(R.id.viewpager);
         tablayout = (VerticalTabLayout) findViewById(R.id.vertical_tab);
 
         viewpager.setAdapter(mAdapter);
-
+        viewpager.setScrollable(false);
         tablayout.setupWithViewPager(viewpager);
         tablayout.setTabAdapter(tabAdapter);
     }

@@ -23,19 +23,19 @@ public class HomeTabAdapter implements TabAdapter {
     @Override
     public ITabView.TabIcon getIcon(int position) {
         if(position == 0){
-            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.ic_orders,R.mipmap.ic_orders).build();
+            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_regular_pre,R.mipmap.tab_regular_nor).build();
         }
         if(position == 1){
-            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.ic_pay,R.mipmap.ic_pay).build();
+            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_school_pre,R.mipmap.tab_school_nor).build();
         }
         if(position == 2){
-            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.ic_recharge,R.mipmap.ic_recharge).build();
+            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_analyze_pre,R.mipmap.tab_classes_nor).build();
         }
         if(position == 3){
-            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.ic_stations,R.mipmap.ic_stations).build();
+            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_classes_pre,R.mipmap.tab_classes_nor).build();
         }
         if(position == 4){
-            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.ic_stations,R.mipmap.ic_stations).build();
+            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_settings_pre,R.mipmap.tab_settings_nor).build();
         }
         return null;
     }
