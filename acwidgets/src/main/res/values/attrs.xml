@@ -23,4 +23,16 @@
         <attr name="LinPaddingBottom" format="dimension"/>
 
     </declare-styleable>
+
+    <declare-styleable name="FloatNaviBar">
+        <attr name="slider" format="reference" />
+        <!-- Drawable used to draw the left part of the strip underneath the tabs. -->
+        <attr name="tabLeft" format="reference" />
+        <!-- Drawable used to draw the right part of the strip underneath the tabs. -->
+        <attr name="tabRight" format="reference" />
+        <!-- Integer used to set the tabs count display to screen. -->
+        <attr name="tabCount" format="integer" />
+        <!-- Determines whether the tab arrow display or hide. -->
+        <attr name="tabArrowEnabled" format="boolean" />
+    </declare-styleable>
 </resources>

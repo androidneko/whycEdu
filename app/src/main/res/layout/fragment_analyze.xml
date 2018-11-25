@@ -61,7 +61,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
                 <RadioButton
                     android:id="@+id/selfManagerRb"
@@ -73,7 +73,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
                 <RadioButton
                     android:id="@+id/exerciseManagerRb"
@@ -85,7 +85,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
                 <RadioButton
                     android:id="@+id/safetyManagerRb"
@@ -97,7 +97,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
                 <RadioButton
                     android:id="@+id/healthManagerRb"
@@ -109,7 +109,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
                 <RadioButton
                     android:id="@+id/classManagerRb"
@@ -121,7 +121,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
                 <RadioButton
                     android:id="@+id/queueManagerRb"
@@ -133,7 +133,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
                 <RadioButton
                     android:id="@+id/schoolAffairRb"
@@ -145,7 +145,7 @@
                     android:gravity="center"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/while_label_check"
+                    android:background="@drawable/gray_green_label_check"
                     />
             </RadioGroup>
             <!--<RelativeLayout-->

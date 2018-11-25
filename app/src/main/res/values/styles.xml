@@ -6,6 +6,6 @@
     </style>
 
     <style name="menu_checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/while_label_check</item>
+        <item name="android:button">@drawable/gray_green_label_check</item>
     </style>
 </resources>

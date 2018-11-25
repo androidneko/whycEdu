@@ -36,6 +36,7 @@ public class LoginActivity extends BaseActivity {
         public void onSingleClick(View v) {
             switch (v.getId()) {
                 case R.id.vg_login:
+                    gotoHome();
                     String nameTxt = usernameTxt.getText().toString().trim();
                     pwdtxtbefore = pwdTxt.getText().toString().trim();
                     if (Utils.isNull(nameTxt)) {
@@ -101,10 +102,7 @@ public class LoginActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (AppConst.IS_MAINACTIVITY_START) {
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);   //注意本行的FLAG设置
-                startActivity(intent);
+                gotoHome();
             }
             finish();
             return true;
@@ -166,4 +164,12 @@ public class LoginActivity extends BaseActivity {
 //                break;
 //        }
 //    }
+
+    private void gotoHome(){
+        Intent intent = new Intent();
+        intent.setClass(LoginActivity.this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);   //注意本行的FLAG设置
+        startActivity(intent);
+        finish();
+    }
 }
