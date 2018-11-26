@@ -123,6 +123,8 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <include layout="@layout/menu_regular_check" />
-
+        <include
+            android:id="@+id/rcBuilding"
+            layout="@layout/sub_rc_building"/>
     </LinearLayout>
 </LinearLayout>

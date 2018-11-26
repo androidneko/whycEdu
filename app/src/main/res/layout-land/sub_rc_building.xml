@@ -46,8 +46,8 @@
             <RelativeLayout
                 android:id="@+id/clockBuilding"
                 android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:visibility="gone">
+                android:layout_height="490dp"
+                android:visibility="visible">
                 <LinearLayout
                     android:id="@+id/clockGridHeader"
                     android:layout_width="45dp"
@@ -55,7 +55,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="130dp"
+                        android:layout_height="160dp"
                         android:background="@drawable/room_bg"
                         android:text="3F"
                         android:gravity="center"
@@ -63,7 +63,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="175dp"
+                        android:layout_height="210dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="2F"
@@ -72,7 +72,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
+                        android:layout_height="105dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="1F"
@@ -83,11 +83,13 @@
                 <GridView
                     android:id="@+id/clockBuildingGrid"
                     android:layout_toRightOf="@+id/clockGridHeader"
-                    android:layout_width="170dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="270dp"
+                    android:layout_height="490dp"
                     android:layout_marginLeft="5dp"
+                    android:verticalSpacing="5dp"
+                    android:horizontalSpacing="5dp"
                     android:numColumns="2"
-                    android:columnWidth="80dp">
+                    android:columnWidth="130dp">
                 </GridView>
 
             </RelativeLayout>
@@ -165,6 +167,7 @@
                 android:id="@+id/eastBuilding"
                 android:layout_width="wrap_content"
                 android:layout_height="295dp"
+                android:visibility="gone"
                 >
                 <LinearLayout
                     android:id="@+id/eastGridHeader"
@@ -250,8 +253,9 @@
                 android:gravity="center"/>
         </RelativeLayout>
         <LinearLayout
-            android:layout_width="230dp"
-            android:layout_height="300dp"
+            android:layout_width="320dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="35dp"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:gravity="center_horizontal"
@@ -269,7 +273,7 @@
                 android:id="@+id/markTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <RadioGroup
@@ -279,16 +283,16 @@
 
                     <RadioButton
                         android:id="@+id/aRb"
-                        android:layout_width="60dp"
-                        android:layout_height="45dp"
+                        android:layout_width="80dp"
+                        android:layout_height="65dp"
                         android:background="@drawable/top_label_check"
                         android:button="@null"
                         android:clickable="true"
                         />
                     <RadioButton
                         android:id="@+id/bRb"
-                        android:layout_width="60dp"
-                        android:layout_height="45dp"
+                        android:layout_width="80dp"
+                        android:layout_height="65dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/top_label_check"
                         android:button="@null"
@@ -296,8 +300,8 @@
                         />
                     <RadioButton
                         android:id="@+id/cRb"
-                        android:layout_width="60dp"
-                        android:layout_height="45dp"
+                        android:layout_width="80dp"
+                        android:layout_height="65dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/top_label_check"
                         android:button="@null"
@@ -309,10 +313,10 @@
                 </RadioGroup>
             </LinearLayout>
             <View
-                android:layout_width="110dp"
-                android:layout_height="100dp"
+                android:layout_width="180dp"
+                android:layout_height="165dp"
                 android:background="@mipmap/marka"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="40dp"/>
         </LinearLayout>
         <View
             android:layout_width="180dp"

@@ -4,19 +4,23 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.androidcat.acnet.entity.Room;
 import com.androidcat.utilities.date.DateUtil;
 import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.R;
+import com.androidcat.yucaiedu.adapter.RoomAdapter;
 import com.bigkoo.pickerview.OptionsPopupWindow;
 import com.bigkoo.pickerview.TimePopupWindow;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @ActivityFragmentInject(
         contentViewId = R.layout.fragment_regular_check,
@@ -25,17 +29,20 @@ public class RegularCheckFragment extends BaseFragment{
 
     private TextView dateTv;
     private TextView buildingTv;
+    View buildingView;
+    GridView clockGrid;
     OptionsPopupWindow pwOptions;
     TimePopupWindow pwTime;
     private ArrayList<String> optionsItems = new ArrayList<String>();
 
     private String building = "钟楼";
-
+    private List<Room> rooms = new ArrayList<>();
+    private RoomAdapter roomAdapter;
     private OnSingleClickListener onClickListener = new OnSingleClickListener() {
         @Override
         public void onSingleClick(View v) {
             switch (v.getId()) {
-                case R.id.buildingTv:
+                case R.id.buildingView:
                     backgroundAlpha(1.0f);
                     pwOptions.showAtLocation(buildingTv, Gravity.BOTTOM, 0, 0);
                     pwOptions.setSelectOptions(0);
@@ -66,6 +73,8 @@ public class RegularCheckFragment extends BaseFragment{
     protected void findViewAfterViewCreate() {
         dateTv = mRootView.findViewById(R.id.dateTv);
         buildingTv = mRootView.findViewById(R.id.buildingTv);
+        buildingView = mRootView.findViewById(R.id.buildingView);
+        clockGrid = mRootView.findViewById(R.id.clockBuildingGrid);
     }
 
     @Override
@@ -74,6 +83,7 @@ public class RegularCheckFragment extends BaseFragment{
         buildingTv.setText("钟楼");
         pickerLintener();
         setListener();
+        initData();
     }
 
     @Override
@@ -105,6 +115,7 @@ public class RegularCheckFragment extends BaseFragment{
 
     protected void setListener() {
         dateTv.setOnClickListener(onClickListener);
+        buildingView.setOnClickListener(onClickListener);
         //时间选择后回调
         pwTime.setOnTimeSelectListener(new TimePopupWindow.OnTimeSelectListener() {
             @Override
@@ -143,5 +154,19 @@ public class RegularCheckFragment extends BaseFragment{
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         getActivity().getWindow().setAttributes(lp);
+    }
+
+    private void initData(){
+        if (rooms.size() == 0){
+            for(int i = 1;i < 19;i++){
+                Room room = new Room();
+                room.name = i+"班";
+                rooms.add(room);
+            }
+        }
+        if (roomAdapter == null){
+            roomAdapter = new RoomAdapter(getActivity(),rooms);
+        }
+        clockGrid.setAdapter(roomAdapter);
     }
 }
