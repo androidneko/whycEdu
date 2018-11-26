@@ -12,6 +12,7 @@ import com.androidcat.acnet.entity.response.LoginResponse;
 import com.androidcat.acnet.manager.UserManager;
 import com.androidcat.utilities.Utils;
 import com.androidcat.utilities.listener.OnSingleClickListener;
+import com.androidcat.utilities.persistence.SPConsts;
 import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.AppConst;
 import com.androidcat.yucaiedu.R;
@@ -36,7 +37,7 @@ public class LoginActivity extends BaseActivity {
         public void onSingleClick(View v) {
             switch (v.getId()) {
                 case R.id.vg_login:
-                    gotoHome();
+                    //gotoHome();
                     String nameTxt = usernameTxt.getText().toString().trim();
                     pwdtxtbefore = pwdTxt.getText().toString().trim();
                     if (Utils.isNull(nameTxt)) {
@@ -86,7 +87,7 @@ public class LoginActivity extends BaseActivity {
         if (!Utils.isNull(mUsername)) {
             usernameTxt.setText(mUsername);
         }
-        pwdTxt.setText("");
+        pwdTxt.setText(SharePreferencesUtil.getValue(SPConsts.CONV));
     }
 
     protected void setListener() {
@@ -129,6 +130,7 @@ public class LoginActivity extends BaseActivity {
             case OptMsgConst.MSG_LOGIN_SUCCESS:
                 dismissLoadingDialog();
                 saveUser((LoginResponse) msg.obj);
+                SharePreferencesUtil.setValue(SPConsts.CONV,this.pwdtxtbefore);
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
@@ -153,6 +155,8 @@ public class LoginActivity extends BaseActivity {
         user.token = loginResponse.sessionId;
         user.avatar = loginResponse.content.avatar;
         user.deptId = loginResponse.content.deptId;
+        user.loginName = loginResponse.content.loginName;
+        user.phonenumber = loginResponse.content.phonenumber;
         // TODO: 2017-8-21 add more properties here
         SharePreferencesUtil.setObject(user);
     }

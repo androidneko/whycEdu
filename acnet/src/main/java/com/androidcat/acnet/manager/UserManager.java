@@ -36,14 +36,14 @@ public class UserManager extends BaseManager {
 
     public void login(String userName,String pwd,RawResponseHandler rawResponseHandler){
         LoginRequest request = new LoginRequest();
-        request.userName = (userName);
+        request.loginName = (userName);
         request.setPasswd(pwd);
         post(InterfaceCodeConst.TYPE_LOGIN, getPostJson(request), rawResponseHandler);
     }
 
     public void login(String userName,String pwd){
         LoginRequest request = new LoginRequest();
-        request.userName = (userName);
+        request.loginName = (userName);
         request.setPasswd(pwd);
         post(InterfaceCodeConst.TYPE_LOGIN, getPostJson(request), new EntityResponseHandler<LoginResponse>() {
             @Override

@@ -2,14 +2,14 @@ package com.androidcat.acnet.entity.request;
 
 
 public class LoginRequest extends BaseRequest {
-    public String userName = null;
-    public String passwd = null;
+    public String loginName = null;
+    public String password = null;
 
     public String getPasswd() {
-        return passwd;
+        return password;
     }
 
     public void setPasswd(String passwd) {
-        this.passwd = passwd;
+        this.password = passwd;
     }
 }

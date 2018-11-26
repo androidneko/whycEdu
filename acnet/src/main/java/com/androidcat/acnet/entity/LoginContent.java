@@ -19,5 +19,5 @@ public class LoginContent implements Serializable{
     public String loginName;
     public String avatar;
     public String deptId;
-
+    public String phonenumber;
 }
