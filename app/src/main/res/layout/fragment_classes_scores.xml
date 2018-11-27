@@ -104,10 +104,14 @@
                     android:clickable="true"
                     android:background="@drawable/white_gray_label_check"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray_item"/>
                 <RadioButton
                     android:id="@+id/grade5Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:text="五年级"
                     android:textColor="@color/black"
                     android:textSize="17sp"
@@ -116,10 +120,14 @@
                     android:clickable="true"
                     android:background="@drawable/white_gray_label_check"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray_item"/>
                 <RadioButton
                     android:id="@+id/grade4Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:text="四年级"
                     android:textColor="@color/black"
                     android:textSize="17sp"
@@ -128,10 +136,14 @@
                     android:clickable="true"
                     android:background="@drawable/white_gray_label_check"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray_item"/>
                 <RadioButton
                     android:id="@+id/grade3Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:text="三年级"
                     android:textColor="@color/black"
                     android:textSize="17sp"
@@ -140,10 +152,14 @@
                     android:clickable="true"
                     android:background="@drawable/white_gray_label_check"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray_item"/>
                 <RadioButton
                     android:id="@+id/grade2Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:text="二年级"
                     android:textColor="@color/black"
                     android:textSize="17sp"
@@ -152,6 +168,10 @@
                     android:clickable="true"
                     android:background="@drawable/white_gray_label_check"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray_item"/>
                 <RadioButton
                     android:id="@+id/grade1Rb"
                     android:layout_width="match_parent"
@@ -164,6 +184,10 @@
                     android:clickable="true"
                     android:background="@drawable/white_gray_label_check"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray_item"/>
             </RadioGroup>
 
         </LinearLayout>

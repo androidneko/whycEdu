@@ -2,13 +2,57 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="match_parent"
+    android:background="@mipmap/main_bg"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <View
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:background="@drawable/logo_big"
+        android:layout_marginTop="50dp"/>
+
     <TextView
+        android:id="@+id/verTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="frag4"/>
-</RelativeLayout>
+        android:textSize="20sp"
+        android:textColor="@color/text_black"
+        android:layout_marginTop="15dp"
+        android:text="版本:1.0.0"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@color/white"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="130dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginRight="260dp">
+        <TextView
+            android:id="@+id/checkUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:text="检查更新"
+            android:textColor="@color/text_black"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_item"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+        <TextView
+            android:id="@+id/exit"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textColor="@color/text_black"
+            android:textSize="20sp"/>
+    </LinearLayout>
 </LinearLayout>

@@ -34,7 +34,7 @@ android:background="@color/gray_item">
                 android:background="@color/gray"/>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:text="安全管理"
                 android:textColor="@color/black"
                 android:checked="true"
@@ -47,7 +47,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/dutyRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="教师执勤"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -63,7 +63,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/protectRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="护校队"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -79,7 +79,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/specialTrainingRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="特长训练"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -95,7 +95,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/safetyRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="门禁安全"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -111,7 +111,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/accidentRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="意外伤害"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -127,7 +127,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/clearRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="放学清场"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -143,7 +143,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/leavingRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="离校巡查"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -158,7 +158,7 @@ android:background="@color/gray_item">
                 android:background="@color/gray"/>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:text="卫生保洁"
                 android:textColor="@color/black"
                 android:checked="true"
@@ -171,7 +171,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/outsideRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="室外保洁"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -187,7 +187,7 @@ android:background="@color/gray_item">
             <RadioButton
                 android:id="@+id/workingRb"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="文明办公"
                 android:textColor="@color/black"
                 android:textSize="17sp"

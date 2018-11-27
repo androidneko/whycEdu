@@ -102,22 +102,22 @@ public class BaseActivity extends AppCompatActivity {
         dismissLoadingDialog();
     }
 
-    protected void showLoadingDialog(String text) {
+    public void showLoadingDialog(String text) {
         mLoadingDialog.setText(text);
         showDialog(mLoadingDialog);
     }
 
-    protected void showLoadingDialog() {
+    public void showLoadingDialog() {
         mLoadingDialog.setText("正在加载...");
         showDialog(mLoadingDialog);
     }
 
-    protected void showLoadingDialog(int text) {
+    public void showLoadingDialog(int text) {
         mLoadingDialog.setText(text);
         showDialog(mLoadingDialog);
     }
 
-    protected void dismissLoadingDialog() {
+    public void dismissLoadingDialog() {
         dismissDialog(mLoadingDialog);
     }
 
@@ -136,7 +136,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void dismissDialog(Dialog dialog) {
+    public void dismissDialog(Dialog dialog) {
         if (dialog == null || !dialog.isShowing()) {
             return;
         }
