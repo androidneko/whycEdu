@@ -88,7 +88,7 @@
                     android:background="@drawable/top_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/selfManagerRb"
+                    android:id="@+id/statisticRb"
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
@@ -101,7 +101,7 @@
                     android:background="@drawable/top_label_check"
                     />
                 <RadioButton
-                    android:id="@+id/exerciseManagerRb"
+                    android:id="@+id/historyRb"
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"

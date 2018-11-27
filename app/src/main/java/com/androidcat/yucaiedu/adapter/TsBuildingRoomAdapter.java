@@ -13,12 +13,12 @@ import com.androidcat.yucaiedu.R;
 
 import java.util.List;
 
-public class RoomAdapter extends BaseAdapter {
+public class TsBuildingRoomAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private List<Room> rooms;
 
-    public RoomAdapter(Context context, List<Room> rooms) {
+    public TsBuildingRoomAdapter(Context context, List<Room> rooms) {
         this.context = context;
         this.rooms = rooms;
         this.inflater = LayoutInflater.from(context);
@@ -44,7 +44,7 @@ public class RoomAdapter extends BaseAdapter {
         ViewHolder vh;
         if (convertView == null) {
             vh = new ViewHolder();
-            convertView = inflater.inflate(R.layout.item_room_clockbuilding, null);
+            convertView = inflater.inflate(R.layout.item_room_tsbuilding, null);
             vh.classTv = convertView.findViewById(R.id.roomRb);
             convertView.setTag(vh);
         } else {

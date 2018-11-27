@@ -98,7 +98,7 @@
             <RelativeLayout
                 android:id="@+id/tsCenter"
                 android:layout_width="wrap_content"
-                android:layout_height="395dp"
+                android:layout_height="435dp"
                 android:visibility="gone">
                 <LinearLayout
                     android:id="@+id/tsCenterHeader"
@@ -107,7 +107,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/room_bg"
                         android:text="6F"
                         android:gravity="center"
@@ -115,7 +115,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="5F"
@@ -124,7 +124,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="95dp"
+                        android:layout_height="105dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/room_bg"
                         android:text="4F"
@@ -133,7 +133,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="95dp"
+                        android:layout_height="105dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="3F"
@@ -142,7 +142,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="95dp"
+                        android:layout_height="105dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="2F"
@@ -153,11 +153,13 @@
                 <GridView
                     android:id="@+id/tsCenterHeaderBuilding"
                     android:layout_toRightOf="@+id/tsCenterHeader"
-                    android:layout_width="380dp"
+                    android:layout_width="435dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
+                    android:verticalSpacing="5dp"
+                    android:horizontalSpacing="5dp"
                     android:numColumns="7"
-                    android:columnWidth="45dp">
+                    android:columnWidth="50dp">
                 </GridView>
 
             </RelativeLayout>
@@ -166,7 +168,7 @@
             <RelativeLayout
                 android:id="@+id/eastBuilding"
                 android:layout_width="wrap_content"
-                android:layout_height="295dp"
+                android:layout_height="375dp"
                 android:visibility="gone"
                 >
                 <LinearLayout
@@ -176,7 +178,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="90dp"
                         android:background="@drawable/room_bg"
                         android:text="4F"
                         android:gravity="center"
@@ -184,7 +186,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="90dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="3F"
@@ -193,7 +195,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="90dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="2F"
@@ -202,7 +204,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="90dp"
                         android:background="@drawable/room_bg"
                         android:layout_marginTop="5dp"
                         android:text="1F"
@@ -213,11 +215,13 @@
                 <GridView
                     android:id="@+id/eastBuildingGrid"
                     android:layout_toRightOf="@+id/eastGridHeader"
-                    android:layout_width="445dp"
+                    android:layout_width="490dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
+                    android:verticalSpacing="5dp"
+                    android:horizontalSpacing="5dp"
                     android:numColumns="9"
-                    android:columnWidth="45dp">
+                    android:columnWidth="50dp">
                 </GridView>
 
             </RelativeLayout>
@@ -270,13 +274,13 @@
                 android:textSize="26sp"/>
 
             <LinearLayout
-                android:id="@+id/markTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <RadioGroup
+                    android:id="@+id/markTab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -307,15 +311,15 @@
                         android:button="@null"
                         android:clickable="true"
                         android:gravity="center"
-                        android:text="纪录"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp" />
                 </RadioGroup>
             </LinearLayout>
             <View
+                android:id="@+id/markHeart"
                 android:layout_width="180dp"
                 android:layout_height="165dp"
-                android:background="@mipmap/marka"
                 android:layout_marginTop="40dp"/>
         </LinearLayout>
         <View
