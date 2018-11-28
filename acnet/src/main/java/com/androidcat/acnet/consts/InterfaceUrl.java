@@ -26,8 +26,6 @@ public class InterfaceUrl {
 
     public static String getUrl(int code){
         switch (code){
-            case InterfaceCodeConst.TYPE_REGISTER:
-                return REGISTER_URL;
             case InterfaceCodeConst.TYPE_LOGIN:
                 return LOGIN_URL;
             case InterfaceCodeConst.TYPE_GET_VERIFY_CODE:

@@ -29,7 +29,7 @@ public class HomeTabAdapter implements TabAdapter {
             return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_school_pre,R.mipmap.tab_school_nor).build();
         }
         if(position == 2){
-            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_analyze_pre,R.mipmap.tab_classes_nor).build();
+            return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_analyze_pre,R.mipmap.tab_analyze_nor).build();
         }
         if(position == 3){
             return new ITabView.TabIcon.Builder().setIcon(R.mipmap.tab_classes_pre,R.mipmap.tab_classes_nor).build();

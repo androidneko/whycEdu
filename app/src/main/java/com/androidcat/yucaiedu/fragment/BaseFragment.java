@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidcat.acnet.entity.User;
 import com.androidcat.utilities.LogUtil;
+import com.androidcat.yucaiedu.ui.BaseActivity;
 
 /**
  * Created by gyq on 2018/2/28 15:55
@@ -31,6 +33,7 @@ public abstract class BaseFragment extends Fragment implements MyToolBarClickLis
 
     protected ActivityFragmentInject annotation;
     protected int contentViewId;
+    protected User user;
 
     protected Handler mHandler = new Handler() {
         @Override
@@ -70,7 +73,7 @@ public abstract class BaseFragment extends Fragment implements MyToolBarClickLis
     }
 
     protected void initViewNData() {
-
+        user = ((BaseActivity)getActivity()).user;
         if (annotation.hasToolbar()) {
             //initToolbar();
         }
@@ -109,5 +112,17 @@ public abstract class BaseFragment extends Fragment implements MyToolBarClickLis
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return true;
+    }
+
+    protected void showLoadingDialog(String text){
+        ((BaseActivity)getActivity()).showLoadingDialog(text);
+    }
+
+    protected void dismissLoadingDialog(){
+        ((BaseActivity)getActivity()).dismissLoadingDialog();
+    }
+
+    protected void showToast(String text){
+        ((BaseActivity)getActivity()).showToast(text);
     }
 }

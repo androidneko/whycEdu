@@ -37,7 +37,7 @@ public class BaseActivity extends AppCompatActivity {
     protected FlippingLoadingDialog mLoadingDialog;
     private Toast mToast;
 
-    protected User user;
+    public User user;
     protected ActivityHandler baseHandler = new ActivityHandler(this);
 
     @Override

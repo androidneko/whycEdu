@@ -1,5 +1,7 @@
 package com.androidcat.acnet.entity.response;
 
+import java.io.Serializable;
+
 /**
  * Project: FuelMore
  * Author: androidcat
@@ -7,7 +9,7 @@ package com.androidcat.acnet.entity.response;
  * Created at: 2017-7-18 16:58:47
  * add function description here...
  */
-public class BaseResponse {
+public class BaseResponse implements Serializable{
 
     public static final String LOGIN_ERR = "LOGIN_ERR";
     public static final int SUCCESS = 1;

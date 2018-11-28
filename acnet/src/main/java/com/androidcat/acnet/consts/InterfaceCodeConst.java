@@ -16,7 +16,7 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_LOGIN = 1004;
 
-    public final static int TYPE_REGISTER = 1005;
+    public final static int TYPE_GET_GRADE_LIST = 1005;
 
     public final static int TYPE_MODIFY_PWD = 1006;
 

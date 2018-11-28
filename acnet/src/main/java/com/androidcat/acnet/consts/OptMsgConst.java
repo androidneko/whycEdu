@@ -46,11 +46,11 @@ public class OptMsgConst {
     public static final int MSG_LOGIN_QUERY = 0x1123;
     public static final int MSG_LOGIN_CANCEL = 0x1124;
 
-    //快捷登录
-    public static final int FAST_LOGIN_START = 0x1160;
-    public static final int FAST_LOGIN_SUCCESS = 0x1161;
-    public static final int FAST_LOGIN_FAIL = 0x1162;
-    public static final int FAST_LOGIN_HAVENODATA = 0x1163;
+    //获取班级列表
+    public static final int GRADE_LIST_START = 0x1160;
+    public static final int GRADE_LIST_SUCCESS = 0x1161;
+    public static final int GRADE_LIST_FAIL = 0x1162;
+    public static final int GRADE_LIST_HAVENODATA = 0x1163;
 
     //修改密码
     public static final int MSG_CHANGEPSW_SUCCESS = 0x1260;

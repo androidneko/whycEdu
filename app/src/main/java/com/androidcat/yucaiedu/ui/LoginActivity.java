@@ -29,7 +29,7 @@ public class LoginActivity extends BaseActivity {
     private ClearEditText usernameTxt;
     private ClearEditText pwdTxt;
     private UserManager loginManager;
-    private String mUsername;
+    private String loginName;
     private String pwdtxtbefore;
 
     private OnSingleClickListener onClickListener = new OnSingleClickListener() {
@@ -83,9 +83,9 @@ public class LoginActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         dismissLoadingDialog();
-        mUsername = user.userName;
-        if (!Utils.isNull(mUsername)) {
-            usernameTxt.setText(mUsername);
+        loginName = user.loginName;
+        if (!Utils.isNull(loginName)) {
+            usernameTxt.setText(loginName);
         }
         pwdTxt.setText(SharePreferencesUtil.getValue(SPConsts.CONV));
     }
@@ -116,7 +116,6 @@ public class LoginActivity extends BaseActivity {
         super.handleEventMsg(msg);
         switch (msg.what) {
             case OptMsgConst.MSG_LOGIN_FAIL:
-            case OptMsgConst.FAST_LOGIN_FAIL:
                 dismissLoadingDialog();
                 if (msg.obj == null || Utils.isNull((String) msg.obj)) {
                     showToast("登录失败");

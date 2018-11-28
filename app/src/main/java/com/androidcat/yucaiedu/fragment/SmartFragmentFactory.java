@@ -1,5 +1,7 @@
 package com.androidcat.yucaiedu.fragment;
 
+import com.androidcat.utilities.LogUtil;
+
 import java.util.HashMap;
 
 public class SmartFragmentFactory {
@@ -8,6 +10,7 @@ public class SmartFragmentFactory {
         BaseFragment baseFragment = mBaseFragments.get(position);
 
         if (baseFragment == null) {
+            LogUtil.e("","createFragment:"+position);
             switch (position) {
                 case 0:
                     baseFragment = new RegularCheckFragment();
@@ -26,6 +29,8 @@ public class SmartFragmentFactory {
                     break;
             }
             mBaseFragments.put(position, baseFragment);
+        }else {
+            LogUtil.e("","getFragment:"+position);
         }
 
         return baseFragment;

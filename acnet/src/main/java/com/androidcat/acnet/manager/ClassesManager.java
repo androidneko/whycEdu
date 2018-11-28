@@ -8,12 +8,14 @@ import com.androidcat.acnet.consts.InterfaceCodeConst;
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.request.ChangePswRequest;
 import com.androidcat.acnet.entity.request.FastLoginRequest;
+import com.androidcat.acnet.entity.request.GradeListRequest;
 import com.androidcat.acnet.entity.request.LoginRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
 import com.androidcat.acnet.entity.request.UserRequest;
 import com.androidcat.acnet.entity.request.ValidateCodeRequest;
 import com.androidcat.acnet.entity.response.BaseResponse;
+import com.androidcat.acnet.entity.response.GradeListResponse;
 import com.androidcat.acnet.entity.response.LoginResponse;
 import com.androidcat.acnet.entity.response.RegistResponse;
 import com.androidcat.acnet.entity.response.StringContentResponse;
@@ -28,9 +30,9 @@ import com.androidcat.acnet.okhttp.callback.RawResponseHandler;
  * Created at: 2017-7-21 17:08:36
  * add function description here...
  */
-public class UserManager extends BaseManager {
+public class ClassesManager extends BaseManager {
 
-    public UserManager(Context context, Handler handler){
+    public ClassesManager(Context context, Handler handler){
         super(context,handler);
     }
 
@@ -41,29 +43,29 @@ public class UserManager extends BaseManager {
         post(InterfaceCodeConst.TYPE_LOGIN, getPostJson(request), rawResponseHandler);
     }
 
-    public void login(String userName,String pwd){
-        LoginRequest request = new LoginRequest();
-        request.loginName = (userName);
-        request.setPasswd(pwd);
-        post(InterfaceCodeConst.TYPE_LOGIN, getPostJson(request), new EntityResponseHandler<LoginResponse>() {
+    public void getGradeList(String loginName,String sessionId){
+        GradeListRequest request = new GradeListRequest();
+        request.loginName = loginName;
+        request.sessionId = sessionId;
+        post(InterfaceCodeConst.TYPE_GET_GRADE_LIST, getPostJson(request), new EntityResponseHandler<GradeListResponse>() {
             @Override
             public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_LOGIN_START);
+                handler.sendEmptyMessage(OptMsgConst.GRADE_LIST_START);
             }
 
             @Override
             public void onFailure(int statusCode, String error_msg) {
                 Message msg = new Message();
                 msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_LOGIN_FAIL;
+                msg.what = OptMsgConst.GRADE_LIST_FAIL;
                 handler.sendMessage(msg);
             }
 
             @Override
-            public void onSuccess(int statusCode, LoginResponse response) {
+            public void onSuccess(int statusCode, GradeListResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.what = OptMsgConst.MSG_LOGIN_SUCCESS;
+                msg.what = OptMsgConst.GRADE_LIST_SUCCESS;
                 handler.sendMessage(msg);
             }
         });
