@@ -1,31 +1,20 @@
 package com.androidcat.yucaiedu.fragment;
 
-import android.content.Intent;
 import android.os.Message;
 import android.widget.ListView;
 
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.ScoreEntity;
 import com.androidcat.acnet.entity.response.GradeListResponse;
-import com.androidcat.acnet.entity.response.LoginResponse;
 import com.androidcat.acnet.manager.ClassesManager;
-import com.androidcat.acnet.manager.UserManager;
 import com.androidcat.utilities.Utils;
-import com.androidcat.utilities.persistence.SPConsts;
-import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.ClassScoreAdapter;
-import com.androidcat.yucaiedu.ui.HomeActivity;
-import com.androidcat.yucaiedu.ui.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-@ActivityFragmentInject(
-        contentViewId = R.layout.fragment_classes_scores,
-        hasNavigationView = false)
 public class ClassesScoresFragment extends BaseFragment {
 
     List<ScoreEntity> scoreEntities = new ArrayList<>();
@@ -35,7 +24,8 @@ public class ClassesScoresFragment extends BaseFragment {
     ClassesManager classesManager;
 
     @Override
-    protected void toHandleMessage(Message msg) {
+    protected void childHandleEventMsg(Message msg) {
+        super.childHandleEventMsg(msg);
         switch (msg.what) {
             case OptMsgConst.GRADE_LIST_FAIL:
                 dismissLoadingDialog();
@@ -57,22 +47,23 @@ public class ClassesScoresFragment extends BaseFragment {
     }
 
     @Override
-    protected void findViewAfterViewCreate() {
-        if (scoreList == null){
-            scoreList = mRootView.findViewById(R.id.scoreList);
-        }
+    protected int getResID() {
+        return R.layout.fragment_classes_scores;
     }
 
     @Override
-    protected void initDataAfterFindView() {
-        adapter = new ClassScoreAdapter(getActivity(),scoreEntities);
-        scoreList.setAdapter(adapter);
-        classesManager.getGradeList(user.loginName,user.token);
+    protected void intLayout() {
+        scoreList = mRootView.findViewById(R.id.scoreList);
     }
 
     @Override
-    protected void initDataBeforeViewCreate() {
-        classesManager = new ClassesManager(this.getActivity(), mHandler);
+    protected void setListener() {
+
+    }
+
+    @Override
+    protected void initModule() {
+        classesManager = new ClassesManager(this.getActivity(), baseHandler);
         for(int i = 0;i<10;i++){
             ScoreEntity entity = new ScoreEntity();
             entity.claz = "五"+ (i+1) + "班";
@@ -82,5 +73,14 @@ public class ClassesScoresFragment extends BaseFragment {
             entity.left = new Random().nextInt(10);
             scoreEntities.add(entity);
         }
+        adapter = new ClassScoreAdapter(getActivity(),scoreEntities);
+        scoreList.setAdapter(adapter);
+    }
+
+    @Override
+    public void iOnResume() {
+        super.iOnResume();
+
+        classesManager.getGradeList(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
     }
 }

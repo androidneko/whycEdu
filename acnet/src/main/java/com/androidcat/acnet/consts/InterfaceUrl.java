@@ -11,7 +11,7 @@ public class InterfaceUrl {
     public static final String URL_CONTROLLER = "/api/v1/";
     public static final String REGISTER_URL = BASE_URL + "/api/v1/create";
     public static final String LOGIN_URL = BASE_URL + "/app/userLogin";
-    public static final String GET_VCODE_URL = BASE_URL + "/api/v1/requestSMS";
+    public static final String GET_GRADE_LIST_URL = BASE_URL + "/app/getAllClasses";
     public static final String FAST_LOGIN_URL = BASE_URL + "/api/v1/quickLogin";
     public static final String RESET_PWD_URL = BASE_URL + "/api/v1/user/resetPassword";
     public static final String STATION_LIST_URL = BASE_URL + "/api/v1/getRefuelingPointList";
@@ -28,8 +28,8 @@ public class InterfaceUrl {
         switch (code){
             case InterfaceCodeConst.TYPE_LOGIN:
                 return LOGIN_URL;
-            case InterfaceCodeConst.TYPE_GET_VERIFY_CODE:
-                return GET_VCODE_URL;
+            case InterfaceCodeConst.TYPE_GET_GRADE_LIST:
+                return GET_GRADE_LIST_URL;
             case InterfaceCodeConst.TYPE_FAST_LOGIN:
                 return FAST_LOGIN_URL;
             case InterfaceCodeConst.TYPE_GET_STATION_LIST:

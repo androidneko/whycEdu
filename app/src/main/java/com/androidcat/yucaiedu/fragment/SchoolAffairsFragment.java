@@ -16,10 +16,7 @@ import com.anroidcat.acwidgets.FloatBar;
 import java.util.ArrayList;
 import java.util.List;
 
-@ActivityFragmentInject(
-        contentViewId = R.layout.fragment_school_affairs,
-        hasNavigationView = false)
-public class SchoolAffairsFragment extends BaseFragment{
+public class SchoolAffairsFragment extends BaseFragment {
 
     private View eventView;
     private View markView;
@@ -46,40 +43,6 @@ public class SchoolAffairsFragment extends BaseFragment{
         }
     };
 
-    @Override
-    protected void toHandleMessage(Message msg) {
-
-    }
-
-    @Override
-    protected void findViewAfterViewCreate() {
-        mInflater = LayoutInflater.from(this.getActivity());
-        mFloatBar = (FloatBar) mRootView.findViewById(R.id.navi_bar);
-        markView = mRootView.findViewById(R.id.markView);
-        eventView = mRootView.findViewById(R.id.eventView);
-        titleTab = mRootView.findViewById(R.id.titleTab);
-        menuSa = mRootView.findViewById(R.id.menuSa);
-    }
-
-    @Override
-    protected void initDataAfterFindView() {
-        if(naviBars.size() == 0){
-            naviBars.add("学术交流");
-            naviBars.add("课程开发");
-            naviBars.add("课堂教学");
-            naviBars.add("教研活动");
-            naviBars.add("学生活动");
-            naviBarSetup(naviBars);
-        }
-        menuSa.setOnCheckedChangeListener(onCheckedChangeListener);
-        menuSa.check(R.id.eventRb);
-    }
-
-    @Override
-    protected void initDataBeforeViewCreate() {
-
-    }
-
     protected void naviBarSetup(List<String> items) {
         mFloatBar.fitScreenWidth(Utils.dp2px(getActivity(),222));
         NaviAdapter adapter =  new NaviAdapter(this.getActivity(), items);
@@ -97,6 +60,40 @@ public class SchoolAffairsFragment extends BaseFragment{
             //makeItemManager(headItems.get(0).getCMSID());
         }
 
+    }
+
+    @Override
+    protected int getResID() {
+        return R.layout.fragment_school_affairs;
+    }
+
+    @Override
+    protected void intLayout() {
+        mInflater = LayoutInflater.from(this.getActivity());
+        mFloatBar = (FloatBar) mRootView.findViewById(R.id.navi_bar);
+        markView = mRootView.findViewById(R.id.markView);
+        eventView = mRootView.findViewById(R.id.eventView);
+        titleTab = mRootView.findViewById(R.id.titleTab);
+        menuSa = mRootView.findViewById(R.id.menuSa);
+    }
+
+    @Override
+    protected void setListener() {
+
+    }
+
+    @Override
+    protected void initModule() {
+        if(naviBars.size() == 0){
+            naviBars.add("学术交流");
+            naviBars.add("课程开发");
+            naviBars.add("课堂教学");
+            naviBars.add("教研活动");
+            naviBars.add("学生活动");
+            naviBarSetup(naviBars);
+        }
+        menuSa.setOnCheckedChangeListener(onCheckedChangeListener);
+        menuSa.check(R.id.eventRb);
     }
 
     /**

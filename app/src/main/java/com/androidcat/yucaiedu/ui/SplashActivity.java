@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.androidcat.utilities.Utils;
 import com.androidcat.yucaiedu.R;
+import com.androidcat.yucaiedu.ui.activity.BaseActivity;
+import com.androidcat.yucaiedu.ui.activity.HomeActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,14 +23,21 @@ public class SplashActivity extends BaseActivity {
     private TimerTask task;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getResID() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    protected void intLayout() {
         initView();
+    }
+
+    @Override
+    protected void setListener() {
         starttask();
     }
 
     private void initView(){
-        setContentView(R.layout.activity_splash);
         Resources resource = getResources();
         Configuration c = resource.getConfiguration();
         c.fontScale = 1.0f;

@@ -17,7 +17,7 @@ public @interface ActivityFragmentInject {
      *
      * @return
      */
-    int contentViewId() default R.layout.activity_home;
+    int contentViewId() default R.layout.activity_nonhome;
 
     /**
      * 是否存在NavigationView

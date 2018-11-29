@@ -1,8 +1,5 @@
 package com.androidcat.yucaiedu.fragment;
 
-import android.os.Build;
-import android.os.Message;
-import android.support.annotation.RequiresApi;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,10 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@ActivityFragmentInject(
-        contentViewId = R.layout.fragment_regular_check,
-        hasNavigationView = false)
-public class RegularCheckFragment extends BaseFragment{
+public class RegularCheckFragment extends BaseFragment {
 
     private TextView dateTv;
     private TextView buildingTv;
@@ -119,12 +113,12 @@ public class RegularCheckFragment extends BaseFragment{
     };
 
     @Override
-    protected void toHandleMessage(Message msg) {
-
+    protected int getResID() {
+        return R.layout.fragment_regular_check;
     }
 
     @Override
-    protected void findViewAfterViewCreate() {
+    protected void intLayout() {
         markView = mRootView.findViewById(R.id.markView);
         markRg = mRootView.findViewById(R.id.markTab);
         menuRc = mRootView.findViewById(R.id.menuRc);
@@ -141,42 +135,16 @@ public class RegularCheckFragment extends BaseFragment{
     }
 
     @Override
-    protected void initDataAfterFindView() {
+    protected void initModule() {
         dateTv.setText(DateUtil.getYMDW(new Date()));
         buildingTv.setText("钟楼");
-        pickerLintener();
-        setListener();
         initData();
     }
 
     @Override
-    protected void initDataBeforeViewCreate() {
-
-    }
-
-    /**
-     * 自定义picker控件事件
-     */
-    private void pickerLintener() {
-        pwTime = new TimePopupWindow(getActivity(), TimePopupWindow.Type.YEAR_MONTH_DAY);
-        pwTime.setTime(new Date());
-        Calendar now = Calendar.getInstance();
-        int year = now.get(Calendar.YEAR);
-        pwTime.setRange(2000, year);
-
-        //楼栋选择
-        optionsItems.clear();
-        pwOptions = new OptionsPopupWindow(getActivity());
-        //选项1
-        optionsItems.add("钟楼");
-        optionsItems.add("教学中心");
-        optionsItems.add("东楼");
-        pwOptions.setPicker(optionsItems);
-        //设置默认选中的三级项目
-        pwOptions.setSelectOptions(0);
-    }
-
     protected void setListener() {
+        pickerLintener();
+
         markRg.setOnCheckedChangeListener(onCheckedChangeListener);
         dateTv.setOnClickListener(onClickListener);
         buildingView.setOnClickListener(onClickListener);
@@ -214,6 +182,28 @@ public class RegularCheckFragment extends BaseFragment{
                 backgroundAlpha(1.0f);
             }
         });
+    }
+
+    /**
+     * 自定义picker控件事件
+     */
+    private void pickerLintener() {
+        pwTime = new TimePopupWindow(getActivity(), TimePopupWindow.Type.YEAR_MONTH_DAY);
+        pwTime.setTime(new Date());
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        pwTime.setRange(2000, year);
+
+        //楼栋选择
+        optionsItems.clear();
+        pwOptions = new OptionsPopupWindow(getActivity());
+        //选项1
+        optionsItems.add("钟楼");
+        optionsItems.add("教学中心");
+        optionsItems.add("东楼");
+        pwOptions.setPicker(optionsItems);
+        //设置默认选中的三级项目
+        pwOptions.setSelectOptions(0);
     }
 
     private void backgroundAlpha(float bgAlpha) {

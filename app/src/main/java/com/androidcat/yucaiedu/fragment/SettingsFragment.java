@@ -6,12 +6,9 @@ import android.view.View;
 
 import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.yucaiedu.R;
-import com.androidcat.yucaiedu.ui.BaseActivity;
 import com.androidcat.yucaiedu.ui.LoginActivity;
+import com.androidcat.yucaiedu.ui.activity.BaseActivity;
 
-@ActivityFragmentInject(
-        contentViewId = R.layout.fragment_settings,
-        hasNavigationView = false)
 public class SettingsFragment extends BaseFragment {
 
     View checkUpdate;
@@ -22,7 +19,7 @@ public class SettingsFragment extends BaseFragment {
         public void onSingleClick(View view) {
             if (view == checkUpdate){
                 ((BaseActivity)getActivity()).showLoadingDialog("正在检查...");
-                mHandler.sendEmptyMessageDelayed(1113,2000);
+                baseHandler.sendEmptyMessageDelayed(1113,2000);
             }
             if (view == exit){
                 gotoLogin();
@@ -31,7 +28,8 @@ public class SettingsFragment extends BaseFragment {
     };
 
     @Override
-    protected void toHandleMessage(Message msg) {
+    protected void childHandleEventMsg(Message msg) {
+        super.childHandleEventMsg(msg);
         switch (msg.what){
             case 1113:
                 ((BaseActivity)getActivity()).dismissLoadingDialog();
@@ -42,26 +40,31 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
+    private void gotoLogin(){
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
     @Override
-    protected void findViewAfterViewCreate() {
+    protected int getResID() {
+        return R.layout.fragment_settings;
+    }
+
+    @Override
+    protected void intLayout() {
         checkUpdate = mRootView.findViewById(R.id.checkUpdate);
         exit = mRootView.findViewById(R.id.exit);
     }
 
     @Override
-    protected void initDataAfterFindView() {
+    protected void setListener() {
         checkUpdate.setOnClickListener(onSingleClickListener);
         exit.setOnClickListener(onSingleClickListener);
     }
 
     @Override
-    protected void initDataBeforeViewCreate() {
+    protected void initModule() {
 
-    }
-
-    private void gotoLogin(){
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
-        getActivity().finish();
     }
 }

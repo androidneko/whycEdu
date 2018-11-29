@@ -1,6 +1,5 @@
 package com.androidcat.yucaiedu.fragment;
 
-import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,10 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
-@ActivityFragmentInject(
-        contentViewId = R.layout.fragment_analyze,
-        hasNavigationView = false)
-public class AnalyzeFragment extends BaseFragment{
+public class AnalyzeFragment extends BaseFragment {
     private static final String TAG = "AnalyzeFragment";
 
     private LineChart chart;
@@ -45,13 +41,48 @@ public class AnalyzeFragment extends BaseFragment{
     private ArrayList<String> options2Items = new ArrayList<String>();
     private ArrayList<String> options4Items=new ArrayList<>();
 
-    @Override
-    protected void toHandleMessage(Message msg) {
+    private final int[] colors = new int[] {
+            ColorTemplate.VORDIPLOM_COLORS[0],
+            ColorTemplate.VORDIPLOM_COLORS[1],
+            ColorTemplate.VORDIPLOM_COLORS[2]
+    };
 
+    /**
+     * 自定义picker控件事件
+     */
+    private void pickerLintener() {
+        options2Items.clear();
+        options4Items.clear();
+        pwTime = new TimePopupWindow(getActivity(), TimePopupWindow.Type.YEAR_MONTH_DAY);
+        pwTime.setTime(new Date());
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        pwTime.setRange(2000, year);
+
+        pwOptions2 = new OptionsPopupWindow(getActivity());
+        //选项1
+        for (int i = 1; i < 7; i++) {
+            options2Items.add("" + i);
+        }
+        for (int i = 1; i < 10; i++){
+            options4Items.add(""+i);
+        }
+        ArrayList<ArrayList<String>> lists=new ArrayList<>();
+        lists.add(options4Items);
+        pwOptions2.setPicker(options2Items, lists, false);
+        pwOptions2.setCyclic(false);
+        pwOptions2.setLabels("年级","班");
+        //设置默认选中的三级项目
+        pwOptions2.setSelectOptions(4, 5);
     }
 
     @Override
-    protected void findViewAfterViewCreate() {
+    protected int getResID() {
+        return R.layout.fragment_analyze;
+    }
+
+    @Override
+    protected void intLayout() {
         dateTv = mRootView.findViewById(R.id.dateTv);
         classTv = mRootView.findViewById(R.id.classTv);
         chart = mRootView.findViewById(R.id.chart1);
@@ -84,57 +115,9 @@ public class AnalyzeFragment extends BaseFragment{
         l.setDrawInside(false);
     }
 
-    private final int[] colors = new int[] {
-            ColorTemplate.VORDIPLOM_COLORS[0],
-            ColorTemplate.VORDIPLOM_COLORS[1],
-            ColorTemplate.VORDIPLOM_COLORS[2]
-    };
-
     @Override
-    protected void initDataAfterFindView() {
-        LogUtil.d(TAG,"initDataAfterFindView");
-        dateTv.setText(DateUtil.getYMDW(new Date()));
-        classTv.setText(5+"年级  "+6 + "班");
-        pickerLintener();
-        setListener();
-        setChartData();
-    }
-
-    @Override
-    protected void initDataBeforeViewCreate() {
-        initData();
-    }
-
-    /**
-     * 自定义picker控件事件
-     */
-    private void pickerLintener() {
-        options2Items.clear();
-        options4Items.clear();
-        pwTime = new TimePopupWindow(getActivity(), TimePopupWindow.Type.YEAR_MONTH_DAY);
-        pwTime.setTime(new Date());
-        Calendar now = Calendar.getInstance();
-        int year = now.get(Calendar.YEAR);
-        pwTime.setRange(2000, year);
-
-        pwOptions2 = new OptionsPopupWindow(getActivity());
-        //选项1
-        for (int i = 1; i < 7; i++) {
-            options2Items.add("" + i);
-        }
-        for (int i = 1; i < 10; i++){
-            options4Items.add(""+i);
-        }
-        ArrayList<ArrayList<String>> lists=new ArrayList<>();
-        lists.add(options4Items);
-        pwOptions2.setPicker(options2Items, lists, false);
-        pwOptions2.setCyclic(false);
-        pwOptions2.setLabels("年级","班");
-        //设置默认选中的三级项目
-        pwOptions2.setSelectOptions(4, 5);
-    }
-
     protected void setListener() {
+        pickerLintener();
         dateTv.setOnClickListener(onClickListener);
         classTv.setOnClickListener(onClickListener);
         //时间选择后回调
@@ -169,6 +152,14 @@ public class AnalyzeFragment extends BaseFragment{
                 backgroundAlpha(1.0f);
             }
         });
+    }
+
+    @Override
+    protected void initModule() {
+        LogUtil.d(TAG,"initDataAfterFindView");
+        dateTv.setText(DateUtil.getYMDW(new Date()));
+        classTv.setText(5+"年级  "+6 + "班");
+        setChartData();
     }
 
     private void initData() {

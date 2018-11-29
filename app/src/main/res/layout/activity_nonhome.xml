@@ -36,12 +36,11 @@
                     app:tab_mode="scrollable" />
             </RelativeLayout>
 
-            <FrameLayout
-                android:id="@+id/vg_fragment_content"
-                android:layout_width="match_parent"
+            <com.anroidcat.acwidgets.SmartViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@color/white">
-            </FrameLayout>
+                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout

@@ -15,11 +15,13 @@ import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.utilities.persistence.SPConsts;
 import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.AppConst;
+import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
+import com.androidcat.yucaiedu.ui.activity.BaseActivity;
+import com.androidcat.yucaiedu.ui.activity.HomeActivity;
 import com.anroidcat.acwidgets.ClearEditText;
 
 //import de.greenrobot.event.EventBus;
-
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
@@ -65,15 +67,12 @@ public class LoginActivity extends BaseActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        intLayout();
-        setListener();
-        //EventBus.getDefault().register(this);
+    protected int getResID() {
+        return R.layout.activity_login;
     }
 
+    @Override
     protected void intLayout() {
-        setContentView(R.layout.activity_login);
         mLogin =  findViewById(R.id.vg_login);
         usernameTxt = (ClearEditText) findViewById(R.id.usernameTxt);
         pwdTxt = (ClearEditText) findViewById(R.id.pwdTxt);
@@ -90,6 +89,7 @@ public class LoginActivity extends BaseActivity {
         pwdTxt.setText(SharePreferencesUtil.getValue(SPConsts.CONV));
     }
 
+    @Override
     protected void setListener() {
         loginManager = new UserManager(this, baseHandler);
         mLogin.setOnClickListener(onClickListener);
@@ -156,17 +156,10 @@ public class LoginActivity extends BaseActivity {
         user.deptId = loginResponse.content.deptId;
         user.loginName = loginResponse.content.loginName;
         user.phonenumber = loginResponse.content.phonenumber;
+        AppData.getAppData().user = user;
         // TODO: 2017-8-21 add more properties here
         SharePreferencesUtil.setObject(user);
     }
-
-//    public void onEventMainThread(FuelMoreEvent event){
-//        switch (event.code){
-//            case FuelMoreEvent.CODE_FINISH_LOGIN:
-//                finish();
-//                break;
-//        }
-//    }
 
     private void gotoHome(){
         Intent intent = new Intent();
@@ -176,3 +169,4 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 }
+

@@ -1,128 +1,198 @@
 package com.androidcat.yucaiedu.fragment;
 
-import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.androidcat.acnet.entity.User;
 import com.androidcat.utilities.LogUtil;
-import com.androidcat.yucaiedu.ui.BaseActivity;
+import com.androidcat.yucaiedu.ui.activity.BaseActivity;
 
-/**
- * Created by gyq on 2018/2/28 15:55
- */
+import java.lang.ref.WeakReference;
 
-public abstract class BaseFragment extends Fragment implements MyToolBarClickListener {
+public abstract class BaseFragment extends Fragment {
+
     private final static String TAG = "BaseFragment";
-    protected static final int DEFAULT_LOADING_TIME = 2000;
-    protected static final int WHAT_LOAD = 1;
-    protected static final int WHAT_LOAD_FINISH = 2;
-    protected static final int WHAT_REFRESH = 3;
+    public FragmentHandler baseHandler;
+    protected View mRootView = null;
+    protected boolean hasFocus = false;
+    protected boolean isVisible = false;
 
-    protected Activity mActivity;
-    protected Context mContext;
-    protected View mRootView;
+    protected abstract int getResID();
 
-    protected ActivityFragmentInject annotation;
-    protected int contentViewId;
-    protected User user;
-
-    protected Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            toHandleMessage(msg);
-        }
-    };
+    protected abstract void intLayout();
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LogUtil.d(TAG,"onCreate");
-        mActivity = getActivity();
-        mContext = getContext();
-        if (!getClass().isAnnotationPresent(ActivityFragmentInject.class)) {
-            throw new RuntimeException("must use ActivityFragmentInitParams.class");
-        }
-        annotation = getClass().getAnnotation(ActivityFragmentInject.class);
-        contentViewId = annotation.contentViewId();
-        initDataBeforeViewCreate();
+
+    protected abstract void setListener();
+
+    public void iOnResume() {
+        isVisible = true;
+        LogUtil.e(TAG,this.getClass().getSimpleName() + "--iOnResume");
     }
 
-    @Nullable
+    public void onWindowFocusChanged(boolean hasFocus) {
+        this.hasFocus = hasFocus;
+    }
+
+    public void handleEventMsg(Message msg){
+        //add process of common processing
+        childHandleEventMsg(msg);
+    }
+
+    protected void childHandleEventMsg(Message msg) {
+        //do nothing ...
+        //only for when child need to handle those messages processed by super class
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtil.d(TAG,"onCreateView");
-        if (mRootView == null) {
-            mRootView = View.inflate(mContext, contentViewId, null);
-        }
-        ViewGroup parent = (ViewGroup) mRootView.getParent();
-        if (parent != null) {
-            parent.removeView(mRootView);
-        }
-        initViewNData();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LogUtil.e(TAG,this.getClass().getSimpleName() + "--onCreate");
+        baseHandler = new FragmentHandler(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mRootView = inflater.inflate(getResID(), container, false);
+
+        intLayout();
+        setListener();
+        initModule();
+
         return mRootView;
     }
 
-    protected void initViewNData() {
-        user = ((BaseActivity)getActivity()).user;
-        if (annotation.hasToolbar()) {
-            //initToolbar();
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+            isVisible = false;
+        }else {
+            isVisible = true;
         }
-        findViewAfterViewCreate();
-        initDataAfterFindView();
-    }
-
-    protected void initToolbar() {
-
-    }
-
-    protected abstract void toHandleMessage(Message msg);
-
-    protected abstract void findViewAfterViewCreate();
-
-    protected abstract void initDataAfterFindView();
-
-    protected abstract void initDataBeforeViewCreate();
-
-
-    @Override
-    public void leftTextClick(View view) {
+        LogUtil.e(TAG,this.getClass().getSimpleName() + "--onHiddenChanged hidden:" + hidden);
     }
 
     @Override
-    public void leftIconClick(View view) {
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        LogUtil.e(TAG,this.getClass().getSimpleName() + "--onDestroyView");
+        mRootView = null;
     }
 
-    @Override
-    public void rightTextClick(View view) {
+    protected abstract void initModule();
+
+    //////////////////////////////////////////////UI提示///////////////////////////////////////////////////
+    public void showToast(String text) {
+        ((BaseActivity)getActivity()).showToast(text);
     }
 
-    @Override
-    public void rightIconClick(View view) {
+
+    protected void showProgressDialog(String msg) {
+        ((BaseActivity)getActivity()).showLoadingDialog(msg);
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return true;
-    }
-
-    protected void showLoadingDialog(String text){
-        ((BaseActivity)getActivity()).showLoadingDialog(text);
-    }
-
-    protected void dismissLoadingDialog(){
+    protected void dismissLoadingDialog() {
         ((BaseActivity)getActivity()).dismissLoadingDialog();
     }
 
-    protected void showToast(String text){
-        ((BaseActivity)getActivity()).showToast(text);
+    protected void openActivity(Class<?> pClass) {
+        openActivity(pClass, null);
     }
+
+    protected void openActivityForResult(Class<?> pClass,int requestCode) {
+        openActivityForResult(pClass, null, requestCode);
+    }
+
+    protected void openActivity(Intent intent) {
+        String src = this.getClass().getSimpleName();
+        String dst;
+        if (intent.getComponent() != null){
+            String dstClassName = intent.getComponent().getShortClassName();
+            dst = dstClassName.substring(dstClassName.lastIndexOf('.')+1);
+        }else {
+            if (intent.getAction() != null){
+                dst = intent.getAction();
+            }else {
+                dst = "unknown";
+            }
+        }
+        startActivity(intent);
+    }
+
+    protected void openActivity(Class<?> pClass, Bundle pBundle) {
+        Intent intent = new Intent(getActivity(), pClass);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivity(intent);
+    }
+
+    protected void openActivityForResult(Class<?> pClass, Bundle pBundle,int requestCode) {
+        Intent intent = new Intent(getActivity(), pClass);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
+
+    protected void openActivityForResult(Intent intent,int requestCode) {
+        String src = this.getClass().getSimpleName();
+        String dst;
+        if (intent.getComponent() != null){
+            String dstClassName = intent.getComponent().getShortClassName();
+            dst = dstClassName.substring(dstClassName.lastIndexOf('.')+1);
+        }else {
+            if (intent.getAction() != null){
+                dst = intent.getAction();
+            }else {
+                dst = "unknown";
+            }
+        }
+        startActivityForResult(intent, requestCode);
+    }
+
+    protected void openActivity(String pAction) {
+        openActivity(pAction, null);
+    }
+
+    protected void openActivity(String pAction, Bundle pBundle) {
+        Intent intent = new Intent(pAction);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivity(intent);
+    }
+
+    //////////////////////////////////////////////handler定义///////////////////////////////////////////////////
+    public static class FragmentHandler extends Handler{
+        private final WeakReference<BaseFragment> mInstance;
+
+        public FragmentHandler(BaseFragment instance) {
+            mInstance = new WeakReference<BaseFragment>(instance);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            BaseFragment fragment = mInstance.get();
+            if (null == fragment) {
+                return;
+            }
+            fragment.handleEventMsg(msg);
+        }
+    }
+
 }
