@@ -22,7 +22,7 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_RESET_PWD = 1007;
 
-    public final static int TYPE_FAST_LOGIN = 1008;
+    public final static int TYPE_DICT = 1008;
 
     public final static int TYPE_GET_STATION_LIST = 1009;
 

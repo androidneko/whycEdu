@@ -33,7 +33,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray_line"/>
             <RadioButton
-                android:id="@+id/grade6Rb"
+                android:id="@+id/recitingRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="经典诵读"
@@ -50,7 +50,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/grade5Rb"
+                android:id="@+id/readingRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="晨读"
@@ -66,7 +66,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/grade4Rb"
+                android:id="@+id/meetingRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="晨会"
@@ -94,7 +94,7 @@ android:background="@color/gray_item">
                 android:background="@color/white"
                 />
             <RadioButton
-                android:id="@+id/exercise"
+                android:id="@+id/exerciseRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="广播操"
@@ -110,7 +110,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/eyeExercise"
+                android:id="@+id/eyeExerciseRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="眼保操"
@@ -138,7 +138,7 @@ android:background="@color/gray_item">
                 android:background="@color/white"
                 />
             <RadioButton
-                android:id="@+id/restTime"
+                android:id="@+id/restTimeRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="大课间"
@@ -154,7 +154,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/goodThings"
+                android:id="@+id/goodThingsRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="好人好事"
@@ -182,7 +182,7 @@ android:background="@color/gray_item">
                 android:background="@color/white"
                 />
             <RadioButton
-                android:id="@+id/health"
+                android:id="@+id/healthRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="班级卫生"
@@ -198,7 +198,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/energy"
+                android:id="@+id/energyRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="班级节能"
@@ -226,7 +226,7 @@ android:background="@color/gray_item">
                 android:background="@color/white"
                 />
             <RadioButton
-                android:id="@+id/morning"
+                android:id="@+id/morningRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="上午巡堂"
@@ -242,7 +242,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/noon"
+                android:id="@+id/noonRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="午间管理"
@@ -258,7 +258,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/afternoon"
+                android:id="@+id/afternoonRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="下午巡堂"
@@ -286,7 +286,7 @@ android:background="@color/gray_item">
                 android:background="@color/white"
                 />
             <RadioButton
-                android:id="@+id/tsQueue"
+                android:id="@+id/tsQueueRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="教学队列"
@@ -302,7 +302,7 @@ android:background="@color/gray_item">
                 android:layout_height="1px"
                 android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/afterSchool"
+                android:id="@+id/afterSchoolRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="放学队列"

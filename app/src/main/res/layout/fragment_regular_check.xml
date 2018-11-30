@@ -21,22 +21,39 @@
             android:layout_marginLeft="40dp">
             <TextView
                 android:id="@+id/dateTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_trans_radius3"
+                android:gravity="center"
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:text="2018年11月20日 周六"
                 />
         </LinearLayout>
+        <TextView
+            android:id="@+id/gradeTv"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/dateView"
+            android:background="@drawable/shape_trans_radius3"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="40dp"
+            android:textStyle="bold"
+            android:text="一年级"
+            />
         <LinearLayout
-            android:id="@+id/buildingView"
+            android:id="@+id/buildingPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_toRightOf="@+id/dateView"
             android:layout_centerVertical="true"
             android:gravity="bottom"
-            android:layout_marginLeft="40dp">
+            android:layout_marginLeft="40dp"
+            android:visibility="gone">
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="58dp"
@@ -71,6 +88,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp">
             <RadioGroup
+                android:id="@+id/viewRg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -126,5 +144,8 @@
         <include
             android:id="@+id/rcBuilding"
             layout="@layout/sub_rc_building"/>
+        <include
+            android:id="@+id/rcStatistics"
+            layout="@layout/sub_rc_statistics"/>
     </LinearLayout>
 </LinearLayout>
