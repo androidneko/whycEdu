@@ -5,6 +5,10 @@ import android.content.Context;
 
 import com.androidcat.utilities.persistence.SharePreferencesUtil;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+
 public class YcApp extends Application{
 
     @Override
@@ -17,6 +21,17 @@ public class YcApp extends Application{
         initSharePreference();
         //初始化日志工具
         //initLogger();
+        initFont();
+    }
+
+    void initFont(){
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/jianshi_default.otf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
     }
 
     private static void initImageLoader(Context context) {

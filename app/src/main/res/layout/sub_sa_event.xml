@@ -21,6 +21,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/editTitleTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="大事记"
@@ -29,6 +30,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/editSubTitleTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="(含周一学生考勤)"

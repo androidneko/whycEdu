@@ -18,9 +18,9 @@ public class OptMsgConst {
 
     //获取广告
     public static final int MSG_CIRCLE = 0x1910;
-    public final static int GET_ADV_START = 0x1540;
-    public final static int GET_ADV_SUCCESS = 0x1541;
-    public final static int GET_ADV_FAIL = 0x1542;
+    public final static int GET_DICT_START = 0x1540;
+    public final static int GET_DICT_SUCCESS = 0x1541;
+    public final static int GET_DICT_FAIL = 0x1542;
 
     //获取验证码
     public static final int MSG_GET_VERIFYCODE_SUCCESS = 0x1010;
@@ -52,15 +52,15 @@ public class OptMsgConst {
     public static final int GRADE_LIST_FAIL = 0x1162;
     public static final int GRADE_LIST_HAVENODATA = 0x1163;
 
-    //修改密码
-    public static final int MSG_CHANGEPSW_SUCCESS = 0x1260;
-    public static final int MSG_CHANGEPSW_FAIL = 0x1261;
-    public static final int MSG_CHANGEPSW_START = 0x1262;
+    //获取建筑物
+    public static final int MSG_BUILDINGS_SUCCESS = 0x1260;
+    public static final int MSG_BUILDINGS_FAIL = 0x1261;
+    public static final int MSG_BUILDINGS_START = 0x1262;
 
-    //重置密码
-    public static final int MSG_RESETPASSWORD_SUCCESS = 0x1270;
-    public static final int MSG_RESETPASSWORD_FAIL = 0x1271;
-    public static final int MSG_RESETPASSWORD_START = 0x1272;
+    //提交事件
+    public static final int POST_EVENT_SUCCESS = 0x1270;
+    public static final int POST_EVENT_FAIL = 0x1271;
+    public static final int POST_EVENT_START = 0x1272;
 
     //获取用户信息
     public final static int MSG_GET_USERINFO_START = 0x1001;

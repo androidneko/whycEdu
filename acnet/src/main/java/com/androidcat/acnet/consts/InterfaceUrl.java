@@ -13,8 +13,8 @@ public class InterfaceUrl {
     public static final String LOGIN_URL = BASE_URL + "/app/userLogin";
     public static final String GET_GRADE_LIST_URL = BASE_URL + "/app/getAllClassesRoot";
     public static final String DICT_URL = BASE_URL + "/app/getDictByType";
-    public static final String RESET_PWD_URL = BASE_URL + "/api/v1/user/resetPassword";
-    public static final String STATION_LIST_URL = BASE_URL + "/api/v1/getRefuelingPointList";
+    public static final String BUILDINGS_URL = BASE_URL + "/app/getAllBuilding";
+    public static final String EVENT_MSG_URL = BASE_URL + "/app/saveMemorabilia";
     public static final String QR_CODE_URL = BASE_URL + "/api/v1/getQrcode";
     public static final String ORDER_LIST_URL = BASE_URL + "/api/v1/getOrderInfoList";
     public static final String ADD_RECHAREGE_URL = BASE_URL + "/api/v1/addRecharge";
@@ -32,10 +32,10 @@ public class InterfaceUrl {
                 return GET_GRADE_LIST_URL;
             case InterfaceCodeConst.TYPE_DICT:
                 return DICT_URL;
-            case InterfaceCodeConst.TYPE_GET_STATION_LIST:
-                return STATION_LIST_URL;
-            case InterfaceCodeConst.TYPE_RESET_PWD:
-                return RESET_PWD_URL;
+            case InterfaceCodeConst.TYPE_POST_EVENT:
+                return EVENT_MSG_URL;
+            case InterfaceCodeConst.TYPE_BUILDINGS:
+                return BUILDINGS_URL;
             case InterfaceCodeConst.TYPE_GET_QR_CODE:
                 return QR_CODE_URL;
             case InterfaceCodeConst.TYPE_GET_ORDER_LIST:

@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.utilities.LogUtil;
+import com.androidcat.yucaiedu.ui.LoginActivity;
 import com.androidcat.yucaiedu.ui.activity.BaseActivity;
 
 import java.lang.ref.WeakReference;
@@ -41,7 +43,18 @@ public abstract class BaseFragment extends Fragment {
 
     public void handleEventMsg(Message msg){
         //add process of common processing
+        if (msg.what == OptMsgConst.TOKEN_ERROR){
+            gotoLogin();
+            showToast("您的登录状态已失效，请重新登录");
+            return;
+        }
         childHandleEventMsg(msg);
+    }
+
+    private void gotoLogin(){
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     protected void childHandleEventMsg(Message msg) {

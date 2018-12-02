@@ -1,6 +1,7 @@
 package com.androidcat.yucaiedu.ui.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.androidcat.yucaiedu.AppData;
 import com.anroidcat.acwidgets.flippingdialog.FlippingLoadingDialog;
 
 import java.lang.ref.WeakReference;
+
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Created by coolbear on 15/4/14.
@@ -84,6 +87,11 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onPause() {
         super.onPause();
         isVisible = false;
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Override

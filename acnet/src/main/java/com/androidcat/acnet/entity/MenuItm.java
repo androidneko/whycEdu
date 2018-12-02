@@ -7,4 +7,5 @@ public class MenuItm implements Serializable {
     public String dictLabel;
     public String dictValue;
     public String dictType;
+    public String parent;
 }

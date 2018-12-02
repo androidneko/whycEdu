@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class BaseResponse implements Serializable{
 
-    public static final String LOGIN_ERR = "LOGIN_ERR";
+    public static final int LOGIN_ERR = 0;
     public static final int SUCCESS = 1;
 
     protected int code;

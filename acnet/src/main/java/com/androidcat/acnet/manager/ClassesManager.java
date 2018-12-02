@@ -6,17 +6,22 @@ import android.os.Message;
 
 import com.androidcat.acnet.consts.InterfaceCodeConst;
 import com.androidcat.acnet.consts.OptMsgConst;
+import com.androidcat.acnet.entity.request.BuildingsRequest;
 import com.androidcat.acnet.entity.request.ChangePswRequest;
+import com.androidcat.acnet.entity.request.EventRequest;
 import com.androidcat.acnet.entity.request.FastLoginRequest;
 import com.androidcat.acnet.entity.request.GradeListRequest;
 import com.androidcat.acnet.entity.request.LoginRequest;
+import com.androidcat.acnet.entity.request.MenuRcRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
 import com.androidcat.acnet.entity.request.UserRequest;
 import com.androidcat.acnet.entity.request.ValidateCodeRequest;
 import com.androidcat.acnet.entity.response.BaseResponse;
+import com.androidcat.acnet.entity.response.BuildingsResponse;
 import com.androidcat.acnet.entity.response.GradeListResponse;
 import com.androidcat.acnet.entity.response.LoginResponse;
+import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.entity.response.RegistResponse;
 import com.androidcat.acnet.entity.response.StringContentResponse;
 import com.androidcat.acnet.entity.response.UserInfoResponse;
@@ -71,49 +76,77 @@ public class ClassesManager extends BaseManager {
         });
     }
 
-    public void getVerifyCode(String phoneNum){
-        ValidateCodeRequest request = new ValidateCodeRequest();
-        request.mobile = (phoneNum);
-        post(InterfaceCodeConst.TYPE_GET_VERIFY_CODE, getPostJson(request), new EntityResponseHandler<StringContentResponse>() {
+    public void getMenuRc(String loginName,String sessionId){
+        MenuRcRequest request = new MenuRcRequest();
+        request.loginName = loginName;
+        request.sessionId = sessionId;
+        post(InterfaceCodeConst.TYPE_DICT, getPostJson(request), new EntityResponseHandler<MenuResponse>() {
             @Override
             public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_GET_VERIFYCODE_START);
+                handler.sendEmptyMessage(OptMsgConst.GET_DICT_START);
             }
 
             @Override
             public void onFailure(int statusCode, String error_msg) {
                 Message msg = new Message();
                 msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_GET_VERIFYCODE_FAIL;
+                msg.what = OptMsgConst.GET_DICT_FAIL;
                 handler.sendMessage(msg);
             }
 
             @Override
-            public void onSuccess(int statusCode, StringContentResponse response) {
+            public void onSuccess(int statusCode, MenuResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.what = OptMsgConst.MSG_GET_VERIFYCODE_SUCCESS;
+                msg.what = OptMsgConst.GET_DICT_SUCCESS;
                 handler.sendMessage(msg);
             }
         });
     }
 
-    public void modifyPwd(String userName,String pwd,String newPwd){
-        ChangePswRequest request = new ChangePswRequest();
-        request.setUserName(userName);
-        request.setPassword(pwd);
-        request.setNePassword(newPwd);
-        post(InterfaceCodeConst.TYPE_MODIFY_PWD, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+    public void getBuildings(String loginName,String sessionId){
+        BuildingsRequest request = new BuildingsRequest();
+        request.loginName = loginName;
+        request.sessionId = sessionId;
+        post(InterfaceCodeConst.TYPE_BUILDINGS, getPostJson(request), new EntityResponseHandler<BuildingsResponse>() {
             @Override
             public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_CHANGEPSW_START);
+                handler.sendEmptyMessage(OptMsgConst.MSG_BUILDINGS_START);
             }
 
             @Override
             public void onFailure(int statusCode, String error_msg) {
                 Message msg = new Message();
                 msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_CHANGEPSW_FAIL;
+                msg.what = OptMsgConst.MSG_BUILDINGS_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, BuildingsResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.what = OptMsgConst.MSG_BUILDINGS_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    /*public void getBuildings(String loginName,String sessionId){
+        BuildingsRequest request = new BuildingsRequest();
+        request.loginName = loginName;
+        request.sessionId = sessionId;
+        post(InterfaceCodeConst.TYPE_BUILDINGS, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.MSG_BUILDINGS_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.MSG_BUILDINGS_FAIL;
                 handler.sendMessage(msg);
             }
 
@@ -121,28 +154,32 @@ public class ClassesManager extends BaseManager {
             public void onSuccess(int statusCode, BaseResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.what = OptMsgConst.MSG_CHANGEPSW_SUCCESS;
+                msg.what = OptMsgConst.MSG_BUILDINGS_SUCCESS;
                 handler.sendMessage(msg);
             }
         });
-    }
+    }*/
 
-    public void resetPwd(String phoneNum,String newPwd,String verifyCode){
-        ResetPasswordRequest request = new ResetPasswordRequest();
-        request.setMobile(phoneNum);
-        request.setPassword(newPwd);
-        request.setVcode(verifyCode);
-        post(InterfaceCodeConst.TYPE_RESET_PWD, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+    public void postEvent(String loginName,String sessionId,String menuId,String date,String type,String msg){
+        EventRequest request = new EventRequest();
+        request.loginName = loginName;
+        request.sessionId = sessionId;
+        request.dateStr = date;
+        //request.memId = menuId;
+        request.memContent = msg;
+        request.typeCode = type;
+
+        post(InterfaceCodeConst.TYPE_POST_EVENT, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
             @Override
             public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_RESETPASSWORD_START);
+                handler.sendEmptyMessage(OptMsgConst.POST_EVENT_START);
             }
 
             @Override
             public void onFailure(int statusCode, String error_msg) {
                 Message msg = new Message();
                 msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_RESETPASSWORD_FAIL;
+                msg.what = OptMsgConst.POST_EVENT_FAIL;
                 handler.sendMessage(msg);
             }
 
@@ -150,7 +187,7 @@ public class ClassesManager extends BaseManager {
             public void onSuccess(int statusCode, BaseResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.what = OptMsgConst.MSG_RESETPASSWORD_SUCCESS;
+                msg.what = OptMsgConst.POST_EVENT_SUCCESS;
                 handler.sendMessage(msg);
             }
         });

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="60dp"
+    android:layout_height="95dp"
+    android:gravity="center"
+    >
+   <ImageView
+       android:id="@+id/markerIv"
+       android:layout_width="60dp"
+       android:layout_height="60dp" />
+    <RadioButton
+        android:id="@+id/markerRb"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:focusable="false"
+        android:text=""
+        android:textColor="@color/white"
+        android:checked="true"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:button="@null"
+        android:clickable="true"
+        android:background="@drawable/top_label_check"
+        />
+</LinearLayout>

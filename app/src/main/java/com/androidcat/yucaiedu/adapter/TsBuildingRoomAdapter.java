@@ -10,13 +10,16 @@ import android.widget.RadioButton;
 import com.androidcat.acnet.entity.Room;
 import com.androidcat.utilities.LogUtil;
 import com.androidcat.yucaiedu.R;
+import com.androidcat.yucaiedu.ui.listener.OnRoomCheckedListener;
 
 import java.util.List;
 
 public class TsBuildingRoomAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<Room> rooms;
+    public List<Room> rooms;
+    public Room checkedRoom;
+    public OnRoomCheckedListener onRoomCheckedListener;
 
     public TsBuildingRoomAdapter(Context context, List<Room> rooms) {
         this.context = context;
@@ -52,7 +55,7 @@ public class TsBuildingRoomAdapter extends BaseAdapter {
         }
         //set data
         final Room room = rooms.get(position);
-        vh.classTv.setText(room.name);
+        vh.classTv.setText(room.deptName);
         if (room.isChecked){
             vh.classTv.setChecked(true);
         }else {
@@ -61,14 +64,14 @@ public class TsBuildingRoomAdapter extends BaseAdapter {
         //当RadioButton被选中时，将其状态记录进States中，并更新其他RadioButton的状态使它们不被选中
         vh.classTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                room.isChecked = true;
+                if(room.isChecked) return;
                 for (Room item : rooms){
-                    if (item.name.equals(room.name)){
-                        LogUtil.e("","textMenu.text.equals(menu.text)->"+room.name);
-                        continue;
-                    }
                     item.isChecked = false;
                 }
+                room.isChecked = true;
+                checkedRoom = room;
+                if(onRoomCheckedListener != null)
+                    onRoomCheckedListener.onRoomChecked(room);
                 notifyDataSetChanged();
             }
         });

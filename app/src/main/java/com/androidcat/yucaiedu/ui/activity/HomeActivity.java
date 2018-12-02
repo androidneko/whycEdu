@@ -5,6 +5,7 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 
 import com.androidcat.utilities.LogUtil;
 import com.androidcat.yucaiedu.R;
@@ -239,5 +240,23 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - firstTime) > 2000) {
+                //弹出提示，可以有多种方式
+                showToast("再按一次退出程序");
+                firstTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -96,64 +96,6 @@ public class UserManager extends BaseManager {
         });
     }
 
-    public void modifyPwd(String userName,String pwd,String newPwd){
-        ChangePswRequest request = new ChangePswRequest();
-        request.setUserName(userName);
-        request.setPassword(pwd);
-        request.setNePassword(newPwd);
-        post(InterfaceCodeConst.TYPE_MODIFY_PWD, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
-            @Override
-            public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_CHANGEPSW_START);
-            }
-
-            @Override
-            public void onFailure(int statusCode, String error_msg) {
-                Message msg = new Message();
-                msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_CHANGEPSW_FAIL;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, BaseResponse response) {
-                Message msg = new Message();
-                msg.obj = response;
-                msg.what = OptMsgConst.MSG_CHANGEPSW_SUCCESS;
-                handler.sendMessage(msg);
-            }
-        });
-    }
-
-    public void resetPwd(String phoneNum,String newPwd,String verifyCode){
-        ResetPasswordRequest request = new ResetPasswordRequest();
-        request.setMobile(phoneNum);
-        request.setPassword(newPwd);
-        request.setVcode(verifyCode);
-        post(InterfaceCodeConst.TYPE_RESET_PWD, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
-            @Override
-            public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_RESETPASSWORD_START);
-            }
-
-            @Override
-            public void onFailure(int statusCode, String error_msg) {
-                Message msg = new Message();
-                msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_RESETPASSWORD_FAIL;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, BaseResponse response) {
-                Message msg = new Message();
-                msg.obj = response;
-                msg.what = OptMsgConst.MSG_RESETPASSWORD_SUCCESS;
-                handler.sendMessage(msg);
-            }
-        });
-    }
-
     public void getUserInfo(String userId,String companyId,String ciphertext){
         UserRequest request = new UserRequest();
         request.userId = (userId);

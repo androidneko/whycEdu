@@ -52,7 +52,7 @@ public class BaseManager {
                     return;
                 }
                 BaseResponse baseResponse = new Gson().fromJson(response,BaseResponse.class);
-                if (BaseResponse.LOGIN_ERR.equals(baseResponse.getCode())){
+                if (BaseResponse.LOGIN_ERR == baseResponse.getCode()){
                     if (handler != null){
                         handler.sendEmptyMessage(OptMsgConst.TOKEN_ERROR);
                     }

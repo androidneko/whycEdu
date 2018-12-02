@@ -18,13 +18,13 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_GET_GRADE_LIST = 1005;
 
-    public final static int TYPE_MODIFY_PWD = 1006;
+    public final static int TYPE_BUILDINGS = 1006;
 
     public final static int TYPE_RESET_PWD = 1007;
 
     public final static int TYPE_DICT = 1008;
 
-    public final static int TYPE_GET_STATION_LIST = 1009;
+    public final static int TYPE_POST_EVENT = 1009;
 
     public final static int TYPE_GET_QR_CODE = 1010;
 

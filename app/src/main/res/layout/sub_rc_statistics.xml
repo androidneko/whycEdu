@@ -12,14 +12,15 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:gravity="center"
-        android:padding="1dp"
-        android:background="@drawable/shape_white_radius10">
+        android:padding="3dp"
+        android:background="@drawable/shape_gray_radius10">
         <GridView
+            android:id="@+id/statisticGrid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
             android:gravity="center"
-            android:numColumns="5"
+            android:numColumns="6"
             android:horizontalSpacing="15dp"
             android:verticalSpacing="15dp"
             >
