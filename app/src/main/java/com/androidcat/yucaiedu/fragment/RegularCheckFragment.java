@@ -44,6 +44,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -97,6 +98,7 @@ public class RegularCheckFragment extends BaseFragment {
 
     private String curMenu;
     private String curMark;
+    private Room curRoom;
 
     ClassesManager classesManager;
 
@@ -125,6 +127,17 @@ public class RegularCheckFragment extends BaseFragment {
                 dismissLoadingDialog();
                 AppData.getAppData().buildingsResponse = (BuildingsResponse) msg.obj;
                 loadBuildings();
+                break;
+            case OptMsgConst.POST_MARK_FAIL:
+                dismissLoadingDialog();
+                showToast("打分失败，请确保网络通畅后重试");
+                break;
+            case OptMsgConst.POST_MARK_START:
+                showProgressDialog("正在打分");
+                break;
+            case OptMsgConst.POST_MARK_SUCCESS:
+                dismissLoadingDialog();
+                showToast("打分成功");
                 break;
             default:
                 break;
@@ -160,6 +173,18 @@ public class RegularCheckFragment extends BaseFragment {
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+            if(-1 == checkedId) {
+                //此处是清除选中的回调。
+                return;
+            }
+            View checkedView = mRootView.findViewById(checkedId);
+            if (checkedView != null && checkedView instanceof RadioButton) {
+                if (!((RadioButton) checkedView).isChecked()) {
+                    //此处是某个选中按钮被取消的回调，在调用check方法修改选中的时候会触发
+                    return;
+                }
+            }
+
             if (radioGroup == menuRc){
                 clearMark();
                 checkMenu(checkedId);
@@ -200,14 +225,16 @@ public class RegularCheckFragment extends BaseFragment {
             if(radioGroup == markRg){
                 if (checkedId == R.id.aRb && checkIfRoomChecked()){
                     markHeart.setBackgroundResource(R.drawable.marka);
+                    postMark(checkedId);
                 }
                 if (checkedId == R.id.bRb && checkIfRoomChecked()){
                     markHeart.setBackgroundResource(R.drawable.markb);
+                    postMark(checkedId);
                 }
                 if (checkedId == R.id.cRb && checkIfRoomChecked()){
                     markHeart.setBackgroundResource(R.drawable.markb);
+                    postMark(checkedId);
                 }
-                postMark(checkedId);
             }
         }
     };
@@ -315,7 +342,7 @@ public class RegularCheckFragment extends BaseFragment {
         pwOptions = new OptionsPopupWindow(getActivity());
         //选项1
         optionsItems.add("钟楼");
-        optionsItems.add("教学中心");
+        optionsItems.add("学教中心");
         optionsItems.add("东楼");
         pwOptions.setPicker(optionsItems);
         //设置默认选中的三级项目
@@ -353,46 +380,9 @@ public class RegularCheckFragment extends BaseFragment {
             classesManager = new ClassesManager(getActivity(),baseHandler);
         }
         classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
-        //classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
-        //钟楼
-        if (clockBuildingRooms.size() == 0){
-            for(int i = 1;i < 19;i++){
-                Room room = new Room();
-                room.deptName = i+"班";
-                clockBuildingRooms.add(room);
-            }
-        }
-        if (roomAdapter == null){
-            roomAdapter = new ClockBuildingRoomAdapter(getActivity(),clockBuildingRooms);
-            clockGrid.setAdapter(roomAdapter);
-        }
-        roomAdapter.onRoomCheckedListener = onRoomCheckedListener;
-        //教学中心
-        if (tsBuildingRooms.size() == 0){
-            for(int i = 1;i < 57;i++){
-                Room room = new Room();
-                room.deptName = i+"班";
-                tsBuildingRooms.add(room);
-            }
-        }
-        if (tsBuildingRoomAdapter == null){
-            tsBuildingRoomAdapter = new TsBuildingRoomAdapter(getActivity(),tsBuildingRooms);
-        }
-        tsGrid.setAdapter(tsBuildingRoomAdapter);
-        tsBuildingRoomAdapter.onRoomCheckedListener = onRoomCheckedListener;
-        //栋楼
-        if (eastBuildingRooms.size() == 0){
-            for(int i = 1;i < 37;i++){
-                Room room = new Room();
-                room.deptName = i+"班";
-                eastBuildingRooms.add(room);
-            }
-        }
-        if (eastBuildingRoomAdapter == null){
-            eastBuildingRoomAdapter = new EastBuildingRoomAdapter(getActivity(),eastBuildingRooms);
-        }
-        eastGrid.setAdapter(eastBuildingRoomAdapter);
-        eastBuildingRoomAdapter.onRoomCheckedListener = onRoomCheckedListener;
+        classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
+        //
+        loadEmptyRooms();
 
         //tongji
         if (classMarks.size() == 0){
@@ -423,6 +413,9 @@ public class RegularCheckFragment extends BaseFragment {
     }
 
     void switchBuilding(){
+        roomAdapter.clearCheck();
+        eastBuildingRoomAdapter.clearCheck();
+        tsBuildingRoomAdapter.clearCheck();
         clearMark();
         if (loc == 0){
             clockBuilding.setVisibility(View.VISIBLE);
@@ -444,7 +437,18 @@ public class RegularCheckFragment extends BaseFragment {
     }
 
     private void postMark(int checkedId){
-
+        if (viewRg.getCheckedRadioButtonId() != R.id.regularRb){
+            return;
+        }
+        if (curRoom == null){
+            return;
+        }
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        String mark = AppData.markMenuMap.get(checkedId)+"";
+        classesManager.postMark(loginName,token,date,curRoom.deptId,curMenu,mark);
     }
 
     private void setupCharts(){
@@ -457,9 +461,9 @@ public class RegularCheckFragment extends BaseFragment {
     }
 
     private void animateCharts(){
-        chartA.animateY(2000, Easing.EaseInOutQuad);
-        chartB.animateY(2000, Easing.EaseInOutQuad);
-        chartC.animateY(2000, Easing.EaseInOutQuad);
+        chartA.animateX(2000, Easing.EaseInOutQuad);
+        chartB.animateX(2000, Easing.EaseInOutQuad);
+        chartC.animateX(2000, Easing.EaseInOutQuad);
     }
 
     private void setChartStyle(PieChart chart){
@@ -640,26 +644,23 @@ public class RegularCheckFragment extends BaseFragment {
     }
 
     void loadBuildings(){
-        List<Building> buildings = AppData.getAppData().buildingsResponse.content;
+        List<Building> buildings = AppData.getAppData().buildingsResponse.content.get(0).children;
         for (Building building : buildings){
             if ("钟楼".equals(building.deptName)){
-                if (roomAdapter == null){
-                    roomAdapter = new ClockBuildingRoomAdapter(getActivity(),building.classesList);
-                }
+                roomAdapter = new ClockBuildingRoomAdapter(getActivity(),building.children);
                 clockGrid.setAdapter(roomAdapter);
+                roomAdapter.onRoomCheckedListener = onRoomCheckedListener;
             }
-//            if ("教学中心".equals(building.deptName)){
-//                if (tsBuildingRoomAdapter == null){
-//                    tsBuildingRoomAdapter = new TsBuildingRoomAdapter(getActivity(),building.classesList);
-//                }
-//                tsGrid.setAdapter(tsBuildingRoomAdapter);
-//            }
-//            if ("栋楼".equals(building.deptName)){
-//                if (eastBuildingRoomAdapter == null){
-//                    eastBuildingRoomAdapter = new EastBuildingRoomAdapter(getActivity(),building.classesList);
-//                }
-//                eastGrid.setAdapter(eastBuildingRoomAdapter);
-//            }
+            if ("学教中心".equals(building.deptName)){
+                tsBuildingRoomAdapter = new TsBuildingRoomAdapter(getActivity(),building.children);
+                tsGrid.setAdapter(tsBuildingRoomAdapter);
+                tsBuildingRoomAdapter.onRoomCheckedListener = onRoomCheckedListener;
+            }
+            if ("东楼".equals(building.deptName)){
+                eastBuildingRoomAdapter = new EastBuildingRoomAdapter(getActivity(),building.children);
+                eastGrid.setAdapter(eastBuildingRoomAdapter);
+                eastBuildingRoomAdapter.onRoomCheckedListener = onRoomCheckedListener;
+            }
         }
     }
 
@@ -667,6 +668,7 @@ public class RegularCheckFragment extends BaseFragment {
         @Override
         public void onRoomChecked(Room room) {
             clearMark();
+            curRoom = room;
         }
     };
 
@@ -680,4 +682,46 @@ public class RegularCheckFragment extends BaseFragment {
             Color.rgb(193, 37, 82), Color.rgb(255, 102, 0), Color.rgb(245, 199, 0),
             Color.rgb(106, 150, 31), Color.rgb(179, 100, 53)
     };
+
+    void loadEmptyRooms(){
+        //钟楼
+        if (clockBuildingRooms.size() == 0){
+            for(int i = 1;i < 19;i++){
+                Room room = new Room();
+                room.deptName = "空闲";
+                clockBuildingRooms.add(room);
+            }
+        }
+        if (roomAdapter == null){
+            roomAdapter = new ClockBuildingRoomAdapter(getActivity(),clockBuildingRooms);
+            clockGrid.setAdapter(roomAdapter);
+        }
+        roomAdapter.onRoomCheckedListener = onRoomCheckedListener;
+        //教学中心
+        if (tsBuildingRooms.size() == 0){
+            for(int i = 1;i < 57;i++){
+                Room room = new Room();
+                room.deptName = "空闲";
+                tsBuildingRooms.add(room);
+            }
+        }
+        if (tsBuildingRoomAdapter == null){
+            tsBuildingRoomAdapter = new TsBuildingRoomAdapter(getActivity(),tsBuildingRooms);
+        }
+        tsGrid.setAdapter(tsBuildingRoomAdapter);
+        tsBuildingRoomAdapter.onRoomCheckedListener = onRoomCheckedListener;
+        //栋楼
+        if (eastBuildingRooms.size() == 0){
+            for(int i = 1;i < 37;i++){
+                Room room = new Room();
+                room.deptName = "空闲";
+                eastBuildingRooms.add(room);
+            }
+        }
+        if (eastBuildingRoomAdapter == null){
+            eastBuildingRoomAdapter = new EastBuildingRoomAdapter(getActivity(),eastBuildingRooms);
+        }
+        eastGrid.setAdapter(eastBuildingRoomAdapter);
+        eastBuildingRoomAdapter.onRoomCheckedListener = onRoomCheckedListener;
+    }
 }

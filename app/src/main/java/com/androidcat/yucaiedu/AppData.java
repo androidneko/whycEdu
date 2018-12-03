@@ -28,6 +28,7 @@ public class AppData {
     public static Map<Integer,MenuItm> saMenuItmMap = new HashMap<>();
 
     public static Map<Integer,String> markMap = new HashMap<>();
+    public static Map<Integer,Integer> markMenuMap = new HashMap<>();
 
     static {
         for (int i = 1; i < 15; i++){
@@ -188,8 +189,12 @@ public class AppData {
         }
 
         //评分字典
-        markMap.put(5,"A");
-        markMap.put(3,"B");
+        markMap.put(3,"A");
+        markMap.put(2,"B");
         markMap.put(1,"C");
+
+        markMenuMap.put(R.id.aRb,3);
+        markMenuMap.put(R.id.bRb,2);
+        markMenuMap.put(R.id.cRb,1);
     }
 }

@@ -27,6 +27,14 @@ public class TsBuildingRoomAdapter extends BaseAdapter {
         this.inflater = LayoutInflater.from(context);
     }
 
+    public void clearCheck(){
+        checkedRoom = null;
+        for (Room room : rooms){
+            room.isChecked = false;
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return rooms.size();
@@ -55,26 +63,34 @@ public class TsBuildingRoomAdapter extends BaseAdapter {
         }
         //set data
         final Room room = rooms.get(position);
-        vh.classTv.setText(room.deptName);
+        if ("空闲".equals(room.deptName)){
+            room.isEmpty = true;
+            vh.classTv.setClickable(false);
+        }else {
+            vh.classTv.setClickable(true);
+        }
+        vh.classTv.setText(room.isEmpty?"":room.deptName);
         if (room.isChecked){
             vh.classTv.setChecked(true);
         }else {
             vh.classTv.setChecked(false);
         }
-        //当RadioButton被选中时，将其状态记录进States中，并更新其他RadioButton的状态使它们不被选中
-        vh.classTv.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(room.isChecked) return;
-                for (Room item : rooms){
-                    item.isChecked = false;
+        if (!room.isEmpty){
+            //当RadioButton被选中时，将其状态记录进States中，并更新其他RadioButton的状态使它们不被选中
+            vh.classTv.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if(room.isChecked || room.isEmpty) return;
+                    for (Room item : rooms){
+                        item.isChecked = false;
+                    }
+                    room.isChecked = true;
+                    checkedRoom = room;
+                    if(onRoomCheckedListener != null)
+                        onRoomCheckedListener.onRoomChecked(room);
+                    notifyDataSetChanged();
                 }
-                room.isChecked = true;
-                checkedRoom = room;
-                if(onRoomCheckedListener != null)
-                    onRoomCheckedListener.onRoomChecked(room);
-                notifyDataSetChanged();
-            }
-        });
+            });
+        }
         return convertView;
     }
 

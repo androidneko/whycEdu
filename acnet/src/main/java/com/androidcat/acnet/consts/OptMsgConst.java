@@ -33,9 +33,9 @@ public class OptMsgConst {
     public static final int MSG_VALIDATE_CODE_START = 0x1022;
 
     //注册
-    public static final int MSG_REIST_SUCCESS = 0x0013;
-    public static final int MSG_REIST_FAIL = 0x0014;
-    public static final int MSG_REIST_START = 0x0015;
+    public static final int POST_MARK_SUCCESS = 0x0013;
+    public static final int POST_MARK_FAIL = 0x0014;
+    public static final int POST_MARK_START = 0x0015;
 
     public static final int RECHARGE_FAILED = 0x3012;
 

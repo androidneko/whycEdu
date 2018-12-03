@@ -13,6 +13,7 @@ import com.androidcat.acnet.entity.request.FastLoginRequest;
 import com.androidcat.acnet.entity.request.GradeListRequest;
 import com.androidcat.acnet.entity.request.LoginRequest;
 import com.androidcat.acnet.entity.request.MenuRcRequest;
+import com.androidcat.acnet.entity.request.PostMarkRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
 import com.androidcat.acnet.entity.request.UserRequest;
@@ -132,21 +133,26 @@ public class ClassesManager extends BaseManager {
         });
     }
 
-    /*public void getBuildings(String loginName,String sessionId){
-        BuildingsRequest request = new BuildingsRequest();
+    public void postMark(String loginName,String sessionId,String dateStr,String deptId,String menu,String mark){
+        PostMarkRequest request = new PostMarkRequest();
         request.loginName = loginName;
         request.sessionId = sessionId;
-        post(InterfaceCodeConst.TYPE_BUILDINGS, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+        request.dateStr = dateStr;
+        request.timetable = menu;
+        request.deptId = deptId;
+        request.grade = mark;
+
+        post(InterfaceCodeConst.TYPE_POST_MARK, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
             @Override
             public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_BUILDINGS_START);
+                handler.sendEmptyMessage(OptMsgConst.POST_MARK_START);
             }
 
             @Override
             public void onFailure(int statusCode, String error_msg) {
                 Message msg = new Message();
                 msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_BUILDINGS_FAIL;
+                msg.what = OptMsgConst.POST_MARK_FAIL;
                 handler.sendMessage(msg);
             }
 
@@ -154,11 +160,11 @@ public class ClassesManager extends BaseManager {
             public void onSuccess(int statusCode, BaseResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.what = OptMsgConst.MSG_BUILDINGS_SUCCESS;
+                msg.what = OptMsgConst.POST_MARK_SUCCESS;
                 handler.sendMessage(msg);
             }
         });
-    }*/
+    }
 
     public void postEvent(String loginName,String sessionId,String menuId,String date,String type,String msg){
         EventRequest request = new EventRequest();
