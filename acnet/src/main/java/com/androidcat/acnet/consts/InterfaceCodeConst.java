@@ -12,7 +12,7 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_GET_USERINFO = 1002;
     //发送邮箱验证（1003）
-    public final static int TYPE_SEND_EMAIL_VERIFY=1003;
+    public final static int TYPE_GET_CLASS_SCORES=1003;
 
     public final static int TYPE_LOGIN = 1004;
 
@@ -20,7 +20,7 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_BUILDINGS = 1006;
 
-    public final static int TYPE_RESET_PWD = 1007;
+    public final static int TYPE_MARK_RECORD = 1007;
 
     public final static int TYPE_DICT = 1008;
 

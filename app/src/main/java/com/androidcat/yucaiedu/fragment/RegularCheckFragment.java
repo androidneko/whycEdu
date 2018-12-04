@@ -81,10 +81,13 @@ public class RegularCheckFragment extends BaseFragment {
     boolean isHistory;
 
     OptionsPopupWindow pwOptions;
+    OptionsPopupWindow pwOptions2;
     TimePopupWindow pwTime;
     private ArrayList<String> optionsItems = new ArrayList<String>();
+    private ArrayList<String> gradeItems = new ArrayList<String>();
 
     private String building = "钟楼";
+    private String curGrade = "一年级";
     private List<Room> clockBuildingRooms = new ArrayList<>();
     private ClockBuildingRoomAdapter roomAdapter;
     private List<Room> tsBuildingRooms = new ArrayList<>();
@@ -291,8 +294,24 @@ public class RegularCheckFragment extends BaseFragment {
                 switchBuilding();
             }
         });
-
         pwOptions.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0f);
+            }
+        });
+
+        //监听年级确定选择按钮
+        pwOptions2.setOnoptionsSelectListener(new OptionsPopupWindow.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                //返回的分别是三个级别的选中位置
+                String grade = gradeItems.get(options1);
+                RegularCheckFragment.this.curGrade = grade;
+                gradeTv.setText(grade);
+            }
+        });
+        pwOptions2.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 backgroundAlpha(1.0f);
@@ -320,6 +339,20 @@ public class RegularCheckFragment extends BaseFragment {
         pwOptions.setPicker(optionsItems);
         //设置默认选中的三级项目
         pwOptions.setSelectOptions(0);
+
+        //年级选择
+        gradeItems.clear();
+        pwOptions2 = new OptionsPopupWindow(getActivity());
+        //选项1
+        gradeItems.add("一年级");
+        gradeItems.add("二年级");
+        gradeItems.add("三年级");
+        gradeItems.add("四年级");
+        gradeItems.add("五年级");
+        gradeItems.add("六年级");
+        pwOptions2.setPicker(gradeItems);
+        //设置默认选中的三级项目
+        pwOptions2.setSelectOptions(0);
     }
 
     @Override

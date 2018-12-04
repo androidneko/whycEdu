@@ -27,15 +27,15 @@ public class OptMsgConst {
     public static final int MSG_GET_VERIFYCODE_FAIL = 0x1011;
     public static final int MSG_GET_VERIFYCODE_START = 0x1012;
 
-    //验证短信验证码
-    public static final int MSG_VALIDATE_CODE_SUCCESS = 0x1020;
-    public static final int MSG_VALIDATE_CODE_FAIL = 0x1021;
-    public static final int MSG_VALIDATE_CODE_START = 0x1022;
+    //打分记录
+    public static final int MSG_MARK_RECORD_SUCCESS = 0x1020;
+    public static final int MSG_MARK_RECORD_FAIL = 0x1021;
+    public static final int MSG_MARK_RECORD_START = 0x1022;
 
-    //注册
-    public static final int MSG_REIST_SUCCESS = 0x0013;
-    public static final int MSG_REIST_FAIL = 0x0014;
-    public static final int MSG_REIST_START = 0x0015;
+    //班级得分列表
+    public static final int GET_CLASS_SCORES_SUCCESS = 0x0013;
+    public static final int GET_CLASS_SCORES_FAIL = 0x0014;
+    public static final int GET_CLASS_SCORES_START = 0x0015;
 
     public static final int RECHARGE_FAILED = 0x3012;
 
