@@ -20,7 +20,9 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_BUILDINGS = 1006;
 
-    public final static int TYPE_MARK_RECORD = 1007;
+    public final static int TYPE_MARK_RECORD = 1097;
+
+    public final static int TYPE_POST_MARK = 1007;
 
     public final static int TYPE_DICT = 1008;
 

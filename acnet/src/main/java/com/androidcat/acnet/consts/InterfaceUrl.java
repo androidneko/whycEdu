@@ -9,7 +9,11 @@ public class InterfaceUrl {
     public static final String BASE_URL = "http://220.249.102.138:8010";
 
     public static final String URL_CONTROLLER = "/api/v1/";
+
     public static final String MARK_RECORD_URL = BASE_URL + "/api/v1/create";
+
+    public static final String POST_MARK_URL = BASE_URL + "/app/saveClassesScore";
+
     public static final String LOGIN_URL = BASE_URL + "/app/userLogin";
     public static final String GET_GRADE_LIST_URL = BASE_URL + "/app/getAllClassesRoot";
     public static final String DICT_URL = BASE_URL + "/app/getDictByType";
@@ -40,6 +44,10 @@ public class InterfaceUrl {
                 return MARK_RECORD_URL;
             case InterfaceCodeConst.TYPE_GET_CLASS_SCORES:
                 return CLASS_SCORES_URL;
+            case InterfaceCodeConst.TYPE_POST_MARK:
+                return POST_MARK_URL;
+            case InterfaceCodeConst.TYPE_GET_ORDER_LIST:
+                return ORDER_LIST_URL;
             case InterfaceCodeConst.TYPE_ADD_RECHARGE:
                 return ADD_RECHAREGE_URL;
             case InterfaceCodeConst.TYPE_GET_NEWS_LIST:

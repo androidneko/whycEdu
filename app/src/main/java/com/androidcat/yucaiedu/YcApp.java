@@ -28,7 +28,7 @@ public class YcApp extends Application{
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
                         new CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/jianshi_default.otf")
+                                .setDefaultFontPath("fonts/Hgs.ttf")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());
