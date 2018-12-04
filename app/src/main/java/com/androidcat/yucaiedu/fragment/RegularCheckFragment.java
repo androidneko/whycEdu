@@ -49,7 +49,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 public class RegularCheckFragment extends BaseFragment {
 
@@ -100,8 +99,9 @@ public class RegularCheckFragment extends BaseFragment {
     private ClassMarkAdapter classMarkAdapter;
 
     private String curMenu;
-    private String curMark;
+    private ClassMark curClass;
     private Room curRoom;
+    private String curDate;
 
     ClassesManager classesManager;
 
@@ -142,6 +142,17 @@ public class RegularCheckFragment extends BaseFragment {
                 dismissLoadingDialog();
                 showToast("打分成功");
                 break;
+            case OptMsgConst.MSG_MARK_RECORD_FAIL:
+                dismissLoadingDialog();
+                showToast("加载当日统计失败，请确保网络通畅后重试");
+                break;
+            case OptMsgConst.MSG_MARK_RECORD_START:
+                showProgressDialog("正在统计");
+                break;
+            case OptMsgConst.MSG_MARK_RECORD_SUCCESS:
+                dismissLoadingDialog();
+                setupStatistics();
+                break;
             default:
                 break;
         }
@@ -166,6 +177,24 @@ public class RegularCheckFragment extends BaseFragment {
                 case R.id.dateTv:
                     backgroundAlpha(1.0f);
                     pwTime.showAtLocation(dateTv, Gravity.BOTTOM, 0, 0,new Date());
+                    break;
+                case R.id.gradeTv:
+                    backgroundAlpha(1.0f);
+                    pwOptions2.showAtLocation(gradeTv, Gravity.BOTTOM, 0, 0);
+                    pwOptions2.setSelectOptions(0);
+                    if ("一年级".equals(curGrade)) {
+                        pwOptions.setSelectOptions(0);
+                    }else if("二年级".equals(curGrade)){
+                        pwOptions2.setSelectOptions(1);
+                    }else if("三年级".equals(curGrade)){
+                        pwOptions2.setSelectOptions(2);
+                    }else if("四年级".equals(curGrade)){
+                        pwOptions2.setSelectOptions(3);
+                    }else if("五年级".equals(curGrade)){
+                        pwOptions2.setSelectOptions(4);
+                    }else if("六年级".equals(curGrade)){
+                        pwOptions2.setSelectOptions(5);
+                    }
                     break;
                 default:
                     break;
@@ -208,9 +237,10 @@ public class RegularCheckFragment extends BaseFragment {
                     statisticsView.setVisibility(View.VISIBLE);
                     gradeTv.setVisibility(View.VISIBLE);
                     dateTv.setClickable(false);
-                    gradeTv.setClickable(false);
-                    gradeTv.setBackgroundResource(R.color.transparent);
                     dateTv.setBackgroundResource(R.color.transparent);
+                    gradeTv.setClickable(true);
+                    gradeTv.setBackgroundResource(R.drawable.shape_trans_radius3);
+                    loadCurrStatistics();
                 }
                 if (checkedId == R.id.historyRb){
                     buildingPicker.setVisibility(View.GONE);
@@ -293,13 +323,17 @@ public class RegularCheckFragment extends BaseFragment {
         viewRg.setOnCheckedChangeListener(onCheckedChangeListener);
         markRg.setOnCheckedChangeListener(onCheckedChangeListener);
         dateTv.setOnClickListener(onClickListener);
+        gradeTv.setOnClickListener(onClickListener);
         buildingPicker.setOnClickListener(onClickListener);
         //时间选择后回调
         pwTime.setOnTimeSelectListener(new TimePopupWindow.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date) {
-                // TODO: 2018/11/19
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                curDate = sdf.format(date);
                 dateTv.setText(DateUtil.getYMDW(date));
+                //切换即触发
+                loadHistoryStatistics();
             }
         });
         pwTime.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -336,6 +370,7 @@ public class RegularCheckFragment extends BaseFragment {
                 String grade = gradeItems.get(options1);
                 RegularCheckFragment.this.curGrade = grade;
                 gradeTv.setText(grade);
+                onGradeChange();
             }
         });
         pwOptions2.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -391,6 +426,9 @@ public class RegularCheckFragment extends BaseFragment {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
+        if(viewRg.getCheckedRadioButtonId() == R.id.historyRb){
+            return;
+        }
         menu.add(0, 1, 0, "A");
         menu.add(0, 2, 0, "B");
         menu.add(0, 3, 0, "C");
@@ -413,36 +451,57 @@ public class RegularCheckFragment extends BaseFragment {
             classesManager = new ClassesManager(getActivity(),baseHandler);
         }
         classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
+        classesManager.getGradeList(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         //
         loadEmptyRooms();
+        //
+        menuRc.check(R.id.recitingRb);
+    }
 
-        //tongji
-        if (classMarks.size() == 0){
-            for(int i = 1;i < 16;i++){
-                ClassMark classMark = new ClassMark();
-                classMark.clsName = "五("+i+")";
-                int a = new Random().nextInt(3);
-                if (a%3 == 1) classMark.score = 1;
-                if (a%3 == 2) classMark.score = 3;
-                if (a%3 == 0) classMark.score = 5;
-                classMarks.add(classMark);
-            }
+    void onGradeChange(){
+        if (viewRg.getCheckedRadioButtonId() == R.id.statisticRb){
+            loadCurrStatistics();
         }
-        if (classMarkAdapter == null){
-            classMarkAdapter = new ClassMarkAdapter(getActivity(),classMarks);
-            statisticGrid.setAdapter(classMarkAdapter);
+        if (viewRg.getCheckedRadioButtonId() == R.id.historyRb){
+            loadHistoryStatistics();
         }
+    }
+
+    private void loadCurrStatistics(){
+        pwTime.setTime(new Date());
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        int classGradeId = AppData.gradeMap.get(gradeTv.getText().toString());
+        String timetable = curMenu;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        curDate = sdf.format(new Date());
+        classesManager.classMarkList(loginName,token,classGradeId,timetable,curDate);
+    }
+
+    private void loadHistoryStatistics(){
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        int classGradeId = AppData.gradeMap.get(gradeTv.getText().toString());
+        String timetable = curMenu;
+        classesManager.classMarkList(loginName,token,classGradeId,timetable,curDate);
+    }
+
+    private void setupStatistics(){
+        classMarkAdapter = new ClassMarkAdapter(getActivity(),classMarks);
+        statisticGrid.setAdapter(classMarkAdapter);
         registerForContextMenu(statisticGrid);
         statisticGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(viewRg.getCheckedRadioButtonId() == R.id.historyRb){
+                    return false;
+                }
                 //selected pos
+                curClass = (ClassMark) adapterView.getAdapter().getItem(i);
                 return false;
             }
         });
-        //
-        menuRc.check(R.id.recitingRb);
     }
 
     void switchBuilding(){
@@ -672,8 +731,16 @@ public class RegularCheckFragment extends BaseFragment {
 
     void checkMenu(int menuId){
         curMenu = AppData.rcMenuItmMap.get(menuId).dictLabel;
-        menuParent.setText(AppData.rcMenuItmMap.get(menuId).parent);
         markMenu.setText(curMenu);
+        if (viewRg.getCheckedRadioButtonId() == R.id.regularRb){
+            menuParent.setText(AppData.rcMenuItmMap.get(menuId).parent);
+        }
+        if (viewRg.getCheckedRadioButtonId() == R.id.statisticRb){
+            loadCurrStatistics();
+        }
+        if (viewRg.getCheckedRadioButtonId() == R.id.historyRb){
+            loadHistoryStatistics();
+        }
     }
 
     void loadBuildings(){

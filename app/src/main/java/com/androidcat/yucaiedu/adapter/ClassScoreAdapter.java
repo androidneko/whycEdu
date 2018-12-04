@@ -55,11 +55,11 @@ public class ClassScoreAdapter extends BaseAdapter {
         }
         //set data
         final ScoreEntity scoreEntity = scoreEntities.get(position);
-        vh.classTv.setText(scoreEntity.claz);
+        vh.classTv.setText(scoreEntity.classesName);
         vh.scoreTv.setText(""+scoreEntity.score);
-        vh.beanTv.setText("x"+scoreEntity.bean);
-        vh.melonTv.setText("x"+scoreEntity.melon);
-        vh.scoreLeftTv.setText(""+scoreEntity.left);
+        vh.beanTv.setText("x"+scoreEntity.doumei);
+        vh.melonTv.setText("x"+scoreEntity.guage);
+        vh.scoreLeftTv.setText(""+scoreEntity.shengyu);
 
         if (position % 2 == 0){
             convertView.setBackgroundColor(context.getResources().getColor(R.color.white));

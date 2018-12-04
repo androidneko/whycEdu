@@ -56,8 +56,8 @@ public class ClassMarkAdapter extends BaseAdapter {
         }
         //set data
         final ClassMark classMark = classMarks.get(position);
-        vh.classTv.setText(classMark.clsName);
-        vh.markTv.setText(AppData.markMap.get(classMark.score));
+        vh.classTv.setText(classMark.classesName);
+        vh.markTv.setText(AppData.markMap.get(classMark.classesAchievement));
 
         return convertView;
     }

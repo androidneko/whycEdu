@@ -8,6 +8,7 @@ import com.androidcat.acnet.consts.InterfaceCodeConst;
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.request.BuildingsRequest;
 import com.androidcat.acnet.entity.request.ChangePswRequest;
+import com.androidcat.acnet.entity.request.ClassMarkListRequest;
 import com.androidcat.acnet.entity.request.EventRequest;
 import com.androidcat.acnet.entity.request.FastLoginRequest;
 import com.androidcat.acnet.entity.request.GradeListRequest;
@@ -16,14 +17,17 @@ import com.androidcat.acnet.entity.request.MenuRcRequest;
 import com.androidcat.acnet.entity.request.PostMarkRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
+import com.androidcat.acnet.entity.request.ScoreListRequest;
 import com.androidcat.acnet.entity.request.UserRequest;
 import com.androidcat.acnet.entity.request.ValidateCodeRequest;
 import com.androidcat.acnet.entity.response.BaseResponse;
 import com.androidcat.acnet.entity.response.BuildingsResponse;
+import com.androidcat.acnet.entity.response.ClassMarkListResponse;
 import com.androidcat.acnet.entity.response.GradeListResponse;
 import com.androidcat.acnet.entity.response.LoginResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.entity.response.RegistResponse;
+import com.androidcat.acnet.entity.response.ScoreListResponse;
 import com.androidcat.acnet.entity.response.StringContentResponse;
 import com.androidcat.acnet.entity.response.UserInfoResponse;
 import com.androidcat.acnet.okhttp.callback.EntityResponseHandler;
@@ -199,30 +203,62 @@ public class ClassesManager extends BaseManager {
         });
     }
 
-    public void getUserInfo(String userId,String companyId,String ciphertext){
-        UserRequest request = new UserRequest();
-        request.userId = (userId);
-        request.companyId = (companyId);
-        request.ciphertext = (ciphertext);
-        post(InterfaceCodeConst.TYPE_GET_USERINFO, getPostJson(request), new EntityResponseHandler<UserInfoResponse>() {
+    public void classMarkList(String loginName,String token,int classGradeId,String timetable,String dateStr){
+        ClassMarkListRequest request = new ClassMarkListRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.classGradeId = classGradeId;
+        request.timetable = timetable;
+        request.dateStr = dateStr;
+        post(InterfaceCodeConst.TYPE_MARK_RECORD, getPostJson(request), new EntityResponseHandler<ClassMarkListResponse>() {
             @Override
             public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_GET_USERINFO_START);
+                handler.sendEmptyMessage(OptMsgConst.MSG_MARK_RECORD_START);
             }
 
             @Override
             public void onFailure(int statusCode, String error_msg) {
                 Message msg = new Message();
                 msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_GET_USERINFO_FAIL;
+                msg.what = OptMsgConst.MSG_MARK_RECORD_FAIL;
                 handler.sendMessage(msg);
             }
 
             @Override
-            public void onSuccess(int statusCode, UserInfoResponse response) {
+            public void onSuccess(int statusCode, ClassMarkListResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.what = OptMsgConst.MSG_GET_USERINFO_SUCCESS;
+                msg.what = OptMsgConst.MSG_MARK_RECORD_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    public void scoreList(String loginName,String token,int classGradeId,int type){
+        ScoreListRequest request = new ScoreListRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.classGradeId = classGradeId;
+        request.type = type;
+        post(InterfaceCodeConst.TYPE_GET_CLASS_SCORES, getPostJson(request), new EntityResponseHandler<ScoreListResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.GET_CLASS_SCORES_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.GET_CLASS_SCORES_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, ScoreListResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.what = OptMsgConst.GET_CLASS_SCORES_SUCCESS;
                 handler.sendMessage(msg);
             }
         });

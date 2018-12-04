@@ -5,11 +5,11 @@ import android.support.annotation.NonNull;
 import java.io.Serializable;
 
 public class ScoreEntity implements Serializable,Comparable<ScoreEntity>{
-    public String claz;
+    public String classesName;
     public int score;
-    public int bean;
-    public int melon;
-    public int left;
+    public int doumei;
+    public int guage;
+    public int shengyu;
 
     @Override
     public int compareTo(@NonNull ScoreEntity scoreEntity) {

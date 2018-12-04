@@ -10,7 +10,7 @@ public class InterfaceUrl {
 
     public static final String URL_CONTROLLER = "/api/v1/";
 
-    public static final String MARK_RECORD_URL = BASE_URL + "/api/v1/create";
+    public static final String MARK_RECORD_URL = BASE_URL + "/api/getStatistics";
 
     public static final String POST_MARK_URL = BASE_URL + "/app/saveClassesScore";
 
@@ -19,7 +19,7 @@ public class InterfaceUrl {
     public static final String DICT_URL = BASE_URL + "/app/getDictByType";
     public static final String BUILDINGS_URL = BASE_URL + "/app/getAllBuilding";
     public static final String EVENT_MSG_URL = BASE_URL + "/app/saveMemorabilia";
-    public static final String CLASS_SCORES_URL = BASE_URL + "/api/v1/getQrcode";
+    public static final String CLASS_SCORES_URL = BASE_URL + "/app/getScoreStatistics";
     public static final String ORDER_LIST_URL = BASE_URL + "/api/v1/getOrderInfoList";
     public static final String ADD_RECHAREGE_URL = BASE_URL + "/api/v1/addRecharge";
     public static final String NEWS_LIST_URL = BASE_URL + "/api/v1/news/getNewsList";

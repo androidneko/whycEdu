@@ -29,6 +29,7 @@ public class AppData {
 
     public static Map<Integer,String> markMap = new HashMap<>();
     public static Map<Integer,Integer> markMenuMap = new HashMap<>();
+    public static Map<String,Integer> gradeMap = new HashMap<>();
 
     static {
         for (int i = 1; i < 15; i++){
@@ -196,5 +197,12 @@ public class AppData {
         markMenuMap.put(R.id.aRb,3);
         markMenuMap.put(R.id.bRb,2);
         markMenuMap.put(R.id.cRb,1);
+
+        gradeMap.put("一年级",100);
+        gradeMap.put("二年级  ",200);
+        gradeMap.put("三年级",300);
+        gradeMap.put("四年级",400);
+        gradeMap.put("五年级",500);
+        gradeMap.put("六年级",600);
     }
 }
