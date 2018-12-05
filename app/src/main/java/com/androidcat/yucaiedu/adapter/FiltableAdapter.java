@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.androidcat.acnet.entity.MarkItem;
+import com.androidcat.acnet.entity.MarkTeacherItem;
 import com.androidcat.acnet.entity.User;
 import com.androidcat.yucaiedu.R;
+import com.androidcat.yucaiedu.entity.TeacherItem;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
 
 import java.util.ArrayList;
@@ -77,9 +79,9 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
             vh = (FiltableAdapter.ViewHolder) convertView.getTag();
         }
         //set data
-        final MarkItem markItem = mOriginalValues.get(position);
-        vh.markerIv.setBackgroundResource(markItem.gender==0?R.mipmap.teacher_female:R.mipmap.teacher_male);
-        vh.markerRb.setText(markItem.name);
+        final MarkTeacherItem markItem = (MarkTeacherItem) mOriginalValues.get(position);
+        vh.markerIv.setBackgroundResource(markItem.sex==1?R.mipmap.teacher_female:R.mipmap.teacher_male);
+        vh.markerRb.setText(markItem.userName);
         if (markItem.isChecked){
             vh.markerRb.setChecked(true);
         }else {
@@ -155,9 +157,9 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
                 final ArrayList<MarkItem> newValues = new ArrayList<>();
 
                 for (int i = 0; i < count; i++) {
-                    final MarkItem value = values.get(i);//从List<User>中拿到User对象
+                    final MarkTeacherItem value = (MarkTeacherItem) values.get(i);//从List<User>中拿到User对象
 //                    final String valueText = value.toString().toLowerCase();
-                    final String valueText = value.name.toString().toLowerCase();//User对象的name属性作为过滤的参数
+                    final String valueText = value.userName.toString().toLowerCase();//User对象的name属性作为过滤的参数
                     // First match against the whole, non-splitted value
                     if (valueText.startsWith(prefixString) || valueText.indexOf(prefixString.toString()) != -1) {//第一个字符是否匹配
                         newValues.add(value);//将这个item加入到数组对象中

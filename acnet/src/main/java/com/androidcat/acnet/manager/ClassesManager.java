@@ -15,6 +15,7 @@ import com.androidcat.acnet.entity.request.GradeListRequest;
 import com.androidcat.acnet.entity.request.LoginRequest;
 import com.androidcat.acnet.entity.request.MenuRcRequest;
 import com.androidcat.acnet.entity.request.PostMarkRequest;
+import com.androidcat.acnet.entity.request.QueryTobeMarkedListRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
 import com.androidcat.acnet.entity.request.ScoreListRequest;
@@ -25,6 +26,9 @@ import com.androidcat.acnet.entity.response.BuildingsResponse;
 import com.androidcat.acnet.entity.response.ClassMarkListResponse;
 import com.androidcat.acnet.entity.response.GradeListResponse;
 import com.androidcat.acnet.entity.response.LoginResponse;
+import com.androidcat.acnet.entity.response.MarkClassResponse;
+import com.androidcat.acnet.entity.response.MarkRoomResponse;
+import com.androidcat.acnet.entity.response.MarkTeacherResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.entity.response.RegistResponse;
 import com.androidcat.acnet.entity.response.ScoreListResponse;
@@ -32,6 +36,9 @@ import com.androidcat.acnet.entity.response.StringContentResponse;
 import com.androidcat.acnet.entity.response.UserInfoResponse;
 import com.androidcat.acnet.okhttp.callback.EntityResponseHandler;
 import com.androidcat.acnet.okhttp.callback.RawResponseHandler;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Project: FuelMore
@@ -239,7 +246,7 @@ public class ClassesManager extends BaseManager {
         request.loginName = loginName;
         request.sessionId = token;
         request.classGradeId = classGradeId;
-        request.type = type;
+        request.type = type+"";
         post(InterfaceCodeConst.TYPE_GET_CLASS_SCORES, getPostJson(request), new EntityResponseHandler<ScoreListResponse>() {
             @Override
             public void onStart(int code) {
@@ -264,4 +271,105 @@ public class ClassesManager extends BaseManager {
         });
     }
 
+    public void saTeacherList(String loginName,String token,String project){
+        QueryTobeMarkedListRequest request = new QueryTobeMarkedListRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.project = project;
+        request.type = "0";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        request.dateStr = date;
+        post(InterfaceCodeConst.TYPE_GET_SA_LIST, getPostJson(request), new EntityResponseHandler<MarkTeacherResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.GET_SA_LIST_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.GET_SA_LIST_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, MarkTeacherResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.arg1 = 0;
+                msg.what = OptMsgConst.GET_SA_LIST_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    public void saClassList(String loginName,String token,String project){
+        QueryTobeMarkedListRequest request = new QueryTobeMarkedListRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.project = project;
+        request.type = "2";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        request.dateStr = date;
+        post(InterfaceCodeConst.TYPE_GET_SA_LIST, getPostJson(request), new EntityResponseHandler<MarkClassResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.GET_SA_LIST_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.GET_SA_LIST_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, MarkClassResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.arg1 = 2;
+                msg.what = OptMsgConst.GET_SA_LIST_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    public void saRoomList(String loginName,String token,String project){
+        QueryTobeMarkedListRequest request = new QueryTobeMarkedListRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.project = project;
+        request.type = "1";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        request.dateStr = date;
+        post(InterfaceCodeConst.TYPE_GET_SA_LIST, getPostJson(request), new EntityResponseHandler<MarkRoomResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.GET_SA_LIST_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.GET_SA_LIST_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, MarkRoomResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.arg1 = 1;
+                msg.what = OptMsgConst.GET_SA_LIST_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
 }

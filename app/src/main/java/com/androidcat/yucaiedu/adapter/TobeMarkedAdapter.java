@@ -59,8 +59,8 @@ public class TobeMarkedAdapter extends BaseAdapter {
         }
         //set data
         final MarkItem markItem = markItems.get(position);
-        vh.markerIv.setBackgroundResource(markItem.gender==0?R.mipmap.teacher_female:R.mipmap.teacher_male);
-        vh.markerRb.setText(markItem.name);
+        //vh.markerIv.setBackgroundResource(markItem.gender==0?R.mipmap.teacher_female:R.mipmap.teacher_male);
+        //vh.markerRb.setText(markItem.name);
         if (markItem.isChecked){
             vh.markerRb.setChecked(true);
         }else {

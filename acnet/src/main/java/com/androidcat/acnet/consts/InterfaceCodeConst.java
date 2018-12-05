@@ -30,7 +30,7 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_GET_QR_CODE = 1010;
 
-    public final static int TYPE_GET_ORDER_LIST = 1011;
+    public final static int TYPE_GET_SA_LIST = 1011;
 
     public final static int TYPE_ADD_RECHARGE = 1012;
 

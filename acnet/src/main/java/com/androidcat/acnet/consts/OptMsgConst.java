@@ -38,9 +38,9 @@ public class OptMsgConst {
     public static final int GET_CLASS_SCORES_START = 0x0015;
 
     //验证短信验证码
-    public static final int MSG_VALIDATE_CODE_SUCCESS = 0x1020;
-    public static final int MSG_VALIDATE_CODE_FAIL = 0x1021;
-    public static final int MSG_VALIDATE_CODE_START = 0x1022;
+    public static final int GET_SA_LIST_SUCCESS = 0x1020;
+    public static final int GET_SA_LIST_FAIL = 0x1021;
+    public static final int GET_SA_LIST_START = 0x1022;
 
     //注册
     public static final int POST_MARK_SUCCESS = 0x0013;

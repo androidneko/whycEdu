@@ -20,7 +20,7 @@ public class InterfaceUrl {
     public static final String BUILDINGS_URL = BASE_URL + "/app/getAllBuilding";
     public static final String EVENT_MSG_URL = BASE_URL + "/app/saveMemorabilia";
     public static final String CLASS_SCORES_URL = BASE_URL + "/app/getScoreStatistics";
-    public static final String ORDER_LIST_URL = BASE_URL + "/api/v1/getOrderInfoList";
+    public static final String SA_LIST_URL = BASE_URL + "/app/searchTeacherScore";
     public static final String ADD_RECHAREGE_URL = BASE_URL + "/api/v1/addRecharge";
     public static final String NEWS_LIST_URL = BASE_URL + "/api/v1/news/getNewsList";
 
@@ -46,8 +46,8 @@ public class InterfaceUrl {
                 return CLASS_SCORES_URL;
             case InterfaceCodeConst.TYPE_POST_MARK:
                 return POST_MARK_URL;
-            case InterfaceCodeConst.TYPE_GET_ORDER_LIST:
-                return ORDER_LIST_URL;
+            case InterfaceCodeConst.TYPE_GET_SA_LIST:
+                return SA_LIST_URL;
             case InterfaceCodeConst.TYPE_ADD_RECHARGE:
                 return ADD_RECHAREGE_URL;
             case InterfaceCodeConst.TYPE_GET_NEWS_LIST:

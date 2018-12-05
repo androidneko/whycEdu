@@ -110,13 +110,13 @@ public class RegularCheckFragment extends BaseFragment {
         super.handleEventMsg(msg);
         switch (msg.what){
             case OptMsgConst.GET_DICT_FAIL:
-                dismissLoadingDialog();
+                //dismissLoadingDialog();
                 break;
             case OptMsgConst.GET_DICT_START:
-                showProgressDialog("加载中");
+                //showProgressDialog("加载中");
                 break;
             case OptMsgConst.GET_DICT_SUCCESS:
-                dismissLoadingDialog();
+               // dismissLoadingDialog();
                 AppData.getAppData().menuResponse = (MenuResponse) msg.obj;
                 //loadMenu();
                 break;
@@ -450,7 +450,7 @@ public class RegularCheckFragment extends BaseFragment {
         if (classesManager == null){
             classesManager = new ClassesManager(getActivity(),baseHandler);
         }
-        classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
+        //classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         classesManager.getGradeList(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         //
@@ -660,73 +660,6 @@ public class RegularCheckFragment extends BaseFragment {
             return false;
         }
         return true;
-    }
-
-    void loadMenu(){
-        List<MenuItm> menuItmList = AppData.getAppData().menuResponse.content;
-        for (int i =0;i<menuItmList.size();i++){
-            MenuItm menuItm = menuItmList.get(i);
-            if (menuItm != null){
-                if (i==0){
-                    AppData.rcMenuItmMap.put(R.id.recitingRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.recitingRb)).setText(menuItm.dictLabel);
-                }
-                if (i==1){
-                    AppData.rcMenuItmMap.put(R.id.readingRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.readingRb)).setText(menuItm.dictLabel);
-                }
-                if (i==2){
-                    AppData.rcMenuItmMap.put(R.id.meetingRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.meetingRb)).setText(menuItm.dictLabel);
-                }
-                if (i==3){
-                    AppData.rcMenuItmMap.put(R.id.exerciseRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.exerciseRb)).setText(menuItm.dictLabel);
-                }
-                if (i==4){
-                    AppData.rcMenuItmMap.put(R.id.eyeExerciseRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.eyeExerciseRb)).setText(menuItm.dictLabel);
-                }
-                if (i==5){
-                    AppData.rcMenuItmMap.put(R.id.restTimeRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.restTimeRb)).setText(menuItm.dictLabel);
-                }
-                if (i==6){
-                    AppData.rcMenuItmMap.put(R.id.goodThingsRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.goodThingsRb)).setText(menuItm.dictLabel);
-                }
-                if (i==7){
-                    AppData.rcMenuItmMap.put(R.id.healthRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.healthRb)).setText(menuItm.dictLabel);
-                }
-                if (i==8){
-                    AppData.rcMenuItmMap.put(R.id.energyRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.energyRb)).setText(menuItm.dictLabel);
-                }
-                if (i==9){
-                    AppData.rcMenuItmMap.put(R.id.morningRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.morningRb)).setText(menuItm.dictLabel);
-                }
-                if (i==10){
-                    AppData.rcMenuItmMap.put(R.id.noonRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.noonRb)).setText(menuItm.dictLabel);
-                }
-                if (i==11){
-                    AppData.rcMenuItmMap.put(R.id.afternoonRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.afternoonRb)).setText(menuItm.dictLabel);
-                }
-                if (i==12){
-                    AppData.rcMenuItmMap.put(R.id.tsQueueRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.tsQueueRb)).setText(menuItm.dictLabel);
-                }
-                if (i==13){
-                    AppData.rcMenuItmMap.put(R.id.afterSchoolRb,menuItm);
-                    ((RadioButton)mRootView.findViewById(R.id.afterSchoolRb)).setText(menuItm.dictLabel);
-                }
-            }
-        }
-
-        menuRc.check(R.id.recitingRb);
     }
 
     void checkMenu(int menuId){

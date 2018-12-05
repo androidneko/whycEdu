@@ -44,6 +44,7 @@ public abstract class BaseFragment extends Fragment {
     public void handleEventMsg(Message msg){
         //add process of common processing
         if (msg.what == OptMsgConst.TOKEN_ERROR){
+            dismissLoadingDialog();
             gotoLogin();
             showToast("您的登录状态已失效，请重新登录");
             return;

@@ -225,11 +225,79 @@ android:background="@color/gray_item">
                 android:clickable="true"
                 android:background="@color/white"
                 />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="上午巡堂"
+                android:textColor="@color/black"
+                android:checked="true"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:button="@null"
+                android:clickable="true"
+                android:background="@color/gray_bg"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/morningRb"
+                android:id="@+id/firstRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="上午巡堂"
+                android:text="第一节"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:button="@null"
+                android:clickable="true"
+                android:background="@drawable/gray_green_label_check"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
+            <RadioButton
+                android:id="@+id/secondRb"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="第二节"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:button="@null"
+                android:clickable="true"
+                android:background="@drawable/gray_green_label_check"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
+            <RadioButton
+                android:id="@+id/thirdRb"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="第三节"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:button="@null"
+                android:clickable="true"
+                android:background="@drawable/gray_green_label_check"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
+            <RadioButton
+                android:id="@+id/forthRb"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="第四节"
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:gravity="center"
@@ -257,11 +325,59 @@ android:background="@color/gray_item">
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="下午巡堂"
+                android:textColor="@color/black"
+                android:checked="true"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:button="@null"
+                android:clickable="true"
+                android:background="@color/gray_bg"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
             <RadioButton
-                android:id="@+id/afternoonRb"
+                android:id="@+id/fifthRb"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="下午巡堂"
+                android:text="第五节"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:button="@null"
+                android:clickable="true"
+                android:background="@drawable/gray_green_label_check"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
+            <RadioButton
+                android:id="@+id/sixthRb"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="第六节"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:button="@null"
+                android:clickable="true"
+                android:background="@drawable/gray_green_label_check"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"/>
+            <RadioButton
+                android:id="@+id/seventhRb"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="第七节"
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:gravity="center"

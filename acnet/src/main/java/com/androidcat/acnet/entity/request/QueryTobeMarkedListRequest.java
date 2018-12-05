@@ -1,9 +1,10 @@
 package com.androidcat.acnet.entity.request;
 
-public class ScoreListRequest extends BaseRequest {
+public class QueryTobeMarkedListRequest extends BaseRequest {
 
     public String loginName=null;
     public String sessionId=null;
     public String type;
-    public int classGradeId;
+    public String dateStr;
+    public String project;
 }

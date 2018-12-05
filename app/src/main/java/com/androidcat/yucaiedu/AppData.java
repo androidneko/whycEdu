@@ -1,5 +1,7 @@
 package com.androidcat.yucaiedu;
 
+import android.widget.RadioButton;
+
 import com.androidcat.acnet.entity.MenuItm;
 import com.androidcat.acnet.entity.User;
 import com.androidcat.acnet.entity.response.BuildingsResponse;
@@ -7,6 +9,7 @@ import com.androidcat.acnet.entity.response.GradeListResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AppData {
@@ -32,7 +35,7 @@ public class AppData {
     public static Map<String,Integer> gradeMap = new HashMap<>();
 
     static {
-        for (int i = 1; i < 15; i++){
+        for (int i = 1; i < 20; i++){
             if (i==1){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "经典诵读";
@@ -89,29 +92,59 @@ public class AppData {
             }
             if (i==10){
                 MenuItm menuItm = new MenuItm();
-                menuItm.dictLabel = "上午巡堂";
-                menuItm.parent = "课堂管理";
-                rcMenuItmMap.put(R.id.morningRb,menuItm);
+                menuItm.dictLabel = "第一节";
+                menuItm.parent = "上午巡堂";
+                rcMenuItmMap.put(R.id.firstRb,menuItm);
             }
             if (i==11){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "第二节";
+                menuItm.parent = "上午巡堂";
+                rcMenuItmMap.put(R.id.secondRb,menuItm);
+            }
+            if (i==12){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "第三节";
+                menuItm.parent = "上午巡堂";
+                rcMenuItmMap.put(R.id.thirdRb,menuItm);
+            }
+            if (i==13){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "第四节";
+                menuItm.parent = "上午巡堂";
+                rcMenuItmMap.put(R.id.forthRb,menuItm);
+            }
+            if (i==14){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "午间管理";
                 menuItm.parent = "课堂管理";
                 rcMenuItmMap.put(R.id.noonRb,menuItm);
             }
-            if (i==12){
+            if (i==15){
                 MenuItm menuItm = new MenuItm();
-                menuItm.dictLabel = "下午巡堂";
-                menuItm.parent = "课堂管理";
-                rcMenuItmMap.put(R.id.afternoonRb,menuItm);
+                menuItm.dictLabel = "第五节";
+                menuItm.parent = "下午巡堂";
+                rcMenuItmMap.put(R.id.fifthRb,menuItm);
             }
-            if (i==13){
+            if (i==16){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "第六节";
+                menuItm.parent = "下午巡堂";
+                rcMenuItmMap.put(R.id.sixthRb,menuItm);
+            }
+            if (i==17){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "第七节";
+                menuItm.parent = "下午巡堂";
+                rcMenuItmMap.put(R.id.seventhRb,menuItm);
+            }
+            if (i==18){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "教学队列";
                 menuItm.parent = "队列管理";
                 rcMenuItmMap.put(R.id.tsQueueRb,menuItm);
             }
-            if (i==14){
+            if (i==19){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "放学队列";
                 menuItm.parent = "队列管理";
@@ -205,4 +238,82 @@ public class AppData {
         gradeMap.put("五年级",500);
         gradeMap.put("六年级",600);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    /*void loadMenu(){
+        List<MenuItm> menuItmList = AppData.getAppData().menuResponse.content;
+        for (int i =0;i<menuItmList.size();i++){
+            MenuItm menuItm = menuItmList.get(i);
+            if (menuItm != null){
+                if (i==0){
+                    AppData.rcMenuItmMap.put(R.id.recitingRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.recitingRb)).setText(menuItm.dictLabel);
+                }
+                if (i==1){
+                    AppData.rcMenuItmMap.put(R.id.readingRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.readingRb)).setText(menuItm.dictLabel);
+                }
+                if (i==2){
+                    AppData.rcMenuItmMap.put(R.id.meetingRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.meetingRb)).setText(menuItm.dictLabel);
+                }
+                if (i==3){
+                    AppData.rcMenuItmMap.put(R.id.exerciseRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.exerciseRb)).setText(menuItm.dictLabel);
+                }
+                if (i==4){
+                    AppData.rcMenuItmMap.put(R.id.eyeExerciseRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.eyeExerciseRb)).setText(menuItm.dictLabel);
+                }
+                if (i==5){
+                    AppData.rcMenuItmMap.put(R.id.restTimeRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.restTimeRb)).setText(menuItm.dictLabel);
+                }
+                if (i==6){
+                    AppData.rcMenuItmMap.put(R.id.goodThingsRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.goodThingsRb)).setText(menuItm.dictLabel);
+                }
+                if (i==7){
+                    AppData.rcMenuItmMap.put(R.id.healthRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.healthRb)).setText(menuItm.dictLabel);
+                }
+                if (i==8){
+                    AppData.rcMenuItmMap.put(R.id.energyRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.energyRb)).setText(menuItm.dictLabel);
+                }
+                if (i==9){
+                    AppData.rcMenuItmMap.put(R.id.morningRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.morningRb)).setText(menuItm.dictLabel);
+                }
+                if (i==10){
+                    AppData.rcMenuItmMap.put(R.id.noonRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.noonRb)).setText(menuItm.dictLabel);
+                }
+                if (i==11){
+                    AppData.rcMenuItmMap.put(R.id.afternoonRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.afternoonRb)).setText(menuItm.dictLabel);
+                }
+                if (i==12){
+                    AppData.rcMenuItmMap.put(R.id.tsQueueRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.tsQueueRb)).setText(menuItm.dictLabel);
+                }
+                if (i==13){
+                    AppData.rcMenuItmMap.put(R.id.afterSchoolRb,menuItm);
+                    ((RadioButton)mRootView.findViewById(R.id.afterSchoolRb)).setText(menuItm.dictLabel);
+                }
+            }
+        }
+
+        menuRc.check(R.id.recitingRb);
+    }*/
 }

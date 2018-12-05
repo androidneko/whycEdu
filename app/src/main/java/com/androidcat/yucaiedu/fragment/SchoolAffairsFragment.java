@@ -92,8 +92,8 @@ public class SchoolAffairsFragment extends BaseFragment {
     OnItemCheckedListener onItemCheckedListener = new OnItemCheckedListener() {
         @Override
         public void onItemChecked(MarkItem item) {
-            itemNameTv.setText(item.name);
-            itemDescTv.setText(item.desc);
+            //itemNameTv.setText(item.name);
+            //itemDescTv.setText(item.desc);
         }
     };
 
@@ -126,6 +126,25 @@ public class SchoolAffairsFragment extends BaseFragment {
             case OptMsgConst.POST_EVENT_SUCCESS:
                 dismissLoadingDialog();
                 showToast("提交成功");
+                break;
+            case OptMsgConst.GET_SA_LIST_FAIL:
+                dismissLoadingDialog();
+                showToast("加载失败");
+                break;
+            case OptMsgConst.GET_SA_LIST_START:
+                showProgressDialog("加载中");
+                break;
+            case OptMsgConst.GET_SA_LIST_SUCCESS:
+                dismissLoadingDialog();
+                if (msg.arg1 == 0){
+
+                }
+                if (msg.arg1 == 1){
+
+                }
+                if (msg.arg1 == 2){
+
+                }
                 break;
             default:
                 break;
@@ -232,7 +251,7 @@ public class SchoolAffairsFragment extends BaseFragment {
 
     void initData(){
         //total
-        if (totalItems.size() == 0){
+        /*if (totalItems.size() == 0){
             for(int i = 1;i < 19;i++){
                 MarkItem room = new MarkItem();
                 room.name = i+"老师";
@@ -281,7 +300,7 @@ public class SchoolAffairsFragment extends BaseFragment {
         if (badAdapter == null){
             badAdapter = new TobeMarkedAdapter(getActivity(),badItems);
         }
-        badGrid.setAdapter(badAdapter);
+        badGrid.setAdapter(badAdapter);*/
     }
 
     public void searchItem(String name){
@@ -352,8 +371,15 @@ public class SchoolAffairsFragment extends BaseFragment {
             markView.setVisibility(View.VISIBLE);
             titleTab.setVisibility(View.VISIBLE);
             eventView.setVisibility(View.GONE);
-            if(menuId == R.id.dutyRb){
 
+            if(menuId == R.id.afterSchoolRb){
+                queryClassItems(menuId);
+            }
+            else if(menuId == R.id.workingRb){
+                queryRoomItems(menuId);
+            }
+            else {
+                queryTeacherItems(menuId);
             }
         }
     }
@@ -379,5 +405,23 @@ public class SchoolAffairsFragment extends BaseFragment {
             type = "备注";
         }
         classesManager.postEvent(loginName,token,curMenu,date,type,msg);
+    }
+
+    void queryTeacherItems(int checkedId){
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        classesManager.saTeacherList(loginName,token,AppData.saMenuItmMap.get(checkedId).dictLabel);
+    }
+
+    void queryRoomItems(int checkedId){
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        classesManager.saRoomList(loginName,token,AppData.saMenuItmMap.get(checkedId).dictLabel);
+    }
+
+    void queryClassItems(int checkedId){
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        classesManager.saClassList(loginName,token,AppData.saMenuItmMap.get(checkedId).dictLabel);
     }
 }

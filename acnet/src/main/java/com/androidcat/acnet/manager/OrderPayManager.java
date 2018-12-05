@@ -102,40 +102,6 @@ public class OrderPayManager extends BaseManager {
         });
     }
 
-    public void getOrderList(String userName,String userId,String ciphertext,String companyId,String companyName, final boolean isPull){
-        OrderListRequest request = new OrderListRequest();
-        request.userName = (userName);
-        request.userId = (userId);
-        request.ciphertext = ciphertext;
-        request.companyId = (companyId);
-        request.company_name = (companyName);
-        post(InterfaceCodeConst.TYPE_GET_ORDER_LIST, getPostJson(request), new EntityResponseHandler<OrderListResponse>() {
-            @Override
-            public void onStart(int code) {
-                Message msg = new Message();
-                msg.obj = isPull;
-                msg.what = OptMsgConst.MSG_GET_ORDER_LIST_START;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onFailure(int statusCode, String error_msg) {
-                Message msg = new Message();
-                msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_GET_ORDER_LIST_FAIL;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, OrderListResponse response) {
-                Message msg = new Message();
-                msg.obj = response;
-                msg.what = OptMsgConst.MSG_GET_ORDER_LIST_SUCCESS;
-                handler.sendMessage(msg);
-            }
-        });
-    }
-
     public void gather(String userName,String userId,String authority,String ciphertext,String companyId,String companyName,String pointId,String amount, String qrcode){
         GatherRequest request = new GatherRequest();
         request.businessUserName = (userName);
