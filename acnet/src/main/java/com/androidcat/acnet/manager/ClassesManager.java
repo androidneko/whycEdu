@@ -19,6 +19,7 @@ import com.androidcat.acnet.entity.request.PostMarkRequest;
 import com.androidcat.acnet.entity.request.QueryTobeMarkedListRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
+import com.androidcat.acnet.entity.request.SaHistoryRequest;
 import com.androidcat.acnet.entity.request.ScoreListRequest;
 import com.androidcat.acnet.entity.request.UserRequest;
 import com.androidcat.acnet.entity.request.ValidateCodeRequest;
@@ -32,6 +33,7 @@ import com.androidcat.acnet.entity.response.MarkRoomResponse;
 import com.androidcat.acnet.entity.response.MarkTeacherResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.entity.response.RegistResponse;
+import com.androidcat.acnet.entity.response.SaHistoryResponse;
 import com.androidcat.acnet.entity.response.ScoreListResponse;
 import com.androidcat.acnet.entity.response.StringContentResponse;
 import com.androidcat.acnet.entity.response.UserInfoResponse;
@@ -215,7 +217,7 @@ public class ClassesManager extends BaseManager {
         ClassMarkListRequest request = new ClassMarkListRequest();
         request.loginName = loginName;
         request.sessionId = token;
-        request.classGradeId = classGradeId;
+        request.classGradeId = classGradeId+"";
         request.timetable = timetable;
         request.dateStr = dateStr;
         post(InterfaceCodeConst.TYPE_MARK_RECORD, getPostJson(request), new EntityResponseHandler<ClassMarkListResponse>() {
@@ -248,9 +250,6 @@ public class ClassesManager extends BaseManager {
         request.sessionId = token;
         request.classGradeId = classGradeId+"";
         request.type = type+"";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
-        request.dateStr = date;
         post(InterfaceCodeConst.TYPE_GET_CLASS_SCORES, getPostJson(request), new EntityResponseHandler<ScoreListResponse>() {
             @Override
             public void onStart(int code) {
@@ -377,7 +376,7 @@ public class ClassesManager extends BaseManager {
         });
     }
 
-    public void saMark(String loginName,String token,String project,String grade,String type,String id){
+    public void saMark(String loginName,String token,String project,String grade,String type,String id,String commName){
         MarkItemRequest request = new MarkItemRequest();
         request.loginName = loginName;
         request.sessionId = token;
@@ -385,6 +384,7 @@ public class ClassesManager extends BaseManager {
         request.type = type;
         request.grade = grade;
         request.teacherId = id;
+        request.commName = commName;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         request.dateStr = date;
@@ -407,6 +407,35 @@ public class ClassesManager extends BaseManager {
                 Message msg = new Message();
                 msg.obj = response;
                 msg.what = OptMsgConst.SA_MARK_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    public void saHistory(String loginName,String token,String date){
+        SaHistoryRequest request = new SaHistoryRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.dateStr = date;
+        post(InterfaceCodeConst.TYPE_SA_HISTORY, getPostJson(request), new EntityResponseHandler<SaHistoryResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.MSG_SA_HISTORY_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.MSG_SA_HISTORY_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, SaHistoryResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.what = OptMsgConst.MSG_SA_HISTORY_SUCCESS;
                 handler.sendMessage(msg);
             }
         });

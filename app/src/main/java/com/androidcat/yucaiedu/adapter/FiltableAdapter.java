@@ -56,7 +56,10 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public int getCount() {
-        return mDatas.size() > 0 ? mDatas.size() : 0;
+        if(mDatas != null){
+            return mDatas.size() > 0 ? mDatas.size() : 0;
+        }
+        return 0;
     }
 
     @Override
@@ -128,6 +131,16 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
             mFilter = new ArrayFilter();
         }
         return mFilter;
+    }
+
+    public void removeItem(MarkItem item){
+        if (mDatas != null && mDatas.size() >0){
+            mDatas.remove(item);
+            notifyDataSetChanged();
+        }
+        if (mOriginalValues != null && mOriginalValues.size() > 0){
+            mOriginalValues.remove(item);
+        }
     }
 
     /**

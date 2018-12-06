@@ -215,7 +215,7 @@
                 <GridView
                     android:id="@+id/eastBuildingGrid"
                     android:layout_toRightOf="@+id/eastGridHeader"
-                    android:layout_width="490dp"
+                    android:layout_width="535dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:verticalSpacing="5dp"

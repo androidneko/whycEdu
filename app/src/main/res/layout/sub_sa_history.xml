@@ -46,7 +46,7 @@
                     android:id="@+id/communication"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -72,7 +72,7 @@
                     android:id="@+id/development"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -98,7 +98,7 @@
                     android:id="@+id/teachAndLearn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -124,7 +124,7 @@
                     android:id="@+id/teachActivities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -150,7 +150,7 @@
                     android:id="@+id/stuActivities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -211,7 +211,7 @@
                         android:id="@+id/goodTeacher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -225,7 +225,7 @@
                         android:id="@+id/badTeacher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -288,7 +288,7 @@
                         android:id="@+id/goodTeacherPro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -302,7 +302,7 @@
                         android:id="@+id/badTeacherPro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -365,7 +365,7 @@
                         android:id="@+id/goodTeacherTran"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -379,7 +379,7 @@
                         android:id="@+id/badTeacherTran"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -418,7 +418,7 @@
                     android:id="@+id/safety"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -444,7 +444,7 @@
                     android:id="@+id/accident"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -482,7 +482,7 @@
                     android:id="@+id/afterSchool"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -508,7 +508,7 @@
                     android:id="@+id/leaving"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -570,7 +570,7 @@
                         android:id="@+id/goodTeacherOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -584,7 +584,7 @@
                         android:id="@+id/badTeacherOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -647,7 +647,7 @@
                         android:id="@+id/goodTeacherOff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -661,7 +661,7 @@
                         android:id="@+id/badTeacherOff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxx"
+                        android:text="暂无"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -688,7 +688,7 @@
                     android:id="@+id/memo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxxxxx"
+                    android:text="暂无"
                     android:textColor="@color/text_black"
                     android:textSize="16sp"/>
             </LinearLayout>

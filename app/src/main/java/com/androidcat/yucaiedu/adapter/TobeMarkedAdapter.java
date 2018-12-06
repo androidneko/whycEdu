@@ -10,7 +10,10 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.androidcat.acnet.entity.ClassMark;
+import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkItem;
+import com.androidcat.acnet.entity.MarkRoomItem;
+import com.androidcat.acnet.entity.MarkTeacherItem;
 import com.androidcat.acnet.entity.Room;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
@@ -59,8 +62,18 @@ public class TobeMarkedAdapter extends BaseAdapter {
         }
         //set data
         final MarkItem markItem = markItems.get(position);
-        //vh.markerIv.setBackgroundResource(markItem.gender==0?R.mipmap.teacher_female:R.mipmap.teacher_male);
-        //vh.markerRb.setText(markItem.name);
+        if (markItem instanceof MarkTeacherItem){
+            vh.markerIv.setBackgroundResource(((MarkTeacherItem)markItem).sex==1?R.mipmap.teacher_female:R.mipmap.teacher_male);
+            vh.markerRb.setText(((MarkTeacherItem)markItem).userName);
+        }
+        if (markItem instanceof MarkRoomItem){
+            vh.markerIv.setBackgroundResource(R.mipmap.office);
+            vh.markerRb.setText(((MarkRoomItem)markItem).deptName);
+        }
+        if (markItem instanceof MarkClassItem){
+            vh.markerIv.setBackgroundResource(R.mipmap.classroom);
+            vh.markerRb.setText(((MarkClassItem)markItem).deptName);
+        }
         if (markItem.isChecked){
             vh.markerRb.setChecked(true);
         }else {

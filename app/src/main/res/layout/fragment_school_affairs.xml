@@ -21,11 +21,13 @@
 
             <TextView
                 android:id="@+id/dateTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="2018年11月20日 周六"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textSize="20sp"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:text="2018年11月20日 周六"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -38,6 +40,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
+                android:id="@+id/viewRg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -72,7 +75,12 @@
     </RelativeLayout>
 
     <!--下半部分-->
+    <include
+        android:id="@+id/saReportsView"
+        layout="@layout/sub_sa_history"
+        android:visibility="gone" />
     <LinearLayout
+        android:id="@+id/saMarkView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">

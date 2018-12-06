@@ -96,33 +96,4 @@ public class UserManager extends BaseManager {
         });
     }
 
-    public void getUserInfo(String userId,String companyId,String ciphertext){
-        UserRequest request = new UserRequest();
-        request.userId = (userId);
-        request.companyId = (companyId);
-        request.ciphertext = (ciphertext);
-        post(InterfaceCodeConst.TYPE_GET_USERINFO, getPostJson(request), new EntityResponseHandler<UserInfoResponse>() {
-            @Override
-            public void onStart(int code) {
-                handler.sendEmptyMessage(OptMsgConst.MSG_GET_USERINFO_START);
-            }
-
-            @Override
-            public void onFailure(int statusCode, String error_msg) {
-                Message msg = new Message();
-                msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_GET_USERINFO_FAIL;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, UserInfoResponse response) {
-                Message msg = new Message();
-                msg.obj = response;
-                msg.what = OptMsgConst.MSG_GET_USERINFO_SUCCESS;
-                handler.sendMessage(msg);
-            }
-        });
-    }
-
 }

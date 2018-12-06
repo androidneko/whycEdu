@@ -73,9 +73,9 @@ public class OptMsgConst {
     public static final int POST_EVENT_START = 0x1272;
 
     //获取用户信息
-    public final static int MSG_GET_USERINFO_START = 0x1001;
-    public final static int MSG_GET_USERINFO_FAIL = 0x1003;
-    public final static int MSG_GET_USERINFO_SUCCESS = 0x1004;
+    public final static int MSG_SA_HISTORY_START = 0x1001;
+    public final static int MSG_SA_HISTORY_FAIL = 0x1003;
+    public final static int MSG_SA_HISTORY_SUCCESS = 0x1004;
 
     //收款
     public static final int MSG_GATHER_SUCCESS = 0x1020;
