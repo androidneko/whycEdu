@@ -13,6 +13,7 @@ import com.androidcat.acnet.entity.request.EventRequest;
 import com.androidcat.acnet.entity.request.FastLoginRequest;
 import com.androidcat.acnet.entity.request.GradeListRequest;
 import com.androidcat.acnet.entity.request.LoginRequest;
+import com.androidcat.acnet.entity.request.MarkItemRequest;
 import com.androidcat.acnet.entity.request.MenuRcRequest;
 import com.androidcat.acnet.entity.request.PostMarkRequest;
 import com.androidcat.acnet.entity.request.QueryTobeMarkedListRequest;
@@ -245,8 +246,11 @@ public class ClassesManager extends BaseManager {
         ScoreListRequest request = new ScoreListRequest();
         request.loginName = loginName;
         request.sessionId = token;
-        request.classGradeId = classGradeId;
+        request.classGradeId = classGradeId+"";
         request.type = type+"";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        request.dateStr = date;
         post(InterfaceCodeConst.TYPE_GET_CLASS_SCORES, getPostJson(request), new EntityResponseHandler<ScoreListResponse>() {
             @Override
             public void onStart(int code) {
@@ -276,7 +280,7 @@ public class ClassesManager extends BaseManager {
         request.loginName = loginName;
         request.sessionId = token;
         request.project = project;
-        request.type = "0";
+        request.type = "1";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         request.dateStr = date;
@@ -298,7 +302,7 @@ public class ClassesManager extends BaseManager {
             public void onSuccess(int statusCode, MarkTeacherResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.arg1 = 0;
+                msg.arg1 = 1;
                 msg.what = OptMsgConst.GET_SA_LIST_SUCCESS;
                 handler.sendMessage(msg);
             }
@@ -310,7 +314,7 @@ public class ClassesManager extends BaseManager {
         request.loginName = loginName;
         request.sessionId = token;
         request.project = project;
-        request.type = "2";
+        request.type = "3";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         request.dateStr = date;
@@ -332,7 +336,7 @@ public class ClassesManager extends BaseManager {
             public void onSuccess(int statusCode, MarkClassResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.arg1 = 2;
+                msg.arg1 = 3;
                 msg.what = OptMsgConst.GET_SA_LIST_SUCCESS;
                 handler.sendMessage(msg);
             }
@@ -344,7 +348,7 @@ public class ClassesManager extends BaseManager {
         request.loginName = loginName;
         request.sessionId = token;
         request.project = project;
-        request.type = "1";
+        request.type = "2";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         request.dateStr = date;
@@ -366,8 +370,43 @@ public class ClassesManager extends BaseManager {
             public void onSuccess(int statusCode, MarkRoomResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
-                msg.arg1 = 1;
+                msg.arg1 = 2;
                 msg.what = OptMsgConst.GET_SA_LIST_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    public void saMark(String loginName,String token,String project,String grade,String type,String id){
+        MarkItemRequest request = new MarkItemRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.project = project;
+        request.type = type;
+        request.grade = grade;
+        request.teacherId = id;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        request.dateStr = date;
+        post(InterfaceCodeConst.TYPE_SA_MARK, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.SA_MARK_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.SA_MARK_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, BaseResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.what = OptMsgConst.SA_MARK_SUCCESS;
                 handler.sendMessage(msg);
             }
         });

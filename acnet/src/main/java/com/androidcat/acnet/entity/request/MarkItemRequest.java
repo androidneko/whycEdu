@@ -1,10 +1,12 @@
 package com.androidcat.acnet.entity.request;
 
-public class ScoreListRequest extends BaseRequest {
+public class MarkItemRequest extends BaseRequest {
 
     public String loginName=null;
     public String sessionId=null;
     public String type;
-    public String classGradeId;
     public String dateStr;
+    public String project;
+    public String teacherId;
+    public String grade;
 }

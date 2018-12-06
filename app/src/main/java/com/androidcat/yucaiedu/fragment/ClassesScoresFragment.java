@@ -33,7 +33,7 @@ public class ClassesScoresFragment extends BaseFragment {
     ListView scoreList;
     ClassesManager classesManager;
 
-    String curGrade = "一年级";
+    String curGrade = "六年级";
     int curType = 1;
     static Map<Integer,Integer> typeMap = new HashMap<>();
     static Map<Integer,String> menuMap = new HashMap<>();
@@ -59,10 +59,10 @@ public class ClassesScoresFragment extends BaseFragment {
                 dismissLoadingDialog();
                 showToast("获取班级得分失败，请确保网络畅通后重试");
                 break;
-            case OptMsgConst.MSG_LOGIN_START:
+            case OptMsgConst.GET_CLASS_SCORES_START:
                 showProgressDialog("正在加载");
                 break;
-            case OptMsgConst.MSG_LOGIN_SUCCESS:
+            case OptMsgConst.GET_CLASS_SCORES_SUCCESS:
                 dismissLoadingDialog();
                 ScoreListResponse scoreListResponse = (ScoreListResponse) msg.obj;
                 scoreEntities = scoreListResponse.content;
@@ -133,7 +133,11 @@ public class ClassesScoresFragment extends BaseFragment {
     }
 
     void getScoreList(){
-        classesManager.scoreList(AppData.getAppData().user.loginName,AppData.getAppData().user.token,AppData.gradeMap.get(curGrade),curType);
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        int gradeId = AppData.gradeMap.get(curGrade);
+        int type = curType;
+        classesManager.scoreList(loginName,token,gradeId,type);
     }
 
     void checkMenu(int checkedId){

@@ -232,7 +232,7 @@ public class AppData {
         markMenuMap.put(R.id.cRb,1);
 
         gradeMap.put("一年级",100);
-        gradeMap.put("二年级  ",200);
+        gradeMap.put("二年级",200);
         gradeMap.put("三年级",300);
         gradeMap.put("四年级",400);
         gradeMap.put("五年级",500);

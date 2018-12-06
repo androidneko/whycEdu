@@ -21,7 +21,7 @@ public class InterfaceUrl {
     public static final String EVENT_MSG_URL = BASE_URL + "/app/saveMemorabilia";
     public static final String CLASS_SCORES_URL = BASE_URL + "/app/getScoreStatistics";
     public static final String SA_LIST_URL = BASE_URL + "/app/searchTeacherScore";
-    public static final String ADD_RECHAREGE_URL = BASE_URL + "/api/v1/addRecharge";
+    public static final String SA_MARK_URL = BASE_URL + "/app/saveTeacherScore";
     public static final String NEWS_LIST_URL = BASE_URL + "/api/v1/news/getNewsList";
 
     public static final String USERINFO_URL = BASE_URL + "/api/v1/user/findByUserId";
@@ -48,8 +48,8 @@ public class InterfaceUrl {
                 return POST_MARK_URL;
             case InterfaceCodeConst.TYPE_GET_SA_LIST:
                 return SA_LIST_URL;
-            case InterfaceCodeConst.TYPE_ADD_RECHARGE:
-                return ADD_RECHAREGE_URL;
+            case InterfaceCodeConst.TYPE_SA_MARK:
+                return SA_MARK_URL;
             case InterfaceCodeConst.TYPE_GET_NEWS_LIST:
                 return NEWS_LIST_URL;
             case InterfaceCodeConst.TYPE_GATHER:

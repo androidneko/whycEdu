@@ -8,9 +8,7 @@ import com.androidcat.acnet.consts.InterfaceCodeConst;
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.request.AddRechargeRequest;
 import com.androidcat.acnet.entity.request.GatherRequest;
-import com.androidcat.acnet.entity.request.OrderListRequest;
 import com.androidcat.acnet.entity.request.QrcodeRequest;
-import com.androidcat.acnet.entity.response.OrderListResponse;
 import com.androidcat.acnet.entity.response.StringContentResponse;
 import com.androidcat.acnet.okhttp.callback.EntityResponseHandler;
 import com.androidcat.acnet.okhttp.callback.RawResponseHandler;
@@ -78,7 +76,7 @@ public class OrderPayManager extends BaseManager {
         request.amount = (amount);
         request.companyId = (companyId);
         request.company_name = (companyName);
-        post(InterfaceCodeConst.TYPE_ADD_RECHARGE, getPostJson(request), new EntityResponseHandler<StringContentResponse>() {
+        post(InterfaceCodeConst.TYPE_SA_MARK, getPostJson(request), new EntityResponseHandler<StringContentResponse>() {
             @Override
             public void onStart(int code) {
                 handler.sendEmptyMessage(OptMsgConst.MSG_ADD_RECHARGE_START);

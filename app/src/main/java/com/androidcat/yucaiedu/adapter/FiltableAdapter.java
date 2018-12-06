@@ -10,9 +10,12 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkItem;
+import com.androidcat.acnet.entity.MarkRoomItem;
 import com.androidcat.acnet.entity.MarkTeacherItem;
 import com.androidcat.acnet.entity.User;
+import com.androidcat.acnet.entity.response.MarkClassResponse;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.entity.TeacherItem;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
@@ -79,9 +82,19 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
             vh = (FiltableAdapter.ViewHolder) convertView.getTag();
         }
         //set data
-        final MarkTeacherItem markItem = (MarkTeacherItem) mOriginalValues.get(position);
-        vh.markerIv.setBackgroundResource(markItem.sex==1?R.mipmap.teacher_female:R.mipmap.teacher_male);
-        vh.markerRb.setText(markItem.userName);
+        final MarkItem markItem = mDatas.get(position);
+        if (markItem instanceof  MarkTeacherItem){
+            vh.markerIv.setBackgroundResource(((MarkTeacherItem)markItem).sex==1?R.mipmap.teacher_female:R.mipmap.teacher_male);
+            vh.markerRb.setText(((MarkTeacherItem)markItem).userName);
+        }
+        if (markItem instanceof MarkRoomItem){
+            vh.markerIv.setBackgroundResource(R.mipmap.office);
+            vh.markerRb.setText(((MarkRoomItem)markItem).deptName);
+        }
+        if (markItem instanceof MarkClassItem){
+            vh.markerIv.setBackgroundResource(R.mipmap.classroom);
+            vh.markerRb.setText(((MarkClassItem)markItem).deptName);
+        }
         if (markItem.isChecked){
             vh.markerRb.setChecked(true);
         }else {
@@ -92,7 +105,7 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
         vh.markerRb.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(markItem.isChecked) return;
-                for (MarkItem item : mOriginalValues){
+                for (MarkItem item : mDatas){
                     item.isChecked = false;
                 }
                 markItem.isChecked = true;

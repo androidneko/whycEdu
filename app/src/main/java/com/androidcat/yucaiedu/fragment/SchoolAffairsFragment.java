@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -19,19 +20,31 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.androidcat.acnet.consts.OptMsgConst;
+import com.androidcat.acnet.entity.ClassItemList;
+import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkItem;
+import com.androidcat.acnet.entity.MarkRoomItem;
+import com.androidcat.acnet.entity.MarkTeacherItem;
 import com.androidcat.acnet.entity.Room;
+import com.androidcat.acnet.entity.RoomItemList;
+import com.androidcat.acnet.entity.TeacherItemList;
 import com.androidcat.acnet.entity.response.BuildingsResponse;
+import com.androidcat.acnet.entity.response.MarkClassResponse;
+import com.androidcat.acnet.entity.response.MarkRoomResponse;
+import com.androidcat.acnet.entity.response.MarkTeacherResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.manager.ClassesManager;
+import com.androidcat.utilities.LogUtil;
 import com.androidcat.utilities.Utils;
 import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.ClockBuildingRoomAdapter;
 import com.androidcat.yucaiedu.adapter.EastBuildingRoomAdapter;
+import com.androidcat.yucaiedu.adapter.FiltableAdapter;
 import com.androidcat.yucaiedu.adapter.TobeMarkedAdapter;
 import com.androidcat.yucaiedu.adapter.TsBuildingRoomAdapter;
+import com.androidcat.yucaiedu.entity.TeacherItem;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
 import com.anroidcat.acwidgets.FloatBar;
 
@@ -44,6 +57,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class SchoolAffairsFragment extends BaseFragment {
+    private static final String TAG = "SchoolAffairsFragment";
 
     private View eventView;
     private View markView;
@@ -64,8 +78,8 @@ public class SchoolAffairsFragment extends BaseFragment {
     GridView goodGrid;
     GridView badGrid;
 
-    private List<MarkItem> totalItems = new ArrayList<>();
-    private TobeMarkedAdapter totalAdapter;
+    private List<MarkItem> unMarkedItems = new ArrayList<>();
+    private FiltableAdapter totalAdapter;
     private List<MarkItem> goodItems = new ArrayList<>();
     private TobeMarkedAdapter goodAdapter;
     private List<MarkItem> badItems = new ArrayList<>();
@@ -77,6 +91,7 @@ public class SchoolAffairsFragment extends BaseFragment {
 
     private String curMenu;
     private String typeCode;
+    private MarkItem curItem;
     private ClassesManager classesManager;
 
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
@@ -136,15 +151,27 @@ public class SchoolAffairsFragment extends BaseFragment {
                 break;
             case OptMsgConst.GET_SA_LIST_SUCCESS:
                 dismissLoadingDialog();
-                if (msg.arg1 == 0){
-
-                }
                 if (msg.arg1 == 1){
-
+                    parseMarkTeacherItems((MarkTeacherResponse) msg.obj);
                 }
                 if (msg.arg1 == 2){
-
+                    parseMarkOfficeItems((MarkRoomResponse) msg.obj);
                 }
+                if (msg.arg1 == 3){
+                    parseMarkClassItems((MarkClassResponse) msg.obj);
+                }
+                break;
+            case OptMsgConst.SA_MARK_FAIL:
+                dismissLoadingDialog();
+                showToast("提交失败!请确认网络畅通后重试。");
+                break;
+            case OptMsgConst.SA_MARK_START:
+                showProgressDialog("正在打分");
+                break;
+            case OptMsgConst.SA_MARK_SUCCESS:
+                dismissLoadingDialog();
+                showToast("打分成功");
+                updateMarkView();
                 break;
             default:
                 break;
@@ -245,76 +272,27 @@ public class SchoolAffairsFragment extends BaseFragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        showToast("pos:"+item.getTitle());
-        return super.onContextItemSelected(item);
+        //showToast("pos:"+item.getTitle());
+        if (item.getItemId() == 1){
+            curItem.grade = 1;
+        }else {
+            curItem.grade = 0;
+        }
+        saMark();
+        return true;
     }
 
     void initData(){
-        //total
-        /*if (totalItems.size() == 0){
-            for(int i = 1;i < 19;i++){
-                MarkItem room = new MarkItem();
-                room.name = i+"老师";
-                room.gender = new Random().nextInt(10)%2==0?0:1;
-                room.desc = "负责"+i+"号楼"+i+"房间区域";
-                totalItems.add(room);
-            }
-        }
-        if (totalAdapter == null){
-            totalAdapter = new TobeMarkedAdapter(getActivity(),totalItems);
-            totalGrid.setAdapter(totalAdapter);
-        }
-        totalAdapter.onItemCheckedListener = onItemCheckedListener;
-        registerForContextMenu(totalGrid);
-        totalGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                return false;
-            }
-        });
 
-        //good
-        if (goodItems.size() == 0){
-            for(int i = 1;i < 13;i++){
-                MarkItem room = new MarkItem();
-                room.name = i+"老师";
-                room.gender = new Random().nextInt(10)%2==0?0:1;
-                room.desc = "负责"+i+"号楼"+i+"房间区域";
-                goodItems.add(room);
-            }
-        }
-        if (goodAdapter == null){
-            goodAdapter = new TobeMarkedAdapter(getActivity(),goodItems);
-        }
-        goodGrid.setAdapter(goodAdapter);
-        //bad
-        if (badItems.size() == 0){
-            for(int i = 1;i < 3;i++){
-                MarkItem room = new MarkItem();
-                room.name = i+"老师";
-                room.gender = new Random().nextInt(10)%2==0?0:1;
-                room.desc = "负责"+i+"号楼"+i+"房间区域";
-                badItems.add(room);
-            }
-        }
-        if (badAdapter == null){
-            badAdapter = new TobeMarkedAdapter(getActivity(),badItems);
-        }
-        badGrid.setAdapter(badAdapter);*/
     }
 
     public void searchItem(String name){
-//        totalItems.clear();
-//        List<MarkItem> shopClient = DataSupport.where("client_name like ?", "%" + name + "%").find(MarkItem.class);
-//        for (MarkItem shopClient1 : shopClient) {
-//            Map<String, Object> map = new HashMap<String, Object>();
-//            map.put("name", shopClient1.getClient_name());
-//            map.put("number", shopClient1.getClient_phone());
-//            listItems.add(map);
-//        }
-//        personalList.clear();
-//        personalList.addAll(listItems);
-//        adapter.notifyDataSetChanged();
+        LogUtil.d(TAG,"searching name:"+name);
+        if (TextUtils.isEmpty(name)) {
+            totalGrid.clearTextFilter();  // 清楚ListView的过滤
+        } else {
+            totalGrid.setFilterText(name); // 设置ListView的过滤关键词
+        }
     }
 
     /**
@@ -372,7 +350,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             titleTab.setVisibility(View.VISIBLE);
             eventView.setVisibility(View.GONE);
 
-            if(menuId == R.id.afterSchoolRb){
+            if(menuId == R.id.clearRb){
                 queryClassItems(menuId);
             }
             else if(menuId == R.id.workingRb){
@@ -423,5 +401,129 @@ public class SchoolAffairsFragment extends BaseFragment {
         String loginName = AppData.getAppData().user.loginName;
         String token = AppData.getAppData().user.token;
         classesManager.saClassList(loginName,token,AppData.saMenuItmMap.get(checkedId).dictLabel);
+    }
+
+    void saMark(){
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        String type = "";
+        String id = "";
+        if (curItem instanceof MarkTeacherItem){
+            type = "1";
+            id = ((MarkTeacherItem) curItem).userId;
+        }
+        if (curItem instanceof MarkRoomItem){
+            type = "1";
+            id = ((MarkRoomItem) curItem).deptId + "";
+        }
+        if (curItem instanceof MarkClassItem){
+            type = "1";
+            id = ((MarkClassItem) curItem).deptId + "";
+        }
+        classesManager.saMark(loginName,token,curMenu,curItem.grade+"",type,id);
+    }
+
+    void parseMarkTeacherItems(MarkTeacherResponse markTeacherResponse){
+        TeacherItemList teacherItemList = markTeacherResponse.content;
+        unMarkedItems.clear();
+        goodItems.clear();
+        badItems.clear();
+        unMarkedItems.addAll(teacherItemList.users);
+        if (teacherItemList.teacherScore.size() != 0){
+            for(MarkItem item : teacherItemList.teacherScore){
+                if (item.grade == 1){
+                    goodItems.add(item);
+                }else {
+                    badItems.add(item);
+                }
+            }
+        }
+
+        setupView();
+    }
+
+    void parseMarkOfficeItems(MarkRoomResponse markRoomResponse){
+        RoomItemList roomItemList = markRoomResponse.content;
+        unMarkedItems.clear();
+        goodItems.clear();
+        badItems.clear();
+        unMarkedItems.addAll(roomItemList.buildings);
+        if (roomItemList.teacherScore.size() != 0){
+            for(MarkItem item : roomItemList.teacherScore){
+                if (item.grade == 1){
+                    goodItems.add(item);
+                }else {
+                    badItems.add(item);
+                }
+            }
+        }
+
+        setupView();
+    }
+
+    void parseMarkClassItems(MarkClassResponse markClassResponse){
+        ClassItemList classItemList = markClassResponse.content;
+        unMarkedItems.clear();
+        goodItems.clear();
+        badItems.clear();
+        unMarkedItems.addAll(classItemList.classes);
+        if (classItemList.teacherScore.size() != 0){
+            for(MarkItem item : classItemList.teacherScore){
+                if (item.grade == 1){
+                    goodItems.add(item);
+                }else {
+                    badItems.add(item);
+                }
+            }
+        }
+
+        setupView();
+    }
+
+    void setupView(){
+        //unmarked
+        if (totalAdapter == null){
+            totalAdapter = new FiltableAdapter(getActivity(),unMarkedItems);
+            totalAdapter.onItemCheckedListener = onItemCheckedListener;
+            totalGrid.setAdapter(totalAdapter);
+        }else {
+            totalAdapter.notifyDataSetChanged();
+        }
+        registerForContextMenu(totalGrid);
+        totalGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                curItem = (MarkItem) adapterView.getAdapter().getItem(i);
+                return false;
+            }
+        });
+
+        //good
+        if (goodAdapter == null){
+            goodAdapter = new TobeMarkedAdapter(getActivity(),goodItems);
+            goodGrid.setAdapter(goodAdapter);
+        }else {
+            goodAdapter.notifyDataSetChanged();
+        }
+        //bad
+        if (badAdapter == null){
+            badAdapter = new TobeMarkedAdapter(getActivity(),badItems);
+            badGrid.setAdapter(badAdapter);
+        }else {
+            badAdapter.notifyDataSetChanged();
+        }
+    }
+
+    void updateMarkView(){
+        if (curItem == null) return;
+        unMarkedItems.remove(curItem);
+        if (curItem.grade == 1){
+            goodItems.add(curItem);
+        }else {
+            badItems.add(curItem);
+        }
+        totalAdapter.notifyDataSetChanged();
+        goodAdapter.notifyDataSetChanged();
+        badAdapter.notifyDataSetChanged();
     }
 }

@@ -32,7 +32,7 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_GET_SA_LIST = 1011;
 
-    public final static int TYPE_ADD_RECHARGE = 1012;
+    public final static int TYPE_SA_MARK = 1012;
 
     public final static int TYPE_GET_NEWS_LIST = 1013;
 

@@ -83,9 +83,9 @@ public class OptMsgConst {
     public static final int MSG_GATHER_START = 0x1022;
 
     //获取站点列表
-    public static final int MSG_GET_STATION_LIST_SUCCESS = 0x1023;
-    public static final int MSG_GET_STATION_LIST_FAIL = 0x1024;
-    public static final int MSG_GET_STATION_LIST_START = 0x1025;
+    public static final int SA_MARK_SUCCESS = 0x1023;
+    public static final int SA_MARK_FAIL = 0x1024;
+    public static final int SA_MARK_START = 0x1025;
 
     //获取二维码
     public static final int MSG_GET_QR_CODE_SUCCESS = 0x1026;
