@@ -21,6 +21,7 @@ import com.androidcat.acnet.entity.ClassMark;
 import com.androidcat.acnet.entity.MenuItm;
 import com.androidcat.acnet.entity.Room;
 import com.androidcat.acnet.entity.response.BuildingsResponse;
+import com.androidcat.acnet.entity.response.ClassMarkListResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.manager.ClassesManager;
 import com.androidcat.utilities.date.DateUtil;
@@ -104,6 +105,9 @@ public class RegularCheckFragment extends BaseFragment {
     private String curDate;
 
     ClassesManager classesManager;
+    int statisticsTodayA = 0;
+    int statisticsTodayB = 0;
+    int statisticsTodayC = 0;
 
     @Override
     public void handleEventMsg(Message msg) {
@@ -151,7 +155,7 @@ public class RegularCheckFragment extends BaseFragment {
                 break;
             case OptMsgConst.MSG_MARK_RECORD_SUCCESS:
                 dismissLoadingDialog();
-                setupStatistics();
+                setupStatistics((ClassMarkListResponse) msg.obj);
                 break;
             default:
                 break;
@@ -487,7 +491,9 @@ public class RegularCheckFragment extends BaseFragment {
         classesManager.classMarkList(loginName,token,classGradeId,timetable,curDate);
     }
 
-    private void setupStatistics(){
+    private void setupStatistics(ClassMarkListResponse classMarkListResponse){
+        classMarks.clear();
+        classMarks = classMarkListResponse.content;
         classMarkAdapter = new ClassMarkAdapter(getActivity(),classMarks);
         statisticGrid.setAdapter(classMarkAdapter);
         registerForContextMenu(statisticGrid);
