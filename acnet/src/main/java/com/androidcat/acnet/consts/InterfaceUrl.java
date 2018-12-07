@@ -10,7 +10,7 @@ public class InterfaceUrl {
 
     public static final String URL_CONTROLLER = "/api/v1/";
 
-    public static final String MARK_RECORD_URL = BASE_URL + "/api/getStatistics";
+    public static final String MARK_RECORD_URL = BASE_URL + "/app/getStatistics";
 
     public static final String POST_MARK_URL = BASE_URL + "/app/saveClassesScore";
 
