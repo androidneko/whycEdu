@@ -63,13 +63,13 @@ public class ClockBuildingRoomAdapter extends BaseAdapter {
         }
         //set data
         final Room room = rooms.get(position);
-        if ("空闲".equals(room.deptName)){
+        if (room.classesList==null || room.classesList.size()==0){
             room.isEmpty = true;
             vh.classTv.setClickable(false);
         }else {
             vh.classTv.setClickable(true);
         }
-        vh.classTv.setText(room.isEmpty?"":room.deptName);
+        vh.classTv.setText("空闲".equals(room.deptName)?"":room.deptName);
         if (room.isChecked){
             vh.classTv.setChecked(true);
         }else {

@@ -36,5 +36,5 @@ public class InterfaceCodeConst {
 
     public final static int TYPE_SA_HISTORY = 1013;
 
-    public final static int TYPE_GATHER = 1014;
+    public final static int QUERY_EVENT = 1014;
 }

@@ -25,7 +25,7 @@ public class InterfaceUrl {
     public static final String SA_HISTORY_URL = BASE_URL + "/app/searchSchoolLog";
 
     public static final String USERINFO_URL = BASE_URL + "/api/v1/user/findByUserId";
-    public static final String GATHER_URL = BASE_URL + "/api/v1/saveOrderInfo";
+    public static final String QUERY_EVENT_URL = BASE_URL + "/api/v1/saveOrderInfo";
 
 
     public static String getUrl(int code){
@@ -52,8 +52,8 @@ public class InterfaceUrl {
                 return SA_MARK_URL;
             case InterfaceCodeConst.TYPE_SA_HISTORY:
                 return SA_HISTORY_URL;
-            case InterfaceCodeConst.TYPE_GATHER:
-                return GATHER_URL;
+            case InterfaceCodeConst.QUERY_EVENT:
+                return QUERY_EVENT_URL;
             case InterfaceCodeConst.TYPE_GET_USERINFO:
                 return USERINFO_URL;
         }

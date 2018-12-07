@@ -99,41 +99,4 @@ public class OrderPayManager extends BaseManager {
             }
         });
     }
-
-    public void gather(String userName,String userId,String authority,String ciphertext,String companyId,String companyName,String pointId,String amount, String qrcode){
-        GatherRequest request = new GatherRequest();
-        request.businessUserName = (userName);
-        request.businessUserId = (userId);
-        request.authority = authority;
-        request.ciphertext = ciphertext;
-        request.companyId = companyId;
-        request.companyName = companyName;
-        request.pointId = pointId;
-        request.amountMoney = amount;
-        request.cipherqrcode = qrcode;
-        post(InterfaceCodeConst.TYPE_GATHER, getPostJson(request), new EntityResponseHandler<StringContentResponse>() {
-            @Override
-            public void onStart(int code) {
-                Message msg = new Message();
-                msg.what = OptMsgConst.MSG_GATHER_START;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onFailure(int statusCode, String error_msg) {
-                Message msg = new Message();
-                msg.obj = error_msg;
-                msg.what = OptMsgConst.MSG_GATHER_FAIL;
-                handler.sendMessage(msg);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, StringContentResponse response) {
-                Message msg = new Message();
-                msg.obj = response;
-                msg.what = OptMsgConst.MSG_GATHER_SUCCESS;
-                handler.sendMessage(msg);
-            }
-        });
-    }
 }

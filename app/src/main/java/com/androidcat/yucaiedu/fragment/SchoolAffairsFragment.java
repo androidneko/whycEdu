@@ -46,6 +46,8 @@ import com.androidcat.utilities.LogUtil;
 import com.androidcat.utilities.Utils;
 import com.androidcat.utilities.date.DateUtil;
 import com.androidcat.utilities.listener.OnSingleClickListener;
+import com.androidcat.utilities.persistence.SPConsts;
+import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.ClockBuildingRoomAdapter;
@@ -70,6 +72,7 @@ import java.util.Random;
 
 public class SchoolAffairsFragment extends BaseFragment {
     private static final String TAG = "SchoolAffairsFragment";
+    private static String HEAD = "";
 
     private View saReportsView;
     private View saMarkView;
@@ -410,6 +413,7 @@ public class SchoolAffairsFragment extends BaseFragment {
         curDate = sdf.format(new Date());
         dateTv.setText(DateUtil.getYMDW(new Date()));
         dateTv.setClickable(false);
+        HEAD = curDate;
     }
 
     public void searchItem(String name){
@@ -826,4 +830,5 @@ public class SchoolAffairsFragment extends BaseFragment {
         badTeacherOff.setText(officeBad.toString());
         memo.setText(remarks.toString());
     }
+
 }

@@ -1,6 +1,7 @@
 package com.androidcat.acnet.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Room implements Serializable{
     public String parentId;
@@ -10,4 +11,5 @@ public class Room implements Serializable{
     public boolean isChecked;
     public String desc;
     public int orderNum;
+    public List<Classroom> classesList;
 }

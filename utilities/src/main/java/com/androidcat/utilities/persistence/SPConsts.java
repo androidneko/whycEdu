@@ -15,4 +15,13 @@ public class SPConsts {
     public static final String VERSION_CODE = "versionCode";
 
     public static final String CONV = "pas_conv";
+
+    public static final String COMMUNICATION = "communication";
+    public static final String DEVELOPMENT = "development";
+    public static final String TEACHING = "teaching";
+    public static final String TEACHACTIVITIES = "teachActivities";
+    public static final String STUDYACTIVITIES = "studyActivities";
+    public static final String ACCIDENT = "accident";
+    public static final String LEAVING = "leaving";
+    public static final String MEMO = "memo";
 }

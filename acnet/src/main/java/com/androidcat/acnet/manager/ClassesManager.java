@@ -16,6 +16,7 @@ import com.androidcat.acnet.entity.request.LoginRequest;
 import com.androidcat.acnet.entity.request.MarkItemRequest;
 import com.androidcat.acnet.entity.request.MenuRcRequest;
 import com.androidcat.acnet.entity.request.PostMarkRequest;
+import com.androidcat.acnet.entity.request.QueryEventRequest;
 import com.androidcat.acnet.entity.request.QueryTobeMarkedListRequest;
 import com.androidcat.acnet.entity.request.RegisterRequest;
 import com.androidcat.acnet.entity.request.ResetPasswordRequest;
@@ -436,6 +437,36 @@ public class ClassesManager extends BaseManager {
                 Message msg = new Message();
                 msg.obj = response;
                 msg.what = OptMsgConst.MSG_SA_HISTORY_SUCCESS;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    public void queryEvent(String loginName,String token,String date,String typeCode){
+        QueryEventRequest request = new QueryEventRequest();
+        request.loginName = loginName;
+        request.sessionId = token;
+        request.dateStr = date;
+        request.typeCode = typeCode;
+        post(InterfaceCodeConst.QUERY_EVENT, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+            @Override
+            public void onStart(int code) {
+                handler.sendEmptyMessage(OptMsgConst.QUERY_EVENT_START);
+            }
+
+            @Override
+            public void onFailure(int statusCode, String error_msg) {
+                Message msg = new Message();
+                msg.obj = error_msg;
+                msg.what = OptMsgConst.QUERY_EVENT_FAIL;
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, BaseResponse response) {
+                Message msg = new Message();
+                msg.obj = response;
+                msg.what = OptMsgConst.QUERY_EVENT_SUCCESS;
                 handler.sendMessage(msg);
             }
         });

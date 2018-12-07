@@ -98,9 +98,9 @@ public class OptMsgConst {
     public static final int MSG_ADD_RECHARGE_START = 0x1031;
 
     //新闻列表
-    public static final int MSG_GET_NEWS_LIST_SUCCESS = 0x1032;
-    public static final int MSG_GET_NEWS_LIST_FAIL = 0x1033;
-    public static final int MSG_GET_NEWS_LIST_START = 0x1034;
+    public static final int QUERY_EVENT_SUCCESS = 0x1032;
+    public static final int QUERY_EVENT_FAIL = 0x1033;
+    public static final int QUERY_EVENT_START = 0x1034;
 
     //订单列表
     public static final int MSG_GET_ORDER_LIST_SUCCESS = 0x1035;
