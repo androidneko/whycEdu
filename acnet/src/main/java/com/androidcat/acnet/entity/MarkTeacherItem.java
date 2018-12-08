@@ -1,7 +1,7 @@
 package com.androidcat.acnet.entity;
 
-public class MarkTeacherItem extends MarkItem{
-    public String userId;
-    public int sex = 1;
+public class MarkTeacherItem extends MarkItem {
     public String userName;
+    public int userId;
+    public int sex;
 }

@@ -6,7 +6,7 @@ public class ClassMark {
     public String classesId;
     public String classesName;
     public int classesAchievement;
-    public String statisticsTodayA;
-    public String statisticsTodayB;
-    public String statisticsTodayC;
+    public int statisticsTodayA;
+    public int statisticsTodayB;
+    public int statisticsTodayC;
 }

@@ -14,10 +14,7 @@ import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkItem;
 import com.androidcat.acnet.entity.MarkRoomItem;
 import com.androidcat.acnet.entity.MarkTeacherItem;
-import com.androidcat.acnet.entity.User;
-import com.androidcat.acnet.entity.response.MarkClassResponse;
 import com.androidcat.yucaiedu.R;
-import com.androidcat.yucaiedu.entity.TeacherItem;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
 
 import java.util.ArrayList;
@@ -32,7 +29,6 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
     private List<MarkItem> mDatas;
     public OnItemCheckedListener onItemCheckedListener;
     private LayoutInflater mInflater;
-
     //过滤相关
     /**
      * This lock is also used by the filter
@@ -86,7 +82,7 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
         }
         //set data
         final MarkItem markItem = mDatas.get(position);
-        if (markItem instanceof  MarkTeacherItem){
+        if (markItem instanceof MarkTeacherItem){
             vh.markerIv.setBackgroundResource(((MarkTeacherItem)markItem).sex==1?R.mipmap.teacher_female:R.mipmap.teacher_male);
             vh.markerRb.setText(((MarkTeacherItem)markItem).userName);
         }

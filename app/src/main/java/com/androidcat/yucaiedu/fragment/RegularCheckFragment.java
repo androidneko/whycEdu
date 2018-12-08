@@ -145,6 +145,9 @@ public class RegularCheckFragment extends BaseFragment {
             case OptMsgConst.POST_MARK_SUCCESS:
                 dismissLoadingDialog();
                 showToast("打分成功");
+                if (viewRg.getCheckedRadioButtonId() == R.id.statisticRb){
+                    loadCurrStatistics();
+                }
                 break;
             case OptMsgConst.MSG_MARK_RECORD_FAIL:
                 dismissLoadingDialog();
@@ -433,15 +436,21 @@ public class RegularCheckFragment extends BaseFragment {
         if(viewRg.getCheckedRadioButtonId() == R.id.historyRb){
             return;
         }
-        menu.add(0, 1, 0, "A");
-        menu.add(0, 2, 0, "B");
-        menu.add(0, 3, 0, "C");
+        menu.add(0, 3, 1, "A");
+        menu.add(0, 2, 2, "B");
+        menu.add(0, 1, 3, "C");
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        showToast("pos:"+item.getTitle());
-        return super.onContextItemSelected(item);
+        //showToast("pos:"+item.getTitle());
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        String mark = item.getItemId()+"";
+        classesManager.postMark(loginName,token,date,curClass.roomId,curMenu,mark);
+        return true;
     }
 
     private void backgroundAlpha(float bgAlpha) {
@@ -480,6 +489,7 @@ public class RegularCheckFragment extends BaseFragment {
         String timetable = curMenu;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         curDate = sdf.format(new Date());
+        dateTv.setText(DateUtil.getYMDW(new Date()));
         classesManager.classMarkList(loginName,token,classGradeId,timetable,curDate);
     }
 
@@ -494,6 +504,11 @@ public class RegularCheckFragment extends BaseFragment {
     private void setupStatistics(ClassMarkListResponse classMarkListResponse){
         classMarks.clear();
         classMarks = classMarkListResponse.content;
+        if (classMarks!=null && classMarks.size()>0){
+            statisticsTodayA = classMarks.get(0).statisticsTodayA;
+            statisticsTodayB = classMarks.get(0).statisticsTodayB;
+            statisticsTodayC = classMarks.get(0).statisticsTodayC;
+        }
         classMarkAdapter = new ClassMarkAdapter(getActivity(),classMarks);
         statisticGrid.setAdapter(classMarkAdapter);
         registerForContextMenu(statisticGrid);
@@ -508,6 +523,10 @@ public class RegularCheckFragment extends BaseFragment {
                 return false;
             }
         });
+
+        setData(chartA,statisticsTodayA,(statisticsTodayB+statisticsTodayC));
+        setData(chartB,statisticsTodayB,(statisticsTodayA+statisticsTodayC));
+        setData(chartC,statisticsTodayC,(statisticsTodayB+statisticsTodayA));
     }
 
     void switchBuilding(){
@@ -553,9 +572,6 @@ public class RegularCheckFragment extends BaseFragment {
         setChartStyle(chartA);
         setChartStyle(chartB);
         setChartStyle(chartC);
-        setData(chartA,30);
-        setData(chartB,40);
-        setData(chartC,30);
     }
 
     private void animateCharts(){
@@ -606,13 +622,23 @@ public class RegularCheckFragment extends BaseFragment {
         chart.setEntryLabelColor(Color.WHITE);
     }
 
-    private void setData(PieChart chart,float range) {
+    private void setData(PieChart chart,int value,int other) {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        entries.add(new PieEntry(range,"A"));
-        entries.add(new PieEntry(100-range,"其他"));
+        String label = "";
+        if (chart == chartA){
+            label = "A";
+        }if (chart == chartB){
+            label = "B";
+        }
+        if (chart == chartC){
+            label = "C";
+        }
+
+        entries.add(new PieEntry(value,label));
+        entries.add(new PieEntry(other,"其他"));
         PieDataSet dataSet = new PieDataSet(entries, "");
 
         dataSet.setDrawIcons(false);
@@ -644,6 +670,7 @@ public class RegularCheckFragment extends BaseFragment {
         // undo all highlights
         //chart.highlightValues({30});
         chart.invalidate();
+        chart.animateY(2000);
     }
 
     void clearMark(){

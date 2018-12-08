@@ -1,6 +1,6 @@
 package com.androidcat.acnet.entity;
 
-public class MarkRoomItem extends MarkItem{
-    public String deptName;
+public class MarkRoomItem extends MarkItem {
     public int deptId;
+    public String deptName;
 }

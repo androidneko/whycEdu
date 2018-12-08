@@ -33,6 +33,7 @@ import com.androidcat.acnet.entity.response.MarkClassResponse;
 import com.androidcat.acnet.entity.response.MarkRoomResponse;
 import com.androidcat.acnet.entity.response.MarkTeacherResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
+import com.androidcat.acnet.entity.response.QueryEventResponse;
 import com.androidcat.acnet.entity.response.RegistResponse;
 import com.androidcat.acnet.entity.response.SaHistoryResponse;
 import com.androidcat.acnet.entity.response.ScoreListResponse;
@@ -448,7 +449,7 @@ public class ClassesManager extends BaseManager {
         request.sessionId = token;
         request.dateStr = date;
         request.typeCode = typeCode;
-        post(InterfaceCodeConst.QUERY_EVENT, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+        post(InterfaceCodeConst.QUERY_EVENT, getPostJson(request), new EntityResponseHandler<QueryEventResponse>() {
             @Override
             public void onStart(int code) {
                 handler.sendEmptyMessage(OptMsgConst.QUERY_EVENT_START);
@@ -463,7 +464,7 @@ public class ClassesManager extends BaseManager {
             }
 
             @Override
-            public void onSuccess(int statusCode, BaseResponse response) {
+            public void onSuccess(int statusCode, QueryEventResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
                 msg.what = OptMsgConst.QUERY_EVENT_SUCCESS;

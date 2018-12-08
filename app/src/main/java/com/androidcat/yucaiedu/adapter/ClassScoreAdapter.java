@@ -56,7 +56,7 @@ public class ClassScoreAdapter extends BaseAdapter {
         //set data
         final ScoreEntity scoreEntity = scoreEntities.get(position);
         vh.classTv.setText(scoreEntity.classesName);
-        vh.scoreTv.setText(""+scoreEntity.score);
+        vh.scoreTv.setText(""+scoreEntity.count);
         vh.beanTv.setText("x"+scoreEntity.doumei);
         vh.melonTv.setText("x"+scoreEntity.guage);
         vh.scoreLeftTv.setText(""+scoreEntity.shengyu);

@@ -164,24 +164,32 @@ public class AppData {
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "教师执勤";
                 menuItm.parent = "安全管理";
+                menuItm.desc = "考评标准:1按时到岗 2佩戴袖章 3巡查提醒";
+                menuItm.memo = "教师成员列表";
                 saMenuItmMap.put(R.id.dutyRb,menuItm);
             }
             if (i==3){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "护校队";
                 menuItm.parent = "安全管理";
+                menuItm.desc = "考评标准:1按时到岗 2佩戴袖章 3巡查提醒";
+                menuItm.memo = "教师成员列表";
                 saMenuItmMap.put(R.id.protectRb,menuItm);
             }
             if (i==4){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "特长训练";
                 menuItm.parent = "安全管理";
+                menuItm.desc = "考评标准:1准时训练 2组织有序";
+                menuItm.memo = "教师成员列表";
                 saMenuItmMap.put(R.id.specialTrainingRb,menuItm);
             }
             if (i==5){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "门禁安全";
                 menuItm.parent = "安全管理";
+                menuItm.desc = "考评标准:1电梯间随手关门 2学生离校出具班主任签条 3不通知家长到学校送学具等物品";
+                menuItm.memo = "教师成员列表";
                 saMenuItmMap.put(R.id.safetyRb,menuItm);
             }
             if (i==6){
@@ -194,6 +202,8 @@ public class AppData {
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "放学清场";
                 menuItm.parent = "安全管理";
+                menuItm.desc = "";
+                menuItm.memo = "班级列表";
                 saMenuItmMap.put(R.id.clearRb,menuItm);
             }
             if (i==8){
@@ -206,12 +216,16 @@ public class AppData {
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "室外保洁";
                 menuItm.parent = "卫生保洁";
+                menuItm.memo = "保洁员列表";
+                menuItm.desc = "考评标准:1准时训练 2组织有序";
                 saMenuItmMap.put(R.id.outsideRb,menuItm);
             }
             if (i==10){
                 MenuItm menuItm = new MenuItm();
                 menuItm.dictLabel = "文明办公";
                 menuItm.parent = "卫生保洁";
+                menuItm.desc = "考评标准:1准时训练 2组织有序";
+                menuItm.memo = "办公室列表";
                 saMenuItmMap.put(R.id.workingRb,menuItm);
             }
             if (i==11){

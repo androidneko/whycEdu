@@ -6,13 +6,13 @@ import java.io.Serializable;
 
 public class ScoreEntity implements Serializable,Comparable<ScoreEntity>{
     public String classesName;
-    public int score;
+    public int count;
     public int doumei;
     public int guage;
     public int shengyu;
 
     @Override
     public int compareTo(@NonNull ScoreEntity scoreEntity) {
-        return this.score - scoreEntity.score;
+        return this.count - scoreEntity.count;
     }
 }

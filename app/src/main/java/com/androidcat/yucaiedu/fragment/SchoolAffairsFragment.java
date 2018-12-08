@@ -26,19 +26,16 @@ import android.widget.TextView;
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.ClassItemList;
 import com.androidcat.acnet.entity.EventLogItem;
-import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkHistoryItem;
 import com.androidcat.acnet.entity.MarkItem;
 import com.androidcat.acnet.entity.MarkRoomItem;
 import com.androidcat.acnet.entity.MarkTeacherItem;
-import com.androidcat.acnet.entity.Room;
 import com.androidcat.acnet.entity.RoomItemList;
 import com.androidcat.acnet.entity.TeacherItemList;
-import com.androidcat.acnet.entity.response.BuildingsResponse;
 import com.androidcat.acnet.entity.response.MarkClassResponse;
 import com.androidcat.acnet.entity.response.MarkRoomResponse;
 import com.androidcat.acnet.entity.response.MarkTeacherResponse;
-import com.androidcat.acnet.entity.response.MenuResponse;
+import com.androidcat.acnet.entity.response.QueryEventResponse;
 import com.androidcat.acnet.entity.response.SaHistoryMenuList;
 import com.androidcat.acnet.entity.response.SaHistoryResponse;
 import com.androidcat.acnet.manager.ClassesManager;
@@ -46,29 +43,19 @@ import com.androidcat.utilities.LogUtil;
 import com.androidcat.utilities.Utils;
 import com.androidcat.utilities.date.DateUtil;
 import com.androidcat.utilities.listener.OnSingleClickListener;
-import com.androidcat.utilities.persistence.SPConsts;
-import com.androidcat.utilities.persistence.SharePreferencesUtil;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
-import com.androidcat.yucaiedu.adapter.ClockBuildingRoomAdapter;
-import com.androidcat.yucaiedu.adapter.EastBuildingRoomAdapter;
 import com.androidcat.yucaiedu.adapter.FiltableAdapter;
 import com.androidcat.yucaiedu.adapter.TobeMarkedAdapter;
-import com.androidcat.yucaiedu.adapter.TsBuildingRoomAdapter;
-import com.androidcat.yucaiedu.entity.TeacherItem;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
 import com.anroidcat.acwidgets.FloatBar;
-import com.bigkoo.pickerview.OptionsPopupWindow;
 import com.bigkoo.pickerview.TimePopupWindow;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class SchoolAffairsFragment extends BaseFragment {
     private static final String TAG = "SchoolAffairsFragment";
@@ -92,6 +79,7 @@ public class SchoolAffairsFragment extends BaseFragment {
     private TextView editSubTitleTv;
     private TextView itemNameTv;
     private TextView itemDescTv;
+    private TextView listTitleTv;
 
     TextView communication;
     TextView development;
@@ -163,8 +151,13 @@ public class SchoolAffairsFragment extends BaseFragment {
     OnItemCheckedListener onItemCheckedListener = new OnItemCheckedListener() {
         @Override
         public void onItemChecked(MarkItem item) {
-            //itemNameTv.setText(item.name);
-            //itemDescTv.setText(item.desc);
+            if (item instanceof MarkTeacherItem){
+                itemNameTv.setText(((MarkTeacherItem) item).userName);
+            }
+            if (item instanceof MarkRoomItem){
+                itemNameTv.setText(((MarkRoomItem) item).deptName);
+            }
+            itemDescTv.setText(item.remark);
         }
     };
 
@@ -231,7 +224,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             case OptMsgConst.SA_MARK_SUCCESS:
                 dismissLoadingDialog();
                 showToast("打分成功");
-                updateMarkView();
+                queryMarkItems(menuSa.getCheckedRadioButtonId());
                 break;
             case OptMsgConst.MSG_SA_HISTORY_FAIL:
                 dismissLoadingDialog();
@@ -243,6 +236,17 @@ public class SchoolAffairsFragment extends BaseFragment {
             case OptMsgConst.MSG_SA_HISTORY_SUCCESS:
                 dismissLoadingDialog();
                 setupReportView((SaHistoryResponse) msg.obj);
+                break;
+            case OptMsgConst.QUERY_EVENT_FAIL:
+                dismissLoadingDialog();
+                showToast("查询日志失败!请确认网络畅通后重试。");
+                break;
+            case OptMsgConst.QUERY_EVENT_START:
+                showProgressDialog("正在查询");
+                break;
+            case OptMsgConst.QUERY_EVENT_SUCCESS:
+                dismissLoadingDialog();
+                setupEventView((QueryEventResponse) msg.obj);
                 break;
             default:
                 break;
@@ -259,6 +263,22 @@ public class SchoolAffairsFragment extends BaseFragment {
             public void OnItemClick(View view, int index, Object mT) {
                 typeCode = (String) mT;
                 eventEt.setText("");
+                if (index == 0){
+                    typeCode = "学术交流";
+                }
+                if (index == 1){
+                    typeCode = "课程开发";
+                }
+                if (index == 2){
+                    typeCode = "课堂教学";
+                }
+                if (index == 3){
+                    typeCode = "教研活动";
+                }
+                if (index == 4){
+                    typeCode = "学生活动";
+                }
+                queryEvent();
             }
         });
 
@@ -298,6 +318,7 @@ public class SchoolAffairsFragment extends BaseFragment {
         itemDescTv = mRootView.findViewById(R.id.itemDescTv);
         searchEt = mRootView.findViewById(R.id.searchEt);
         dateTv = mRootView.findViewById(R.id.dateTv);
+        listTitleTv = mRootView.findViewById(R.id.listTitleTv);
 
         communication = mRootView.findViewById(R.id.communication);
         development = mRootView.findViewById(R.id.development);
@@ -397,6 +418,14 @@ public class SchoolAffairsFragment extends BaseFragment {
         return true;
     }
 
+    @Override
+    public void iOnResume() {
+        super.iOnResume();
+        if(Utils.isNull(eventEt.getText().toString()) && menuSa.getCheckedRadioButtonId() == R.id.eventRb){
+            queryEvent();
+        }
+    }
+
     /**
      * 自定义picker控件事件
      */
@@ -478,22 +507,51 @@ public class SchoolAffairsFragment extends BaseFragment {
             titleTab.setVisibility(View.GONE);
             mFloatBar.setVisibility(View.GONE);
             eventView.setVisibility(View.VISIBLE);
+            if (menuId == R.id.accidentRb){
+                typeCode = "意外伤害";
+            }
+            else if (menuId == R.id.memoRb){
+                typeCode = "备注";
+            }
+            else if (menuId == R.id.leavingRb){
+                typeCode = "离校巡查";
+            }
+            queryEvent();
         }else {
             mFloatBar.setVisibility(View.GONE);
             markView.setVisibility(View.VISIBLE);
             titleTab.setVisibility(View.VISIBLE);
             eventView.setVisibility(View.GONE);
-
-            if(menuId == R.id.clearRb){
-                queryClassItems(menuId);
-            }
-            else if(menuId == R.id.workingRb){
-                queryRoomItems(menuId);
-            }
-            else {
-                queryTeacherItems(menuId);
-            }
+            viewTitleTv.setText(AppData.saMenuItmMap.get(menuId).dictLabel);
+            viewSubTitleTv.setText(AppData.saMenuItmMap.get(menuId).desc);
+            listTitleTv.setText(AppData.saMenuItmMap.get(menuId).memo);
+            queryMarkItems(menuId);
         }
+    }
+
+    void queryMarkItems(int menuId){
+        if(menuId == R.id.clearRb){
+            queryClassItems(menuId);
+        }
+        else if(menuId == R.id.workingRb){
+            queryRoomItems(menuId);
+        }
+        else {
+            queryTeacherItems(menuId);
+        }
+    }
+
+    void queryEvent(){
+        String loginName = AppData.getAppData().user.loginName;
+        String token = AppData.getAppData().user.token;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        classesManager.queryEvent(loginName,token,date,typeCode);
+    }
+
+    void setupEventView(QueryEventResponse eventResponse){
+        eventEt.setText("");
+        eventEt.setText(eventResponse.content.msg);
     }
 
     void postEventMsg(){
@@ -548,18 +606,13 @@ public class SchoolAffairsFragment extends BaseFragment {
         String commName = "";
         if (curItem instanceof MarkTeacherItem){
             type = "1";
-            id = ((MarkTeacherItem) curItem).userId;
+            id = ((MarkTeacherItem) curItem).userId+"";
             commName = ((MarkTeacherItem) curItem).userName;
         }
         if (curItem instanceof MarkRoomItem){
             type = "1";
             id = ((MarkRoomItem) curItem).deptId + "";
             commName = ((MarkRoomItem) curItem).deptName;
-        }
-        if (curItem instanceof MarkClassItem){
-            type = "1";
-            id = ((MarkClassItem) curItem).deptId + "";
-            commName = ((MarkClassItem) curItem).deptName;
         }
         classesManager.saMark(loginName,token,curMenu,curItem.grade+"",type,id,commName);
     }
@@ -636,19 +689,27 @@ public class SchoolAffairsFragment extends BaseFragment {
         });
 
         //good
-        if (goodAdapter == null){
-            goodAdapter = new TobeMarkedAdapter(getActivity(),goodItems);
-            goodGrid.setAdapter(goodAdapter);
-        }else {
-            goodAdapter.notifyDataSetChanged();
-        }
+        goodAdapter = new TobeMarkedAdapter(getActivity(),goodItems);
+        goodGrid.setAdapter(goodAdapter);
+        registerForContextMenu(goodGrid);
+        goodGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                curItem = (MarkItem) adapterView.getAdapter().getItem(i);
+                return false;
+            }
+        });
         //bad
-        if (badAdapter == null){
-            badAdapter = new TobeMarkedAdapter(getActivity(),badItems);
-            badGrid.setAdapter(badAdapter);
-        }else {
-            badAdapter.notifyDataSetChanged();
-        }
+        badAdapter = new TobeMarkedAdapter(getActivity(),badItems);
+        badGrid.setAdapter(badAdapter);
+        registerForContextMenu(badGrid);
+        badGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                curItem = (MarkItem) adapterView.getAdapter().getItem(i);
+                return false;
+            }
+        });
     }
 
     void updateMarkView(){

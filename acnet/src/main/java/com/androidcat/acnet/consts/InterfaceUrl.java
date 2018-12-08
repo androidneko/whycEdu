@@ -25,7 +25,7 @@ public class InterfaceUrl {
     public static final String SA_HISTORY_URL = BASE_URL + "/app/searchSchoolLog";
 
     public static final String USERINFO_URL = BASE_URL + "/api/v1/user/findByUserId";
-    public static final String QUERY_EVENT_URL = BASE_URL + "/api/v1/saveOrderInfo";
+    public static final String QUERY_EVENT_URL = BASE_URL + "/app/getMemorabilia";
 
 
     public static String getUrl(int code){
