@@ -26,12 +26,16 @@ import android.widget.TextView;
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.ClassItemList;
 import com.androidcat.acnet.entity.EventLogItem;
+import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkHistoryItem;
 import com.androidcat.acnet.entity.MarkItem;
 import com.androidcat.acnet.entity.MarkRoomItem;
 import com.androidcat.acnet.entity.MarkTeacherItem;
 import com.androidcat.acnet.entity.RoomItemList;
 import com.androidcat.acnet.entity.TeacherItemList;
+import com.androidcat.acnet.entity.UnmarkClassItem;
+import com.androidcat.acnet.entity.UnmarkRoomItem;
+import com.androidcat.acnet.entity.UnmarkTeacherItem;
 import com.androidcat.acnet.entity.response.MarkClassResponse;
 import com.androidcat.acnet.entity.response.MarkRoomResponse;
 import com.androidcat.acnet.entity.response.MarkTeacherResponse;
@@ -121,8 +125,11 @@ public class SchoolAffairsFragment extends BaseFragment {
     private String curDate;
     private String curMenu;
     private String typeCode = "学术交流";
+    private int floatBarIndex = 0;
     private MarkItem curItem;
     private ClassesManager classesManager;
+
+
 
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
@@ -151,11 +158,14 @@ public class SchoolAffairsFragment extends BaseFragment {
     OnItemCheckedListener onItemCheckedListener = new OnItemCheckedListener() {
         @Override
         public void onItemChecked(MarkItem item) {
-            if (item instanceof MarkTeacherItem){
-                itemNameTv.setText(((MarkTeacherItem) item).userName);
+            if (item instanceof UnmarkTeacherItem){
+                itemNameTv.setText(((UnmarkTeacherItem) item).userName);
             }
-            if (item instanceof MarkRoomItem){
-                itemNameTv.setText(((MarkRoomItem) item).deptName);
+            if (item instanceof UnmarkRoomItem){
+                itemNameTv.setText(((UnmarkRoomItem) item).deptName);
+            }
+            if (item instanceof UnmarkClassItem){
+                itemNameTv.setText(((UnmarkClassItem) item).deptName);
             }
             itemDescTv.setText(item.remark);
         }
@@ -224,6 +234,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             case OptMsgConst.SA_MARK_SUCCESS:
                 dismissLoadingDialog();
                 showToast("打分成功");
+                searchEt.setText("");
                 queryMarkItems(menuSa.getCheckedRadioButtonId());
                 break;
             case OptMsgConst.MSG_SA_HISTORY_FAIL:
@@ -262,22 +273,8 @@ public class SchoolAffairsFragment extends BaseFragment {
             @Override
             public void OnItemClick(View view, int index, Object mT) {
                 typeCode = (String) mT;
+                floatBarIndex = index;
                 eventEt.setText("");
-                if (index == 0){
-                    typeCode = "学术交流";
-                }
-                if (index == 1){
-                    typeCode = "课程开发";
-                }
-                if (index == 2){
-                    typeCode = "课堂教学";
-                }
-                if (index == 3){
-                    typeCode = "教研活动";
-                }
-                if (index == 4){
-                    typeCode = "学生活动";
-                }
                 queryEvent();
             }
         });
@@ -414,6 +411,7 @@ public class SchoolAffairsFragment extends BaseFragment {
         }else {
             curItem.grade = 0;
         }
+        searchEt.setText("");
         saMark();
         return true;
     }
@@ -500,6 +498,8 @@ public class SchoolAffairsFragment extends BaseFragment {
             titleTab.setVisibility(View.GONE);
             eventView.setVisibility(View.VISIBLE);
             mFloatBar.setVisibility(View.VISIBLE);
+            typeCode = AppData.eventMenuMap.get(floatBarIndex);
+            queryEvent();
         }else if( menuId == R.id.accidentRb || menuId == R.id.memoRb || menuId == R.id.leavingRb){
             eventEt.setText("");
             editSubTitleTv.setVisibility(View.GONE);
@@ -525,6 +525,8 @@ public class SchoolAffairsFragment extends BaseFragment {
             viewTitleTv.setText(AppData.saMenuItmMap.get(menuId).dictLabel);
             viewSubTitleTv.setText(AppData.saMenuItmMap.get(menuId).desc);
             listTitleTv.setText(AppData.saMenuItmMap.get(menuId).memo);
+            itemNameTv.setText("");
+            itemDescTv.setText("");
             queryMarkItems(menuId);
         }
     }
@@ -551,7 +553,7 @@ public class SchoolAffairsFragment extends BaseFragment {
 
     void setupEventView(QueryEventResponse eventResponse){
         eventEt.setText("");
-        eventEt.setText(eventResponse.content.msg);
+        eventEt.setText(eventResponse.content.memContent);
     }
 
     void postEventMsg(){
@@ -606,13 +608,33 @@ public class SchoolAffairsFragment extends BaseFragment {
         String commName = "";
         if (curItem instanceof MarkTeacherItem){
             type = "1";
-            id = ((MarkTeacherItem) curItem).userId+"";
-            commName = ((MarkTeacherItem) curItem).userName;
+            id = ((MarkTeacherItem) curItem).teacherId+"";
+            commName = ((MarkTeacherItem) curItem).teacherName;
+        }
+        if (curItem instanceof UnmarkTeacherItem){
+            type = "1";
+            id = ((UnmarkTeacherItem) curItem).userId+"";
+            commName = ((UnmarkTeacherItem) curItem).userName;
+        }
+        if (curItem instanceof UnmarkRoomItem){
+            type = "2";
+            id = ((UnmarkRoomItem) curItem).deptId + "";
+            commName = ((UnmarkRoomItem) curItem).deptName;
         }
         if (curItem instanceof MarkRoomItem){
-            type = "1";
-            id = ((MarkRoomItem) curItem).deptId + "";
-            commName = ((MarkRoomItem) curItem).deptName;
+            type = "2";
+            id = ((MarkRoomItem) curItem).teacherId + "";
+            commName = ((MarkRoomItem) curItem).teacherName;
+        }
+        if (curItem instanceof UnmarkClassItem){
+            type = "3";
+            id = ((UnmarkClassItem) curItem).deptId + "";
+            commName = ((UnmarkClassItem) curItem).deptName;
+        }
+        if (curItem instanceof MarkClassItem){
+            type = "3";
+            id = ((MarkRoomItem) curItem).teacherId + "";
+            commName = ((MarkRoomItem) curItem).teacherName;
         }
         classesManager.saMark(loginName,token,curMenu,curItem.grade+"",type,id,commName);
     }

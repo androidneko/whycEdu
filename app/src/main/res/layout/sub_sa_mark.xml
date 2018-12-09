@@ -164,7 +164,7 @@
                 android:id="@+id/itemNameTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="李老师"
+                android:text=""
                 android:textSize="17sp"
                 android:textColor="@color/text_black"
                 android:background="@color/gray_item"/>
@@ -172,7 +172,7 @@
                 android:id="@+id/itemDescTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="执勤区域:教学中心5楼"
+                android:text=""
                 android:textSize="13sp"
                 android:textColor="@color/text_black2"
                 android:background="@color/gray_item"/>

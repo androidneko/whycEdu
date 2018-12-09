@@ -13,6 +13,6 @@ public class ScoreEntity implements Serializable,Comparable<ScoreEntity>{
 
     @Override
     public int compareTo(@NonNull ScoreEntity scoreEntity) {
-        return this.count - scoreEntity.count;
+        return scoreEntity.count - this.count;
     }
 }

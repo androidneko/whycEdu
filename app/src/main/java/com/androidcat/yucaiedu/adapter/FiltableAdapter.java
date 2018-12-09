@@ -10,10 +10,11 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkItem;
-import com.androidcat.acnet.entity.MarkRoomItem;
 import com.androidcat.acnet.entity.MarkTeacherItem;
+import com.androidcat.acnet.entity.UnmarkClassItem;
+import com.androidcat.acnet.entity.UnmarkRoomItem;
+import com.androidcat.acnet.entity.UnmarkTeacherItem;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
 
@@ -82,17 +83,17 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
         }
         //set data
         final MarkItem markItem = mDatas.get(position);
-        if (markItem instanceof MarkTeacherItem){
-            vh.markerIv.setBackgroundResource(((MarkTeacherItem)markItem).sex==1?R.mipmap.teacher_female:R.mipmap.teacher_male);
-            vh.markerRb.setText(((MarkTeacherItem)markItem).userName);
+        if (markItem instanceof UnmarkTeacherItem){
+            vh.markerIv.setBackgroundResource(((UnmarkTeacherItem)markItem).sex==1?R.mipmap.teacher_female:R.mipmap.teacher_male);
+            vh.markerRb.setText(((UnmarkTeacherItem)markItem).userName);
         }
-        if (markItem instanceof MarkRoomItem){
+        if (markItem instanceof UnmarkRoomItem){
             vh.markerIv.setBackgroundResource(R.mipmap.office);
-            vh.markerRb.setText(((MarkRoomItem)markItem).deptName);
+            vh.markerRb.setText(((UnmarkRoomItem)markItem).deptName);
         }
-        if (markItem instanceof MarkClassItem){
+        if (markItem instanceof UnmarkClassItem){
             vh.markerIv.setBackgroundResource(R.mipmap.classroom);
-            vh.markerRb.setText(((MarkClassItem)markItem).deptName);
+            vh.markerRb.setText(((UnmarkClassItem)markItem).deptName);
         }
         if (markItem.isChecked){
             vh.markerRb.setChecked(true);
@@ -179,9 +180,18 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
                 final ArrayList<MarkItem> newValues = new ArrayList<>();
 
                 for (int i = 0; i < count; i++) {
-                    final MarkTeacherItem value = (MarkTeacherItem) values.get(i);//从List<User>中拿到User对象
-//                    final String valueText = value.toString().toLowerCase();
-                    final String valueText = value.userName.toString().toLowerCase();//User对象的name属性作为过滤的参数
+                    final MarkItem value = values.get(i);//从List<User>中拿到User对象
+                    String nameText = "";
+                    if (value instanceof UnmarkTeacherItem){
+                        nameText = ((UnmarkTeacherItem) value).userName.toString().toLowerCase();
+                    }
+                    if (value instanceof UnmarkRoomItem){
+                        nameText = ((UnmarkRoomItem) value).deptName.toString().toLowerCase();
+                    }
+                    if (value instanceof UnmarkClassItem){
+                        nameText = ((UnmarkClassItem) value).deptName.toString().toLowerCase();
+                    }
+                    final String valueText = nameText;//User对象的name属性作为过滤的参数
                     // First match against the whole, non-splitted value
                     if (valueText.startsWith(prefixString) || valueText.indexOf(prefixString.toString()) != -1) {//第一个字符是否匹配
                         newValues.add(value);//将这个item加入到数组对象中
