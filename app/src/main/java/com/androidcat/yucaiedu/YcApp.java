@@ -3,7 +3,7 @@ package com.androidcat.yucaiedu;
 import android.app.Application;
 import android.content.Context;
 
-import com.androidcat.utilities.persistence.SharePreferencesUtil;
+import com.androidcat.utilities.persistence.SpUtil;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
@@ -14,7 +14,6 @@ public class YcApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-
         //初始化图片加载
         initImageLoader(this);
         //初始化缓存Context
@@ -22,6 +21,7 @@ public class YcApp extends Application{
         //初始化日志工具
         //initLogger();
         initFont();
+        AppData.getAppData().loadData();
     }
 
     void initFont(){
@@ -53,6 +53,6 @@ public class YcApp extends Application{
     }
 
     private void initSharePreference(){
-        SharePreferencesUtil.init(this);
+        SpUtil.init(this);
     }
 }

@@ -1,7 +1,6 @@
 package com.androidcat.yucaiedu.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,7 +12,7 @@ import com.androidcat.acnet.manager.UserManager;
 import com.androidcat.utilities.Utils;
 import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.utilities.persistence.SPConsts;
-import com.androidcat.utilities.persistence.SharePreferencesUtil;
+import com.androidcat.utilities.persistence.SpUtil;
 import com.androidcat.yucaiedu.AppConst;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
@@ -86,7 +85,7 @@ public class LoginActivity extends BaseActivity {
         if (!Utils.isNull(loginName)) {
             usernameTxt.setText(loginName);
         }
-        pwdTxt.setText(SharePreferencesUtil.getValue(SPConsts.CONV));
+        pwdTxt.setText(SpUtil.getValue(SPConsts.CONV));
     }
 
     @Override
@@ -129,7 +128,7 @@ public class LoginActivity extends BaseActivity {
             case OptMsgConst.MSG_LOGIN_SUCCESS:
                 dismissLoadingDialog();
                 saveUser((LoginResponse) msg.obj);
-                SharePreferencesUtil.setValue(SPConsts.CONV,this.pwdtxtbefore);
+                SpUtil.setValue(SPConsts.CONV,this.pwdtxtbefore);
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
@@ -158,7 +157,7 @@ public class LoginActivity extends BaseActivity {
         user.phonenumber = loginResponse.content.phonenumber;
         AppData.getAppData().user = user;
         // TODO: 2017-8-21 add more properties here
-        SharePreferencesUtil.setObject(user);
+        SpUtil.setObject(user);
     }
 
     private void gotoHome(){

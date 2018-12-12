@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.androidcat.acnet.entity.User;
 import com.androidcat.utilities.LogUtil;
-import com.androidcat.utilities.persistence.SharePreferencesUtil;
+import com.androidcat.utilities.persistence.SpUtil;
 import com.androidcat.yucaiedu.AppData;
 import com.anroidcat.acwidgets.flippingdialog.FlippingLoadingDialog;
 
@@ -56,7 +56,7 @@ public abstract class BaseActivity extends FragmentActivity {
         }
         mLoadingDialog = new FlippingLoadingDialog(this, "正在加载...");
         mLoadingDialog.setCancelable(false);
-        user = (User) SharePreferencesUtil.getObject(User.class);
+        user = (User) SpUtil.getObject(User.class);
         AppData.getAppData().user = user;
         intLayout();//模板方法模式
         intLayout(savedInstanceState);
@@ -72,7 +72,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         LogUtil.e(TAG,this.getClass().getSimpleName() + "--onNewIntent");
-        user = (User) SharePreferencesUtil.getObject(User.class);
+        user = (User) SpUtil.getObject(User.class);
         AppData.getAppData().user = user;
     }
 
@@ -80,7 +80,7 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onResume();
         isVisible = true;
         LogUtil.e(TAG,this.getClass().getSimpleName() + "--onResume");
-        user = (User) SharePreferencesUtil.getObject(User.class);
+        user = (User) SpUtil.getObject(User.class);
         AppData.getAppData().user = user;
     }
 

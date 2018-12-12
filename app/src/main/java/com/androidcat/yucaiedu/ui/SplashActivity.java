@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
+import com.androidcat.acnet.consts.OptMsgConst;
+import com.androidcat.acnet.manager.ClassesManager;
 import com.androidcat.utilities.Utils;
+import com.androidcat.utilities.persistence.SpUtil;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.ui.activity.BaseActivity;
 import com.androidcat.yucaiedu.ui.activity.HomeActivity;
@@ -78,7 +82,7 @@ public class SplashActivity extends BaseActivity {
                 }
             };
         }
-        timer.schedule(task, 1000);
+        timer.schedule(task, 2000);
     }
 
 
