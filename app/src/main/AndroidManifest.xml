@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.SplashActivity"
+        <activity android:name=".ui.activity.TestActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +27,10 @@
             android:screenOrientation="landscape"
             android:launchMode="singleTask"
             />
+        <!--<activity android:name=".ui.activity.TestActivity"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            />-->
     </application>
 
 </manifest>

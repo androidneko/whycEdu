@@ -2,6 +2,7 @@ package com.androidcat.yucaiedu;
 
 import com.androidcat.acnet.entity.Classroom;
 import com.androidcat.acnet.entity.MenuItm;
+import com.androidcat.acnet.entity.TextMenu;
 import com.androidcat.acnet.entity.User;
 import com.androidcat.acnet.entity.response.BuildingsResponse;
 import com.androidcat.acnet.entity.response.GradeListResponse;
@@ -44,6 +45,9 @@ public class AppData {
     public static List<Classroom> grade4Classes = new ArrayList<>();
     public static List<Classroom> grade5Classes = new ArrayList<>();
     public static List<Classroom> grade6Classes = new ArrayList<>();
+
+    public static List<MenuItm> parentMenu = new ArrayList();
+    public static List<ArrayList<MenuItm>> childMenu = new ArrayList<ArrayList<MenuItm>>();
 
     public void loadData(){
         loadRcMenu();
@@ -159,115 +163,150 @@ public class AppData {
 
     public void loadRcMenu() {
         long now = System.currentTimeMillis();
-        AppData.getAppData().menuResponse = (MenuResponse) SpUtil.getObject(MenuResponse.class);
-        if (AppData.getAppData().menuResponse == null){
-            AppData.getAppData().menuResponse = new MenuResponse();
-        }
-        List<MenuItm> menuItmList = AppData.getAppData().menuResponse.content;
-        for (int i = 1; i < 20; i++) {
-            MenuItm menuItm = null;
-            try {
-                menuItm = menuItmList.get(i);
-            }catch (Exception e){
-                //do nothing
+
+        for (int k = 0;k < 5;k++){
+            if (k == 0){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "自我管理";
+                parentMenu.add(menuItm);
+                ArrayList<MenuItm> child = new ArrayList();
+                for (int i = 1;i <= 5;i++){
+                    if (i == 1) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "经典诵读";
+                        childItem.parent = "自我管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                    }
+                    if (i == 2) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "晨读";
+                        childItem.parent = "自我管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                    }
+                    if (i == 3) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "晨会";
+                        childItem.parent = "自我管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.meetingRb, childItem);
+                    }
+                    if (i == 4) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "广播操";
+                        childItem.parent = "两操管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.exerciseRb, childItem);
+                    }
+                    if (i == 5) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "眼保操";
+                        childItem.parent = "自我管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.eyeExerciseRb, childItem);
+                    }
+                }
+                childMenu.add(child);
             }
-            if (menuItm == null) {
-                menuItm = new MenuItm();
+            if (k == 1){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "安全文明";
+                parentMenu.add(menuItm);
+                ArrayList<MenuItm> child = new ArrayList();
+                for (int i = 1;i <= 2;i++){
+                    if (i == 1) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "大课间";
+                        childItem.parent = "安全文明";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                    }
+                    if (i == 2) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "好人好事";
+                        childItem.parent = "安全文明";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                    }
+                }
+                childMenu.add(child);
             }
-            if (i == 1) {
-                menuItm.dictLabel = "经典诵读";
-                menuItm.parent = "自我管理";
-                rcMenuItmMap.put(R.id.recitingRb, menuItm);
+            if (k == 2){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "卫生节能";
+                parentMenu.add(menuItm);
+                ArrayList<MenuItm> child = new ArrayList();
+                for (int i = 1;i <= 2;i++){
+                    if (i == 1) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "班级卫生";
+                        childItem.parent = "卫生节能";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                    }
+                    if (i == 2) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "班级节能";
+                        childItem.parent = "卫生节能";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                    }
+                }
+                childMenu.add(child);
             }
-            if (i == 2) {
-                menuItm.dictLabel = "晨读";
-                menuItm.parent = "自我管理";
-                rcMenuItmMap.put(R.id.readingRb, menuItm);
+            if (k == 3){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "课堂管理";
+                parentMenu.add(menuItm);
+                ArrayList<MenuItm> child = new ArrayList();
+                for (int i = 1;i <= 3;i++){
+                    if (i == 1) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "上午巡堂";
+                        childItem.parent = "课堂管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                    }
+                    if (i == 2) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "午间管理";
+                        childItem.parent = "课堂管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                    }
+                    if (i == 3) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "下午巡堂";
+                        childItem.parent = "课堂管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                    }
+                }
+                childMenu.add(child);
             }
-            if (i == 3) {
-                menuItm.dictLabel = "晨会";
-                menuItm.parent = "自我管理";
-                rcMenuItmMap.put(R.id.meetingRb, menuItm);
-            }
-            if (i == 4) {
-                menuItm.dictLabel = "广播操";
-                menuItm.parent = "两操管理";
-                rcMenuItmMap.put(R.id.exerciseRb, menuItm);
-            }
-            if (i == 5) {
-                menuItm.dictLabel = "眼保操";
-                menuItm.parent = "自我管理";
-                rcMenuItmMap.put(R.id.eyeExerciseRb, menuItm);
-            }
-            if (i == 6) {
-                menuItm.dictLabel = "大课间";
-                menuItm.parent = "安全文明";
-                rcMenuItmMap.put(R.id.restTimeRb, menuItm);
-            }
-            if (i == 7) {
-                menuItm.dictLabel = "好人好事";
-                menuItm.parent = "安全文明";
-                rcMenuItmMap.put(R.id.goodThingsRb, menuItm);
-            }
-            if (i == 8) {
-                menuItm.dictLabel = "班级卫生";
-                menuItm.parent = "卫生节能";
-                rcMenuItmMap.put(R.id.healthRb, menuItm);
-            }
-            if (i == 9) {
-                menuItm.dictLabel = "班级节能";
-                menuItm.parent = "卫生节能";
-                rcMenuItmMap.put(R.id.energyRb, menuItm);
-            }
-            if (i == 10) {
-                menuItm.dictLabel = "第一节";
-                menuItm.parent = "上午巡堂";
-                rcMenuItmMap.put(R.id.firstRb, menuItm);
-            }
-            if (i == 11) {
-                menuItm.dictLabel = "第二节";
-                menuItm.parent = "上午巡堂";
-                rcMenuItmMap.put(R.id.secondRb, menuItm);
-            }
-            if (i == 12) {
-                menuItm.dictLabel = "第三节";
-                menuItm.parent = "上午巡堂";
-                rcMenuItmMap.put(R.id.thirdRb, menuItm);
-            }
-            if (i == 13) {
-                menuItm.dictLabel = "第四节";
-                menuItm.parent = "上午巡堂";
-                rcMenuItmMap.put(R.id.forthRb, menuItm);
-            }
-            if (i == 14) {
-                menuItm.dictLabel = "午间管理";
-                menuItm.parent = "课堂管理";
-                rcMenuItmMap.put(R.id.noonRb, menuItm);
-            }
-            if (i == 15) {
-                menuItm.dictLabel = "第五节";
-                menuItm.parent = "下午巡堂";
-                rcMenuItmMap.put(R.id.fifthRb, menuItm);
-            }
-            if (i == 16) {
-                menuItm.dictLabel = "第六节";
-                menuItm.parent = "下午巡堂";
-                rcMenuItmMap.put(R.id.sixthRb, menuItm);
-            }
-            if (i == 17) {
-                menuItm.dictLabel = "第七节";
-                menuItm.parent = "下午巡堂";
-                rcMenuItmMap.put(R.id.seventhRb, menuItm);
-            }
-            if (i == 18) {
-                menuItm.dictLabel = "教学队列";
-                menuItm.parent = "队列管理";
-                rcMenuItmMap.put(R.id.tsQueueRb, menuItm);
-            }
-            if (i == 19) {
-                menuItm.dictLabel = "放学队列";
-                menuItm.parent = "队列管理";
-                rcMenuItmMap.put(R.id.afterSchoolRb, menuItm);
+            if (k == 4){
+                MenuItm menuItm = new MenuItm();
+                menuItm.dictLabel = "队列管理";
+                parentMenu.add(menuItm);
+                ArrayList<MenuItm> child = new ArrayList();
+                for (int i = 1;i <= 2;i++){
+                    if (i == 1) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "教学队列";
+                        childItem.parent = "队列管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                    }
+                    if (i == 2) {
+                        MenuItm childItem = new MenuItm();
+                        childItem.dictLabel = "放学队列";
+                        childItem.parent = "队列管理";
+                        child.add(childItem);
+                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                    }
+                }
+                childMenu.add(child);
             }
         }
         LogUtil.e(TAG,"loadRcMenu cost:" + (System.currentTimeMillis()-now)+"ms");

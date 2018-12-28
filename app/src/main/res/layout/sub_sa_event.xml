@@ -73,18 +73,14 @@
             android:layout_height="300dp"
             android:layout_marginTop="-1dp"
             android:background="@color/gray_item">
-            <com.anroidcat.acwidgets.edittext.NoteEditText
+            <com.anroidcat.acwidgets.LinedEditText
                 android:id="@+id/msgEt"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_height="400dp"
                 android:layout_weight="8"
-                android:background="#00000000"
-                android:gravity="top"
                 android:inputType="textMultiLine"
-                android:padding="5dip"
-                android:textSize="20sp"
+                android:lineSpacingExtra="10dp"
+                android:textSize="18sp"
                  />
         </RelativeLayout>
     </RelativeLayout>

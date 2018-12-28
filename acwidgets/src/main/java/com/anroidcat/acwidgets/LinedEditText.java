@@ -42,7 +42,7 @@ public class LinedEditText extends EditText {
         mRect = new Rect();
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.BLACK);
+        mPaint.setColor(Color.GRAY);
         mPaint.setAntiAlias(true);
 
         setFocusable(true);
