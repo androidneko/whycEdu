@@ -3,6 +3,7 @@ package com.androidcat.acnet.manager;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 
 import com.androidcat.acnet.consts.InterfaceCodeConst;
 import com.androidcat.acnet.consts.OptMsgConst;
@@ -183,12 +184,14 @@ public class ClassesManager extends BaseManager {
         });
     }
 
-    public void postEvent(String loginName,String sessionId,String menuId,String date,String type,String msg){
+    public void postEvent(String loginName,String sessionId,String memId,String date,String type,String msg){
         EventRequest request = new EventRequest();
         request.loginName = loginName;
         request.sessionId = sessionId;
         request.dateStr = date;
-        //request.memId = menuId;
+        if (!TextUtils.isEmpty(memId)){
+            request.memId = memId;
+        }
         request.memContent = msg;
         request.typeCode = type;
 

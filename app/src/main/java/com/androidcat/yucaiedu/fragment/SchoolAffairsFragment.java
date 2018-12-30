@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.ClassItemList;
 import com.androidcat.acnet.entity.EventLogItem;
+import com.androidcat.acnet.entity.EventText;
 import com.androidcat.acnet.entity.MarkClassItem;
 import com.androidcat.acnet.entity.MarkHistoryItem;
 import com.androidcat.acnet.entity.MarkItem;
@@ -559,6 +560,7 @@ public class SchoolAffairsFragment extends BaseFragment {
     void setupEventView(QueryEventResponse eventResponse){
         eventEt.setText("");
         eventEt.setText(eventResponse.content.memContent);
+        eventEt.setTag(eventResponse.content);
     }
 
     void postEventMsg(){
@@ -572,6 +574,7 @@ public class SchoolAffairsFragment extends BaseFragment {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         String type = "";
+
         if (menuSa.getCheckedRadioButtonId() == R.id.eventRb){
             type = typeCode;
         }
@@ -584,7 +587,12 @@ public class SchoolAffairsFragment extends BaseFragment {
         else if (menuSa.getCheckedRadioButtonId() == R.id.leavingRb){
             type = "离校巡查";
         }
-        classesManager.postEvent(loginName,token,curMenu,date,type,msg);
+        if (eventEt.getTag() != null && eventEt.getTag() instanceof EventText){
+            String memId = ((EventText) eventEt.getTag()).memId;
+            classesManager.postEvent(loginName,token,memId,date,type,msg);
+        }else {
+            classesManager.postEvent(loginName,token,null,date,type,msg);
+        }
     }
 
     void queryTeacherItems(int checkedId){
