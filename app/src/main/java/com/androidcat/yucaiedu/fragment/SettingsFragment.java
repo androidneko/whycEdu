@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.yucaiedu.R;
-import com.androidcat.yucaiedu.ui.LoginActivity;
+import com.androidcat.yucaiedu.ui.activity.LoginActivity;
 import com.androidcat.yucaiedu.ui.activity.BaseActivity;
 
 public class SettingsFragment extends BaseFragment {

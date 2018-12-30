@@ -28,7 +28,7 @@ public class YcApp extends Application{
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
                         new CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/Hgs.ttf")
+                                .setDefaultFontPath("fonts/PingFang.ttc")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());

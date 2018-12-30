@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.utilities.LogUtil;
-import com.androidcat.yucaiedu.ui.LoginActivity;
+import com.androidcat.yucaiedu.ui.activity.LoginActivity;
 import com.androidcat.yucaiedu.ui.activity.BaseActivity;
 
 import java.lang.ref.WeakReference;

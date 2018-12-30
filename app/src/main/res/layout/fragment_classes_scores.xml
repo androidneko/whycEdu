@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@mipmap/main_bg">
+    android:background="@color/white_three">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -27,7 +27,7 @@
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:text="周"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:checked="true"
                     android:textSize="16sp"
                     android:gravity="center"
@@ -41,7 +41,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
                     android:text="月"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:button="@null"
@@ -54,7 +54,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
                     android:text="学期"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:button="@null"
@@ -67,7 +67,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
                     android:text="学年"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:button="@null"
@@ -84,210 +84,234 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="130dp"
+            android:layout_width="170dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:background="@color/gray_item"
             android:gravity="center_horizontal"
-            android:background="@color/gray_item">
+            android:orientation="vertical">
+
             <RadioGroup
                 android:id="@+id/gradeRg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
+
                 <RadioButton
                     android:id="@+id/grade6Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="65dp"
+                    android:background="@drawable/white_gray_label_check"
+                    android:button="@null"
+                    android:checked="true"
+                    android:clickable="true"
+                    android:gravity="center"
                     android:text="六年级"
                     android:textColor="@color/black"
-                    android:checked="true"
-                    android:textSize="17sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:clickable="true"
-                    android:background="@drawable/white_gray_label_check"
-                    />
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/gray_line"/>
+                    android:background="@color/gray_line" />
+
                 <RadioButton
                     android:id="@+id/grade5Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:text="五年级"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
+                    android:layout_height="65dp"
+                    android:background="@drawable/white_gray_label_check"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/white_gray_label_check"
-                    />
+                    android:gravity="center"
+                    android:text="五年级"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/gray_line"/>
+                    android:background="@color/gray_line" />
+
                 <RadioButton
                     android:id="@+id/grade4Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:text="四年级"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
+                    android:layout_height="65dp"
+                    android:background="@drawable/white_gray_label_check"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/white_gray_label_check"
-                    />
+                    android:gravity="center"
+                    android:text="四年级"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/gray_line"/>
+                    android:background="@color/gray_line" />
+
                 <RadioButton
                     android:id="@+id/grade3Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:text="三年级"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
+                    android:layout_height="65dp"
+                    android:background="@drawable/white_gray_label_check"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/white_gray_label_check"
-                    />
+                    android:gravity="center"
+                    android:text="三年级"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/gray_line"/>
+                    android:background="@color/gray_line" />
+
                 <RadioButton
                     android:id="@+id/grade2Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:text="二年级"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
+                    android:layout_height="65dp"
+                    android:background="@drawable/white_gray_label_check"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/white_gray_label_check"
-                    />
+                    android:gravity="center"
+                    android:text="二年级"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/gray_line"/>
+                    android:background="@color/gray_line" />
+
                 <RadioButton
                     android:id="@+id/grade1Rb"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:text="一年级"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    android:gravity="center"
+                    android:layout_height="65dp"
+                    android:background="@drawable/white_gray_label_check"
                     android:button="@null"
                     android:clickable="true"
-                    android:background="@drawable/white_gray_label_check"
-                    />
+                    android:gravity="center"
+                    android:text="一年级"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/gray_line"/>
+                    android:background="@color/gray_line" />
             </RadioGroup>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
+                    android:text="班级得分"
                     android:textColor="@color/text_black"
                     android:textSize="22sp"
-                    android:layout_centerVertical="true"
-                    android:text="班级得分"/>
+                    android:visibility="invisible"/>
+
                 <TextView
                     android:id="@+id/sortView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
                     android:layout_centerVertical="true"
-                    android:textSize="18sp"
-                    android:textColor="@color/text_black"
+                    android:layout_marginRight="15dp"
+                    android:drawableRight="@drawable/orderby"
                     android:text="排序"
-                    android:drawableRight="@drawable/orderby"/>
+                    android:textColor="@color/text_black"
+                    android:textSize="18sp" />
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:background="@drawable/shape_blue_radius10"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="10dp"
-                android:background="@drawable/shape_white_radius10">
+                android:padding="10dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
                     android:orientation="horizontal">
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="5">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
-                            android:textSize="18sp"
-                            android:background="@color/theme_blue"
+                            android:background="@color/theme_dark_blue"
+                            android:gravity="center"
                             android:text="班级"
-                            android:gravity="center"/>
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentLeft="true"/>
+                            android:layout_alignParentLeft="true"
+                            android:background="@color/gray_line" />
+
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentRight="true"/>
+                            android:layout_alignParentRight="true"
+                            android:background="@color/gray_line" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentBottom="true"/>
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/gray_line" />
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="2">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
-                            android:textSize="18sp"
-                            android:background="@color/theme_blue"
+                            android:background="@color/theme_dark_blue"
+                            android:gravity="center"
                             android:text="得分"
-                            android:gravity="center"/>
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentRight="true"/>
+                            android:layout_alignParentRight="true"
+                            android:background="@color/gray_line" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentBottom="true"/>
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/gray_line" />
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -296,23 +320,26 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
-                            android:textSize="18sp"
-                            android:background="@color/theme_blue"
+                            android:background="@color/theme_dark_blue"
+                            android:gravity="center"
                             android:text="豆妹"
-                            android:gravity="center"/>
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentRight="true"/>
+                            android:layout_alignParentRight="true"
+                            android:background="@color/gray_line" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentBottom="true"/>
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/gray_line" />
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -321,23 +348,26 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
-                            android:textSize="18sp"
-                            android:background="@color/theme_blue"
+                            android:background="@color/theme_dark_blue"
+                            android:gravity="center"
                             android:text="瓜哥"
-                            android:gravity="center"/>
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentRight="true"/>
+                            android:layout_alignParentRight="true"
+                            android:background="@color/gray_line" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentBottom="true"/>
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/gray_line" />
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -346,31 +376,33 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
-                            android:textSize="18sp"
-                            android:background="@color/theme_blue"
+                            android:background="@color/theme_dark_blue"
+                            android:gravity="center"
                             android:text="剩余积分"
-                            android:gravity="center"/>
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentRight="true"/>
+                            android:layout_alignParentRight="true"
+                            android:background="@color/gray_line" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/gray_line"
-                            android:layout_alignParentBottom="true"/>
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/gray_line" />
                     </RelativeLayout>
                 </LinearLayout>
+
                 <ListView
                     android:id="@+id/scoreList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:divider="@null">
-                </ListView>
+                    android:divider="@null"></ListView>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

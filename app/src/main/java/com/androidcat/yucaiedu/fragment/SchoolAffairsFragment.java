@@ -406,14 +406,19 @@ public class SchoolAffairsFragment extends BaseFragment {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         //showToast("pos:"+item.getTitle());
+        searchEt.setText("");
         if (item.getItemId() == 1){
             curItem.grade = 1;
+            saMark();
         }else {
             curItem.grade = 0;
+            showImproveDialog();
         }
-        searchEt.setText("");
-        saMark();
         return true;
+    }
+
+    private void showImproveDialog(){
+
     }
 
     @Override

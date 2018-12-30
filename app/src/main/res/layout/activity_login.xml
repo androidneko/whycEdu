@@ -1,69 +1,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/main_bg"
-    android:orientation="vertical"
+    android:background="@color/white"
+    android:orientation="horizontal"
     >
-
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_margin="15dp">
+        android:layout_weight="1"
+        android:background="@drawable/login_bg_left">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="ADMINISTRATION DUTY SYSTEM."/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_logo"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@mipmap/logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:text="武汉市育才小学|行政执勤系统"
-                    android:textColor="@color/theme_dark_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Administration Duty System · Wuhan YuCai Edu."
-                android:textColor="@color/theme_dark_blue"
-                android:textSize="16sp" />
-        </RelativeLayout>
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="390dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:background="@drawable/shape_white_radius10"
             android:gravity="center">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@drawable/shape_green_half_radius10">
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/theme_dark_blue"
                     android:layout_centerInParent="true"
-                    android:textSize="18sp"
-                    android:text="用户登录"/>
+                    android:textSize="26sp"
+                    android:text="USER SIGN IN"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -76,45 +59,42 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/gray_bounds_corners"
+                    android:layout_marginTop="35dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="5dp">
                     <TextView
                         android:layout_width="20dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
+                        android:visibility="gone"
                         android:background="@mipmap/user"/>
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/gray"/>
                     <com.anroidcat.acwidgets.ClearEditText
                         android:id="@+id/usernameTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:hint="请输入用户名"
                         android:background="@null"
-                        android:hint="请输入账号"
                         android:inputType="text"
                         android:maxLength="20"
-                        android:padding="5dp"
+                        android:padding="10dp"
                         android:singleLine="true"
                         android:textColor="@color/text_black"
                         android:textColorHint="@color/gray"
                         android:textSize="16sp"
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray"/>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/gray_bounds_corners"
                     android:layout_marginTop="10dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -126,22 +106,16 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
                         android:background="@mipmap/password"
-
+                        android:visibility="gone"
                         />
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/gray"/>
                     <com.anroidcat.acwidgets.ClearEditText
                         android:id="@+id/pwdTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:background="@null"
                         android:hint="请输入密码"
                         android:inputType="textPassword"
+                        android:background="@null"
                         android:maxLength="20"
                         android:padding="5dp"
                         android:singleLine="true"
@@ -150,7 +124,11 @@
                         android:textSize="16sp"
                         />
                 </LinearLayout>
-                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray"/>
+
                 <TextView
                     android:id="@+id/vg_login"
                     android:layout_width="130dp"
@@ -159,16 +137,10 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="50dp"
                     />
             </LinearLayout>
         </LinearLayout>
-        <View
-            android:layout_width="600dp"
-            android:layout_height="390dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/lace"/>
     </RelativeLayout>
 
 </LinearLayout>

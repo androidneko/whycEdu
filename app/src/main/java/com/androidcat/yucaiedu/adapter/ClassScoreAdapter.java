@@ -64,7 +64,7 @@ public class ClassScoreAdapter extends BaseAdapter {
         if (position % 2 == 0){
             convertView.setBackgroundColor(context.getResources().getColor(R.color.white));
         } else {
-            convertView.setBackgroundColor(context.getResources().getColor(R.color.theme_blue));
+            convertView.setBackgroundColor(context.getResources().getColor(R.color.theme_select_blue));
         }
         return convertView;
     }
