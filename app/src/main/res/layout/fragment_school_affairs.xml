@@ -55,7 +55,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:text="当日日志"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:textSize="16sp" />
 
                 <RadioButton
@@ -68,7 +68,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:text="历史纪录"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:textSize="16sp" />
             </RadioGroup>
         </LinearLayout>

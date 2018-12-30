@@ -57,7 +57,18 @@ public class ClassMarkAdapter extends BaseAdapter {
         //set data
         final ClassMark classMark = classMarks.get(position);
         vh.classTv.setText(classMark.roomName);
-        vh.markTv.setText(AppData.markMap.get(classMark.classesAchievement));
+        if("A".equals(AppData.markMap.get(classMark.classesAchievement))){
+            vh.markTv.setBackgroundResource(R.drawable.gold);
+        }
+        else if("B".equals(AppData.markMap.get(classMark.classesAchievement))){
+            vh.markTv.setBackgroundResource(R.drawable.silver);
+        }
+        else if("C".equals(AppData.markMap.get(classMark.classesAchievement))){
+            vh.markTv.setBackgroundResource(R.drawable.copper);
+        }
+        else {
+            vh.markTv.setBackgroundResource(0);
+        }
 
         return convertView;
     }

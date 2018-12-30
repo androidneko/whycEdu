@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@mipmap/main_bg">
+    android:background="@color/white_three">
     <!--title部分-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:text="当日考评"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:checked="true"
                     android:textSize="16sp"
                     android:gravity="center"
@@ -110,7 +110,7 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
                     android:text="当日统计"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:button="@null"
@@ -123,7 +123,7 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
                     android:text="历史纪录"
-                    android:textColor="@color/white"
+                    android:textColor="@color/top_rb_color"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:button="@null"

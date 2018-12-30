@@ -5,8 +5,8 @@ package com.androidcat.acnet.consts;
  */
 
 public class InterfaceUrl {
-    //public static final String BASE_URL = "http://120.24.176.35:8010";
-    public static final String BASE_URL = "http://220.249.102.138:8010";
+    public static final String BASE_URL = "http://120.24.176.35:8010";
+    //public static final String BASE_URL = "http://220.249.102.138:8010";
 
     public static final String URL_CONTROLLER = "/api/v1/";
 

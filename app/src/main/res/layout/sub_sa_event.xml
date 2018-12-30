@@ -54,7 +54,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:padding="3dp"
-        android:background="@drawable/shape_blue_radius10">
+        android:background="@drawable/shape_white_border_radius10">
 
         <com.anroidcat.acwidgets.FloatBar
             android:id="@+id/navi_bar"

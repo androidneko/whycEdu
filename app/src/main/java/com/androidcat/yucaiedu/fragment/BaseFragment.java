@@ -115,11 +115,15 @@ public abstract class BaseFragment extends Fragment {
 
 
     protected void showProgressDialog(String msg) {
-        ((BaseActivity)getActivity()).showLoadingDialog(msg);
+        if ((getActivity()) != null && !(getActivity()).isDestroyed()){
+            ((BaseActivity)getActivity()).showLoadingDialog(msg);
+        }
     }
 
     protected void dismissLoadingDialog() {
-        ((BaseActivity)getActivity()).dismissLoadingDialog();
+        if ((getActivity()) != null && !(getActivity()).isDestroyed()){
+            ((BaseActivity)getActivity()).dismissLoadingDialog();
+        }
     }
 
     protected void openActivity(Class<?> pClass) {

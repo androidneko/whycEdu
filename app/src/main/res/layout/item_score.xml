@@ -72,8 +72,8 @@
             android:orientation="horizontal"
             android:gravity="center">
             <View
-                android:layout_width="26dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="28dp"
                 android:background="@drawable/bean"/>
             <TextView
                 android:id="@+id/beanTv"
@@ -107,8 +107,8 @@
             android:orientation="horizontal"
             android:gravity="center">
             <View
-                android:layout_width="40dp"
-                android:layout_height="33dp"
+                android:layout_width="35dp"
+                android:layout_height="28dp"
                 android:background="@drawable/melon"/>
             <TextView
                 android:id="@+id/melonTv"

@@ -123,10 +123,12 @@ public class ClassesManager extends BaseManager {
         });
     }
 
-    public void getBuildings(String loginName,String sessionId){
+    public void getBuildings(String loginName,String sessionId,String dateStr,String project){
         BuildingsRequest request = new BuildingsRequest();
         request.loginName = loginName;
         request.sessionId = sessionId;
+        request.dateStr = dateStr;
+        request.project = project;
         post(InterfaceCodeConst.TYPE_BUILDINGS, getPostJson(request), new EntityResponseHandler<BuildingsResponse>() {
             @Override
             public void onStart(int code) {

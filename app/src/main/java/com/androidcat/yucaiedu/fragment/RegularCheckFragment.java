@@ -100,7 +100,7 @@ public class RegularCheckFragment extends BaseFragment {
     private List<ClassMark> classMarks = new ArrayList<>();
     private ClassMarkAdapter classMarkAdapter;
 
-    private String curMenu;
+    private String curMenu = "经典诵读";
     private ClassMark curClass;
     private Room curRoom;
     private String curDate;
@@ -462,12 +462,15 @@ public class RegularCheckFragment extends BaseFragment {
     }
 
     private void initData(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        this.curDate = date;
         if (classesManager == null){
             classesManager = new ClassesManager(getActivity(),baseHandler);
         }
         classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         classesManager.getGradeList(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
-        classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
+        classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu);
         //
         loadEmptyRooms();
         //
