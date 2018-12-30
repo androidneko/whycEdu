@@ -76,9 +76,9 @@ public class RegularCheckFragment extends BaseFragment {
 
     //当日统计
     View statisticsView;
-    PieChart chartA;
+    //PieChart chartA;
     PieChart chartB;
-    PieChart chartC;
+    //PieChart chartC;
     boolean isHistory;
 
     OptionsPopupWindow pwOptions;
@@ -306,9 +306,9 @@ public class RegularCheckFragment extends BaseFragment {
         tsGrid = mRootView.findViewById(R.id.tsCenterHeaderBuilding);
         eastGrid = mRootView.findViewById(R.id.eastBuildingGrid);
         statisticGrid = mRootView.findViewById(R.id.statisticGrid);
-        chartA = mRootView.findViewById(R.id.charta);
+        //chartA = mRootView.findViewById(R.id.charta);
         chartB = mRootView.findViewById(R.id.chartb);
-        chartC = mRootView.findViewById(R.id.chartc);
+        //chartC = mRootView.findViewById(R.id.chartc);
         setupCharts();
     }
 
@@ -524,9 +524,9 @@ public class RegularCheckFragment extends BaseFragment {
             }
         });
 
-        setData(chartA,statisticsTodayA,(statisticsTodayB+statisticsTodayC));
-        setData(chartB,statisticsTodayB,(statisticsTodayA+statisticsTodayC));
-        setData(chartC,statisticsTodayC,(statisticsTodayB+statisticsTodayA));
+        //setData(chartA,statisticsTodayA,(statisticsTodayB+statisticsTodayC));
+        setData(chartB,statisticsTodayA,statisticsTodayB,statisticsTodayC);
+        //setData(chartC,statisticsTodayC,(statisticsTodayB+statisticsTodayA));
     }
 
     void switchBuilding(){
@@ -569,15 +569,15 @@ public class RegularCheckFragment extends BaseFragment {
     }
 
     private void setupCharts(){
-        setChartStyle(chartA);
+        //setChartStyle(chartA);
         setChartStyle(chartB);
-        setChartStyle(chartC);
+        //setChartStyle(chartC);
     }
 
     private void animateCharts(){
-        chartA.animateX(2000, Easing.EaseInOutQuad);
+        //chartA.animateX(2000, Easing.EaseInOutQuad);
         chartB.animateX(2000, Easing.EaseInOutQuad);
-        chartC.animateX(2000, Easing.EaseInOutQuad);
+        //chartC.animateX(2000, Easing.EaseInOutQuad);
     }
 
     private void setChartStyle(PieChart chart){
@@ -585,23 +585,23 @@ public class RegularCheckFragment extends BaseFragment {
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 45, 5);
         chart.setDragDecelerationFrictionCoef(0.95f);
-        if(chart == chartA)
+        /*if(chart == chartA)
             chart.setCenterText("A");
         if(chart == chartB)
             chart.setCenterText("B");
         if(chart == chartC)
-            chart.setCenterText("C");
-        chart.setDrawHoleEnabled(true);
-        chart.setHoleColor(Color.TRANSPARENT);
+            chart.setCenterText("C");*/
+        chart.setDrawHoleEnabled(false);
+        //chart.setHoleColor(Color.TRANSPARENT);
 
         chart.setTransparentCircleColor(Color.WHITE);
         chart.setTransparentCircleAlpha(110);
 
-        chart.setHoleRadius(38f);
+        //chart.setHoleRadius(38f);
         chart.setTransparentCircleRadius(61f);
 
-        chart.setDrawCenterText(true);
-        chart.setCenterTextSize(20);
+        //chart.setDrawCenterText(true);
+        //chart.setCenterTextSize(20);
         chart.setRotationAngle(0);
         // enable rotation of the chart by touch
         chart.setRotationEnabled(true);
@@ -622,23 +622,24 @@ public class RegularCheckFragment extends BaseFragment {
         chart.setEntryLabelColor(Color.WHITE);
     }
 
-    private void setData(PieChart chart,int value,int other) {
+    private void setData(PieChart chart,int aMark,int bMark,int cMark) {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
         String label = "";
-        if (chart == chartA){
+        /*if (chart == chartA){
             label = "A";
         }if (chart == chartB){
             label = "B";
         }
         if (chart == chartC){
             label = "C";
-        }
+        }*/
 
-        entries.add(new PieEntry(value,label));
-        entries.add(new PieEntry(other,"其他"));
+        entries.add(new PieEntry(aMark,"A"));
+        entries.add(new PieEntry(bMark,"B"));
+        entries.add(new PieEntry(cMark,"C"));
         PieDataSet dataSet = new PieDataSet(entries, "");
 
         dataSet.setDrawIcons(false);
