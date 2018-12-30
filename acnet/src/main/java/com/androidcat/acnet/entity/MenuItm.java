@@ -10,4 +10,5 @@ public class MenuItm implements Serializable {
     public String parent;
     public String desc;
     public String memo;
+    public boolean isChecked;
 }

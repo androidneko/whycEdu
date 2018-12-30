@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/main_bg"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
+
+ <com.anroidcat.acwidgets.LinedEditText
+     android:visibility="gone"
+     android:layout_width="300dp"
+     android:layout_height="450dp"
+     android:lineSpacingExtra="10dp"/>
+
+ <ExpandableListView
+     android:id="@+id/expend_list"
+     android:layout_width="130dp"
+     android:layoutDirection="rtl"
+     android:layout_height="match_parent">
+
+ </ExpandableListView>
+</LinearLayout>

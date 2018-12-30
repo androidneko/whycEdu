@@ -26,6 +26,7 @@ import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.manager.ClassesManager;
 import com.androidcat.utilities.date.DateUtil;
 import com.androidcat.utilities.listener.OnSingleClickListener;
+import com.androidcat.utilities.persistence.SpUtil;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.ClassMarkAdapter;
@@ -122,6 +123,7 @@ public class RegularCheckFragment extends BaseFragment {
             case OptMsgConst.GET_DICT_SUCCESS:
                // dismissLoadingDialog();
                 AppData.getAppData().menuResponse = (MenuResponse) msg.obj;
+                SpUtil.setObject(AppData.getAppData().menuResponse);
                 //loadMenu();
                 break;
             case OptMsgConst.MSG_BUILDINGS_FAIL:
@@ -463,7 +465,7 @@ public class RegularCheckFragment extends BaseFragment {
         if (classesManager == null){
             classesManager = new ClassesManager(getActivity(),baseHandler);
         }
-        //classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
+        classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         classesManager.getGradeList(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         //

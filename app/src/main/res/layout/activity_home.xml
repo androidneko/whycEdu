@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme_green"
+    android:background="@color/theme_blue"
     tools:context=".ui.HomeActivity">
 
     <LinearLayout
@@ -32,7 +32,7 @@
                     app:tab_margin="0dp"
                     app:tab_height="110dp"
                     app:tab_width="80dp"
-                    app:indicator_color="@color/theme_dark_green"
+                    app:indicator_color="@color/theme_dark_blue"
                     app:tab_mode="scrollable" />
             </RelativeLayout>
 

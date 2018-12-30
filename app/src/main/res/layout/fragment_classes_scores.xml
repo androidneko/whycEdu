@@ -245,7 +245,7 @@
                             android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
                             android:textSize="18sp"
-                            android:background="@color/theme_green"
+                            android:background="@color/theme_blue"
                             android:text="班级"
                             android:gravity="center"/>
                         <View
@@ -274,7 +274,7 @@
                             android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
                             android:textSize="18sp"
-                            android:background="@color/theme_green"
+                            android:background="@color/theme_blue"
                             android:text="得分"
                             android:gravity="center"/>
                         <View
@@ -299,7 +299,7 @@
                             android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
                             android:textSize="18sp"
-                            android:background="@color/theme_green"
+                            android:background="@color/theme_blue"
                             android:text="豆妹"
                             android:gravity="center"/>
                         <View
@@ -324,7 +324,7 @@
                             android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
                             android:textSize="18sp"
-                            android:background="@color/theme_green"
+                            android:background="@color/theme_blue"
                             android:text="瓜哥"
                             android:gravity="center"/>
                         <View
@@ -349,7 +349,7 @@
                             android:textColor="@color/text_black"
                             android:layout_centerInParent="true"
                             android:textSize="18sp"
-                            android:background="@color/theme_green"
+                            android:background="@color/theme_blue"
                             android:text="剩余积分"
                             android:gravity="center"/>
                         <View
