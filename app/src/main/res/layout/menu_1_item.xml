@@ -5,16 +5,20 @@
     android:layout_height="55dp"
     android:gravity="left"
     android:layoutDirection="ltr"
-    android:background="@drawable/gray_bounds">
+    android:background="@color/white">
     <TextView
         android:id="@+id/menuTxt"
         android:layout_width="130dp"
-        android:layout_height="55dp"
+        android:layout_height="52dp"
         android:gravity="center"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textColor="@color/black"
-        android:layout_centerInParent="true"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/white_three"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

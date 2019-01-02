@@ -36,7 +36,7 @@ public class AppData {
     public static Map<Integer,MenuItm> saMenuItmMap = new HashMap<>();
 
     public static Map<Integer,String> markMap = new HashMap<>();
-    public static Map<Integer,Integer> markLogoMap = new HashMap<>();
+    public static Map<String,Integer> markLogoMap = new HashMap<>();
     public static Map<Integer,Integer> markMenuMap = new HashMap<>();
     public static Map<String,Integer> gradeMap = new HashMap<>();
     public static Map<Integer,String> eventMenuMap = new HashMap<>();
@@ -57,9 +57,9 @@ public class AppData {
         markMap.put(3,"A");
         markMap.put(2,"B");
         markMap.put(1,"C");
-        markLogoMap.put(3,R.drawable.gold);
-        markLogoMap.put(2,R.drawable.silver);
-        markLogoMap.put(1,R.drawable.copper);
+        markLogoMap.put("3",R.drawable.gold);
+        markLogoMap.put("2",R.drawable.silver);
+        markLogoMap.put("1",R.drawable.copper);
 
         markMenuMap.put(R.id.aRb,3);
         markMenuMap.put(R.id.bRb,2);
@@ -179,6 +179,7 @@ public class AppData {
                         MenuItm childItem = new MenuItm();
                         childItem.dictLabel = "经典诵读";
                         childItem.parent = "自我管理";
+                        childItem.isChecked = true;
                         child.add(childItem);
                         rcMenuItmMap.put(R.id.recitingRb, childItem);
                     }
@@ -224,14 +225,14 @@ public class AppData {
                         childItem.dictLabel = "大课间";
                         childItem.parent = "安全文明";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                        rcMenuItmMap.put(R.id.restTimeRb, childItem);
                     }
                     if (i == 2) {
                         MenuItm childItem = new MenuItm();
                         childItem.dictLabel = "好人好事";
                         childItem.parent = "安全文明";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                        rcMenuItmMap.put(R.id.goodThingsRb, childItem);
                     }
                 }
                 childMenu.add(child);
@@ -247,14 +248,14 @@ public class AppData {
                         childItem.dictLabel = "班级卫生";
                         childItem.parent = "卫生节能";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                        rcMenuItmMap.put(R.id.healthRb, childItem);
                     }
                     if (i == 2) {
                         MenuItm childItem = new MenuItm();
                         childItem.dictLabel = "班级节能";
                         childItem.parent = "卫生节能";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                        rcMenuItmMap.put(R.id.energyRb, childItem);
                     }
                 }
                 childMenu.add(child);
@@ -270,21 +271,21 @@ public class AppData {
                         childItem.dictLabel = "上午巡堂";
                         childItem.parent = "课堂管理";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                        rcMenuItmMap.put(R.id.firstRb, childItem);
                     }
                     if (i == 2) {
                         MenuItm childItem = new MenuItm();
                         childItem.dictLabel = "午间管理";
                         childItem.parent = "课堂管理";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                        rcMenuItmMap.put(R.id.noonRb, childItem);
                     }
                     if (i == 3) {
                         MenuItm childItem = new MenuItm();
                         childItem.dictLabel = "下午巡堂";
                         childItem.parent = "课堂管理";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                        rcMenuItmMap.put(R.id.sixthRb, childItem);
                     }
                 }
                 childMenu.add(child);
@@ -300,14 +301,14 @@ public class AppData {
                         childItem.dictLabel = "教学队列";
                         childItem.parent = "队列管理";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.recitingRb, childItem);
+                        rcMenuItmMap.put(R.id.tsQueueRb, childItem);
                     }
                     if (i == 2) {
                         MenuItm childItem = new MenuItm();
                         childItem.dictLabel = "放学队列";
                         childItem.parent = "队列管理";
                         child.add(childItem);
-                        rcMenuItmMap.put(R.id.readingRb, childItem);
+                        rcMenuItmMap.put(R.id.afterSchoolRb, childItem);
                     }
                 }
                 childMenu.add(child);

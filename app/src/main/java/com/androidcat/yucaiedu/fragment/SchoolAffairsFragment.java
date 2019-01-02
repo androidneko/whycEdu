@@ -384,6 +384,21 @@ public class SchoolAffairsFragment extends BaseFragment {
             public void afterTextChanged(Editable s) {
             }
         });
+
+        /*totalGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MarkItem markItem = (MarkItem) adapterView.getAdapter().getItem(i);
+                if(markItem.isChecked) return;
+                for (MarkItem item : mDatas){
+                    item.isChecked = false;
+                }
+                markItem.isChecked = true;
+                if(onItemCheckedListener != null)
+                    onItemCheckedListener.onItemChecked(markItem);
+                notifyDataSetChanged();
+            }
+        });*/
     }
 
     @Override
@@ -696,7 +711,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             for(MarkItem item : teacherItemList.teacherScore){
                 if (item.grade == 1){
                     goodItems.add(item);
-                }else {
+                }else if (item.grade == 0){
                     badItems.add(item);
                 }
             }
@@ -715,7 +730,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             for(MarkItem item : roomItemList.teacherScore){
                 if (item.grade == 1){
                     goodItems.add(item);
-                }else {
+                }else if (item.grade == 0){
                     badItems.add(item);
                 }
             }
@@ -734,7 +749,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             for(MarkItem item : classItemList.teacherScore){
                 if (item.grade == 1){
                     goodItems.add(item);
-                }else {
+                }else if (item.grade == 0) {
                     badItems.add(item);
                 }
             }

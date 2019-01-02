@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 
 import com.androidcat.acnet.entity.Room;
 import com.androidcat.utilities.LogUtil;
+import com.androidcat.utilities.Utils;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.ui.listener.OnRoomCheckedListener;
@@ -77,8 +78,9 @@ public class ClockBuildingRoomAdapter extends BaseAdapter {
         }else {
             vh.classTv.setChecked(false);
         }
-        if (room.score != 0){
-            vh.mark.setBackgroundResource(AppData.markLogoMap.get(room.score));
+        if (!Utils.isNull(room.scores) && !"0".equals(room.scores)){
+            int drawableRes = AppData.markLogoMap.get(room.scores);
+            vh.mark.setBackgroundResource(drawableRes);
         }else {
             vh.mark.setBackgroundResource(0);
         }

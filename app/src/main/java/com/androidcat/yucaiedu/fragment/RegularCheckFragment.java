@@ -8,12 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.Building;
@@ -32,6 +34,7 @@ import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.ClassMarkAdapter;
 import com.androidcat.yucaiedu.adapter.ClockBuildingRoomAdapter;
 import com.androidcat.yucaiedu.adapter.EastBuildingRoomAdapter;
+import com.androidcat.yucaiedu.adapter.MyExtendableListViewAdapter;
 import com.androidcat.yucaiedu.adapter.TsBuildingRoomAdapter;
 import com.androidcat.yucaiedu.chart.PercentFormatter;
 import com.androidcat.yucaiedu.ui.listener.OnRoomCheckedListener;
@@ -60,7 +63,7 @@ public class RegularCheckFragment extends BaseFragment {
     TextView menuParent;
     TextView markMenu;
     int loc = 0;
-    private RadioGroup menuRc;
+    //private RadioGroup menuRc;
     private RadioGroup viewRg;
     private RadioGroup markRg;
     View buildingView;
@@ -81,6 +84,8 @@ public class RegularCheckFragment extends BaseFragment {
     PieChart chartB;
     //PieChart chartC;
     boolean isHistory;
+    ExpandableListView expandableListView;
+    List<MenuItm> parentMenu = AppData.parentMenu;
 
     OptionsPopupWindow pwOptions;
     OptionsPopupWindow pwOptions2;
@@ -228,10 +233,10 @@ public class RegularCheckFragment extends BaseFragment {
                 }
             }
 
-            if (radioGroup == menuRc){
+            /*if (radioGroup == menuRc){
                 clearMark();
                 checkMenu(checkedId);
-            }
+            }*/
             if (radioGroup == viewRg){
                 if (checkedId == R.id.regularRb){
                     buildingPicker.setVisibility(View.VISIBLE);
@@ -295,7 +300,8 @@ public class RegularCheckFragment extends BaseFragment {
         markView = mRootView.findViewById(R.id.markView);
         markRg = mRootView.findViewById(R.id.markTab);
         viewRg = mRootView.findViewById(R.id.viewRg);
-        menuRc = mRootView.findViewById(R.id.menuRc);
+        //menuRc = mRootView.findViewById(R.id.menuRc);
+        expandableListView = mRootView.findViewById(R.id.expend_list);
         dateTv = mRootView.findViewById(R.id.dateTv);
         gradeTv = mRootView.findViewById(R.id.gradeTv);
         menuParent = mRootView.findViewById(R.id.menuParent);
@@ -330,7 +336,34 @@ public class RegularCheckFragment extends BaseFragment {
     @Override
     protected void setListener() {
         pickerLintener();
-        menuRc.setOnCheckedChangeListener(onCheckedChangeListener);
+        expandableListView.setAdapter(new MyExtendableListViewAdapter());
+        //设置分组的监听
+        /*expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                return false;
+            }
+        });*/
+        //设置子项布局监听
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                return true;
+            }
+        });
+        //控制他只能打开一个组
+        /*expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int count = new MyExtendableListViewAdapter().getGroupCount();
+                for(int i = 0;i < count;i++){
+                    if (i!=groupPosition){
+                        expandableListView.collapseGroup(i);
+                    }
+                }
+            }
+        });*/
+        //menuRc.setOnCheckedChangeListener(onCheckedChangeListener);
         viewRg.setOnCheckedChangeListener(onCheckedChangeListener);
         markRg.setOnCheckedChangeListener(onCheckedChangeListener);
         dateTv.setOnClickListener(onClickListener);
@@ -476,7 +509,8 @@ public class RegularCheckFragment extends BaseFragment {
         //
         loadEmptyRooms();
         //
-        menuRc.check(R.id.recitingRb);
+        //menuRc.check(R.id.recitingRb);
+        expandableListView.expandGroup(0);
     }
 
     void onGradeChange(){

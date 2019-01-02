@@ -21,11 +21,11 @@
         />
     <View
         android:id="@+id/mark"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="2dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/gold"/>
+        />
 </RelativeLayout>

@@ -3,22 +3,28 @@
     android:orientation="vertical"
     android:layout_width="130dp"
     android:layout_height="40dp"
-    android:background="@drawable/gray_bounds">
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RadioButton
             android:id="@+id/subMenuTxt"
             android:layout_width="130dp"
-            android:layout_height="40dp"
+            android:layout_height="39dp"
             android:layout_centerInParent="true"
             android:text=""
             android:textColor="@color/text_black2"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:button="@null"
             android:clickable="true"
             android:background="@drawable/gray_green_label_check"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+
 </LinearLayout>

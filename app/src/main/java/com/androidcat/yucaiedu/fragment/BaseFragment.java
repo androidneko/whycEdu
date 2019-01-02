@@ -53,9 +53,11 @@ public abstract class BaseFragment extends Fragment {
     }
 
     private void gotoLogin(){
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
-        getActivity().finish();
+        if(getActivity() != null && !getActivity().isDestroyed()){
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
     }
 
     protected void childHandleEventMsg(Message msg) {
@@ -110,7 +112,9 @@ public abstract class BaseFragment extends Fragment {
 
     //////////////////////////////////////////////UI提示///////////////////////////////////////////////////
     public void showToast(String text) {
-        ((BaseActivity)getActivity()).showToast(text);
+        if ((getActivity()) != null && !(getActivity()).isDestroyed()){
+            ((BaseActivity)getActivity()).showToast(text);
+        }
     }
 
 

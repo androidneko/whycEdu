@@ -19,6 +19,5 @@
      android:divider="@color/gray_item"
      android:dividerHeight="3dp"
      android:layout_height="match_parent">
-
  </ExpandableListView>
 </LinearLayout>

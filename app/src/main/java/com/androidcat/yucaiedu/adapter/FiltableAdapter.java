@@ -102,7 +102,7 @@ public class FiltableAdapter extends BaseAdapter implements Filterable {
         }
 
         //当RadioButton被选中时，将其状态记录进States中，并更新其他RadioButton的状态使它们不被选中
-        vh.markerRb.setOnClickListener(new View.OnClickListener() {
+        vh.markerIv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(markItem.isChecked) return;
                 for (MarkItem item : mDatas){
