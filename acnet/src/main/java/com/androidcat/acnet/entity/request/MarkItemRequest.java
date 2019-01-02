@@ -10,4 +10,5 @@ public class MarkItemRequest extends BaseRequest {
     public String teacherId;
     public String grade;
     public String commName;
+    public String remark;
 }

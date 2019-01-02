@@ -77,15 +77,15 @@ public class NormalEtDialog extends BaseAlertDialog<NormalEtDialog> {
         mTvContent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         mLlContainer.addView(mTvContent);
-        mEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         mEditText.setPadding(35, 5, 35, 5);
-        SpannableString ss = new SpannableString("请输入金额，最高1000元，最低0.1元");//定义hint的值
+        SpannableString ss = new SpannableString("");//定义hint的值
         AbsoluteSizeSpan ass = new AbsoluteSizeSpan(13,true);//设置字体大小 true表示单位是sp
         ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mEditText.setHint(new SpannableString(ss));
         mEditText.setHintTextColor(mDividerColor);
         mEditText.setBackgroundColor(Color.TRANSPARENT);
-        mEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
+        /*mEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
         mEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable edt) {
                 String temp = edt.toString();
@@ -108,7 +108,7 @@ public class NormalEtDialog extends BaseAlertDialog<NormalEtDialog> {
 
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
             }
-        });
+        });*/
         mLlContainer.addView(mEditText);
 
         mVLineHorizontal = new View(mContext);

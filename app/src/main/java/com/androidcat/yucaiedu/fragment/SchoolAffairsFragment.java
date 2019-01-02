@@ -55,6 +55,10 @@ import com.androidcat.yucaiedu.adapter.TobeMarkedAdapter;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
 import com.anroidcat.acwidgets.FloatBar;
 import com.bigkoo.pickerview.TimePopupWindow;
+import com.flyco.animation.FlipEnter.FlipVerticalSwingEnter;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
+import com.flyco.dialog.widget.NormalEtDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -129,7 +133,7 @@ public class SchoolAffairsFragment extends BaseFragment {
     private int floatBarIndex = 0;
     private MarkItem curItem;
     private ClassesManager classesManager;
-
+    private String badReason = "";
 
 
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
@@ -235,6 +239,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             case OptMsgConst.SA_MARK_SUCCESS:
                 dismissLoadingDialog();
                 showToast("打分成功");
+                badReason = "";
                 searchEt.setText("");
                 queryMarkItems(menuSa.getCheckedRadioButtonId());
                 break;
@@ -400,8 +405,12 @@ public class SchoolAffairsFragment extends BaseFragment {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(0, 1, 0, "规范管理");
-        menu.add(0, 2, 0, "需改进");
+        if (v == totalGrid){
+            menu.add(0, 1, 0, "规范管理");
+            menu.add(0, 2, 0, "需改进");
+        }else {
+            menu.add(0, 3, 0, "撤销");
+        }
     }
 
     @Override
@@ -411,15 +420,39 @@ public class SchoolAffairsFragment extends BaseFragment {
         if (item.getItemId() == 1){
             curItem.grade = 1;
             saMark();
-        }else {
+        }
+        else if (item.getItemId() == 2){
             curItem.grade = 0;
             showImproveDialog();
+        }else {
+            curItem.grade = -1;
+            saMark();
         }
         return true;
     }
 
     private void showImproveDialog(){
-
+        final NormalEtDialog dialog = new NormalEtDialog(getActivity());
+        dialog.content("请填写需改进的原因")
+                .contentTextColor(getResources().getColor(R.color.text_black))
+                .title("")
+                .btnText("取消", "确定") //
+                .style(NormalDialog.STYLE_TWO)//
+                .showAnim(new FlipVerticalSwingEnter())//
+                .show();
+        dialog.setOnBtnClickL(new OnBtnClickL() {
+            @Override
+            public void onBtnClick() {
+                dialog.dismiss();
+            }
+        }, new OnBtnClickL() {
+            @Override
+            public void onBtnClick() {
+                dialog.dismiss();
+                badReason = dialog.getEditText().getText().toString();
+                saMark();
+            }
+        });
     }
 
     @Override
@@ -649,7 +682,8 @@ public class SchoolAffairsFragment extends BaseFragment {
             id = ((MarkRoomItem) curItem).teacherId + "";
             commName = ((MarkRoomItem) curItem).teacherName;
         }
-        classesManager.saMark(loginName,token,curMenu,curItem.grade+"",type,id,commName);
+
+        classesManager.saMark(loginName,token,curMenu,curItem.grade+"",type,id,commName,badReason);
     }
 
     void parseMarkTeacherItems(MarkTeacherResponse markTeacherResponse){

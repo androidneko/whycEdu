@@ -147,6 +147,8 @@ public class RegularCheckFragment extends BaseFragment {
             case OptMsgConst.POST_MARK_SUCCESS:
                 dismissLoadingDialog();
                 showToast("打分成功");
+                AppData.getAppData().buildingsResponse = (BuildingsResponse) msg.obj;
+                loadBuildings();
                 if (viewRg.getCheckedRadioButtonId() == R.id.statisticRb){
                     loadCurrStatistics();
                 }

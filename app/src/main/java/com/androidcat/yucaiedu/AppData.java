@@ -36,6 +36,7 @@ public class AppData {
     public static Map<Integer,MenuItm> saMenuItmMap = new HashMap<>();
 
     public static Map<Integer,String> markMap = new HashMap<>();
+    public static Map<Integer,Integer> markLogoMap = new HashMap<>();
     public static Map<Integer,Integer> markMenuMap = new HashMap<>();
     public static Map<String,Integer> gradeMap = new HashMap<>();
     public static Map<Integer,String> eventMenuMap = new HashMap<>();
@@ -56,6 +57,9 @@ public class AppData {
         markMap.put(3,"A");
         markMap.put(2,"B");
         markMap.put(1,"C");
+        markLogoMap.put(3,R.drawable.gold);
+        markLogoMap.put(2,R.drawable.silver);
+        markLogoMap.put(1,R.drawable.copper);
 
         markMenuMap.put(R.id.aRb,3);
         markMenuMap.put(R.id.bRb,2);

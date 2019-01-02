@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 
 import com.androidcat.acnet.entity.Room;
 import com.androidcat.utilities.LogUtil;
+import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.ui.listener.OnRoomCheckedListener;
 
@@ -57,6 +58,7 @@ public class ClockBuildingRoomAdapter extends BaseAdapter {
             vh = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_room_clockbuilding, null);
             vh.classTv = convertView.findViewById(R.id.roomRb);
+            vh.mark = convertView.findViewById(R.id.mark);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
@@ -74,6 +76,11 @@ public class ClockBuildingRoomAdapter extends BaseAdapter {
             vh.classTv.setChecked(true);
         }else {
             vh.classTv.setChecked(false);
+        }
+        if (room.score != 0){
+            vh.mark.setBackgroundResource(AppData.markLogoMap.get(room.score));
+        }else {
+            vh.mark.setBackgroundResource(0);
         }
         if (!room.isEmpty){
             //当RadioButton被选中时，将其状态记录进States中，并更新其他RadioButton的状态使它们不被选中
@@ -96,6 +103,7 @@ public class ClockBuildingRoomAdapter extends BaseAdapter {
 
     static class ViewHolder {
         RadioButton classTv;
+        View mark;
     }
 
 }

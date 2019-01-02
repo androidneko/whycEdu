@@ -162,7 +162,7 @@ public class ClassesManager extends BaseManager {
         request.deptId = deptId;
         request.grade = mark;
 
-        post(InterfaceCodeConst.TYPE_POST_MARK, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
+        post(InterfaceCodeConst.TYPE_POST_MARK, getPostJson(request), new EntityResponseHandler<BuildingsResponse>() {
             @Override
             public void onStart(int code) {
                 handler.sendEmptyMessage(OptMsgConst.POST_MARK_START);
@@ -177,7 +177,7 @@ public class ClassesManager extends BaseManager {
             }
 
             @Override
-            public void onSuccess(int statusCode, BaseResponse response) {
+            public void onSuccess(int statusCode, BuildingsResponse response) {
                 Message msg = new Message();
                 msg.obj = response;
                 msg.what = OptMsgConst.POST_MARK_SUCCESS;
@@ -384,7 +384,7 @@ public class ClassesManager extends BaseManager {
         });
     }
 
-    public void saMark(String loginName,String token,String project,String grade,String type,String id,String commName){
+    public void saMark(String loginName,String token,String project,String grade,String type,String id,String commName,String remark){
         MarkItemRequest request = new MarkItemRequest();
         request.loginName = loginName;
         request.sessionId = token;
@@ -396,6 +396,7 @@ public class ClassesManager extends BaseManager {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         request.dateStr = date;
+        request.remark = remark;
         post(InterfaceCodeConst.TYPE_SA_MARK, getPostJson(request), new EntityResponseHandler<BaseResponse>() {
             @Override
             public void onStart(int code) {

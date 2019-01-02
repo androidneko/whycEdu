@@ -56,7 +56,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
             android:orientation="vertical"
-            android:background="@drawable/shape_blue_half_top_radius10"
+            android:background="@drawable/shape_darkblue_radius10"
             android:layout_weight="5">
             <TextView
                 android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 android:id="@+id/goodGrid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/gray_item"
+                android:background="@drawable/shape_gray_half_btm_radius10"
                 android:numColumns="5"
                 android:horizontalSpacing="3dp"
                 android:verticalSpacing="2dp"
@@ -82,7 +82,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
             android:orientation="vertical"
-            android:background="@drawable/shape_red_half_top_radius10"
+            android:background="@drawable/shape_red_radius10"
             android:layout_weight="3">
             <TextView
                 android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                 android:id="@+id/badGrid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/gray_item"
+                android:background="@drawable/shape_gray_half_btm_radius10"
                 android:horizontalSpacing="3dp"
                 android:verticalSpacing="2dp"
                 android:numColumns="5"

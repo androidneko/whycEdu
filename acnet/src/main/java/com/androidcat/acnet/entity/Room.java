@@ -11,5 +11,6 @@ public class Room implements Serializable{
     public boolean isChecked;
     public String desc;
     public int orderNum;
+    public int score;
     public List<Classroom> classesList;
 }
