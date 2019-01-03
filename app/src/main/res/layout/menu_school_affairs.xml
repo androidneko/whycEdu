@@ -5,7 +5,7 @@ android:layout_height="match_parent"
 android:orientation="vertical"
 android:gravity="center_horizontal"
 android:background="@color/gray_item">
-<ScrollView
+<!--<ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -230,5 +230,19 @@ android:background="@color/gray_item">
         android:layout_height="8dp"
         android:layout_centerInParent="true"
         android:background="@mipmap/arrow_down"/>
-</RelativeLayout>
+</RelativeLayout>-->
+
+    <ExpandableListView
+        android:id="@+id/expend_list"
+        android:layout_width="130dp"
+        android:layoutDirection="rtl"
+        android:scrollbars="none"
+        android:layout_height="match_parent"
+        android:divider="@null">
+    </ExpandableListView>
+    <View
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/shadow_ver"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>

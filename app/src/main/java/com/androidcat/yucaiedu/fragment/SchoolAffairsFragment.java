@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.GridView;
@@ -32,6 +33,7 @@ import com.androidcat.acnet.entity.MarkHistoryItem;
 import com.androidcat.acnet.entity.MarkItem;
 import com.androidcat.acnet.entity.MarkRoomItem;
 import com.androidcat.acnet.entity.MarkTeacherItem;
+import com.androidcat.acnet.entity.MenuItm;
 import com.androidcat.acnet.entity.RoomItemList;
 import com.androidcat.acnet.entity.TeacherItemList;
 import com.androidcat.acnet.entity.UnmarkClassItem;
@@ -51,8 +53,11 @@ import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.adapter.FiltableAdapter;
+import com.androidcat.yucaiedu.adapter.MyExtendableListViewAdapter;
+import com.androidcat.yucaiedu.adapter.SaMenuAdapter;
 import com.androidcat.yucaiedu.adapter.TobeMarkedAdapter;
 import com.androidcat.yucaiedu.ui.listener.OnItemCheckedListener;
+import com.androidcat.yucaiedu.ui.listener.OnMenuCheckedListener;
 import com.anroidcat.acwidgets.FloatBar;
 import com.bigkoo.pickerview.TimePopupWindow;
 import com.flyco.animation.FlipEnter.FlipVerticalSwingEnter;
@@ -79,13 +84,16 @@ public class SchoolAffairsFragment extends BaseFragment {
     View clear;
     View done;
     EditText searchEt;
-    private RadioGroup menuSa;
+    //private RadioGroup menuSa;
+    ExpandableListView expandableListView;
+    SaMenuAdapter menuAdapter = new SaMenuAdapter();
     private EditText eventEt;
     private TextView dateTv;
     private TextView viewTitleTv;
     private TextView viewSubTitleTv;
     private TextView editTitleTv;
     private TextView editSubTitleTv;
+    private TextView etSubTitle;
     private TextView itemNameTv;
     private TextView itemDescTv;
     private TextView listTitleTv;
@@ -128,8 +136,9 @@ public class SchoolAffairsFragment extends BaseFragment {
 
     private TimePopupWindow pwTime;
     private String curDate;
-    private String curMenu;
-    private String typeCode = "学术交流";
+    private MenuItm curMenu = AppData.childSaMenu.get(0).get(0);
+    private int groupPosition;
+    //private String typeCode = "学术交流";
     private int floatBarIndex = 0;
     private MarkItem curItem;
     private ClassesManager classesManager;
@@ -139,9 +148,9 @@ public class SchoolAffairsFragment extends BaseFragment {
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-            if (radioGroup == menuSa){
+            /*if (radioGroup == menuSa){
                 checkMenu(checkedId);
-            }
+            }*/
             if (radioGroup == viewRg){
                 if (checkedId == R.id.curLogRb){
                     saReportsView.setVisibility(View.GONE);
@@ -241,7 +250,7 @@ public class SchoolAffairsFragment extends BaseFragment {
                 showToast("打分成功");
                 badReason = "";
                 searchEt.setText("");
-                queryMarkItems(menuSa.getCheckedRadioButtonId());
+                queryMarkItems();
                 break;
             case OptMsgConst.MSG_SA_HISTORY_FAIL:
                 dismissLoadingDialog();
@@ -270,6 +279,14 @@ public class SchoolAffairsFragment extends BaseFragment {
         }
     }
 
+    private OnMenuCheckedListener onMenuCheckedListener = new OnMenuCheckedListener() {
+        @Override
+        public void onMenuChecked(MenuItm item) {
+            curMenu = item;
+            checkMenu();
+        }
+    };
+
     protected void naviBarSetup(List<String> items) {
         mFloatBar.fitScreenWidth(Utils.dp2px(getActivity(),280));
         NaviAdapter adapter =  new NaviAdapter(this.getActivity(), items);
@@ -278,7 +295,7 @@ public class SchoolAffairsFragment extends BaseFragment {
 
             @Override
             public void OnItemClick(View view, int index, Object mT) {
-                typeCode = (String) mT;
+                //typeCode = (String) mT;
                 floatBarIndex = index;
                 eventEt.setText("");
                 queryEvent();
@@ -305,12 +322,14 @@ public class SchoolAffairsFragment extends BaseFragment {
         markView = mRootView.findViewById(R.id.markView);
         eventView = mRootView.findViewById(R.id.eventView);
         titleTab = mRootView.findViewById(R.id.titleTab);
-        menuSa = mRootView.findViewById(R.id.menuSa);
+        //menuSa = mRootView.findViewById(R.id.menuSa);
+        expandableListView = mRootView.findViewById(R.id.expend_list);
         viewRg = mRootView.findViewById(R.id.viewRg);
         eventEt = mRootView.findViewById(R.id.msgEt);
         viewTitleTv = mRootView.findViewById(R.id.viewTitleTv);
         viewSubTitleTv = mRootView.findViewById(R.id.viewSubTitleTv);
         editTitleTv = mRootView.findViewById(R.id.editTitleTv);
+        etSubTitle = mRootView.findViewById(R.id.etSubTitle);
         editSubTitleTv = mRootView.findViewById(R.id.editSubTitleTv);
         clear = mRootView.findViewById(R.id.clear);
         done = mRootView.findViewById(R.id.done);
@@ -368,7 +387,23 @@ public class SchoolAffairsFragment extends BaseFragment {
         });
         clear.setOnClickListener(onClickListener);
         done.setOnClickListener(onClickListener);
-        menuSa.setOnCheckedChangeListener(onCheckedChangeListener);
+        //menuSa.setOnCheckedChangeListener(onCheckedChangeListener);
+        expandableListView.setAdapter(menuAdapter);
+        menuAdapter.setOnMenuCheckedListener(onMenuCheckedListener);
+        //控制他只能打开一个组
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                SchoolAffairsFragment.this.groupPosition = groupPosition;
+                int count = new MyExtendableListViewAdapter().getGroupCount();
+                for(int i = 0;i < count;i++){
+                    if (i!=groupPosition){
+                        expandableListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
+
         viewRg.setOnCheckedChangeListener(onCheckedChangeListener);
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -413,7 +448,8 @@ public class SchoolAffairsFragment extends BaseFragment {
             naviBars.add("学生活动");
             naviBarSetup(naviBars);
         }
-        menuSa.check(R.id.eventRb);
+        //menuSa.check(R.id.eventRb);
+        expandableListView.expandGroup(0);
     }
 
     @Override
@@ -473,9 +509,10 @@ public class SchoolAffairsFragment extends BaseFragment {
     @Override
     public void iOnResume() {
         super.iOnResume();
-        if(Utils.isNull(eventEt.getText().toString()) && menuSa.getCheckedRadioButtonId() == R.id.eventRb){
+        if(Utils.isNull(eventEt.getText().toString()) && groupPosition == 0){
             queryEvent();
         }
+        // TODO: 2019/1/3
     }
 
     /**
@@ -542,58 +579,48 @@ public class SchoolAffairsFragment extends BaseFragment {
         }
     }
 
-    void checkMenu(int menuId){
-        curMenu = AppData.saMenuItmMap.get(menuId).dictLabel;
-        editTitleTv.setText(curMenu);
-        if (menuId == R.id.eventRb){
+    void checkMenu(){
+        editTitleTv.setText(curMenu.dictLabel);
+        if (groupPosition == 0){
             eventEt.setText("");
             editSubTitleTv.setVisibility(View.VISIBLE);
             markView.setVisibility(View.GONE);
             titleTab.setVisibility(View.GONE);
             eventView.setVisibility(View.VISIBLE);
-            mFloatBar.setVisibility(View.VISIBLE);
-            typeCode = AppData.eventMenuMap.get(floatBarIndex);
+            //mFloatBar.setVisibility(View.VISIBLE);
+            //typeCode = curMenu.dictLabel;
             queryEvent();
-        }else if( menuId == R.id.accidentRb || menuId == R.id.memoRb || menuId == R.id.leavingRb){
+        }else if("意外伤害".equals(curMenu.dictLabel) || "离校巡查".equals(curMenu.dictLabel) || "备注".equals(curMenu.dictLabel)){
             eventEt.setText("");
             editSubTitleTv.setVisibility(View.GONE);
             markView.setVisibility(View.GONE);
             titleTab.setVisibility(View.GONE);
             mFloatBar.setVisibility(View.GONE);
             eventView.setVisibility(View.VISIBLE);
-            if (menuId == R.id.accidentRb){
-                typeCode = "意外伤害";
-            }
-            else if (menuId == R.id.memoRb){
-                typeCode = "备注";
-            }
-            else if (menuId == R.id.leavingRb){
-                typeCode = "离校巡查";
-            }
             queryEvent();
         }else {
             mFloatBar.setVisibility(View.GONE);
             markView.setVisibility(View.VISIBLE);
             titleTab.setVisibility(View.VISIBLE);
             eventView.setVisibility(View.GONE);
-            viewTitleTv.setText(AppData.saMenuItmMap.get(menuId).dictLabel);
-            viewSubTitleTv.setText(AppData.saMenuItmMap.get(menuId).desc);
-            listTitleTv.setText(AppData.saMenuItmMap.get(menuId).memo);
+            viewTitleTv.setText(curMenu.dictLabel);
+            viewSubTitleTv.setText(curMenu.desc);
+            listTitleTv.setText(curMenu.memo);
             itemNameTv.setText("");
             itemDescTv.setText("");
-            queryMarkItems(menuId);
+            queryMarkItems();
         }
     }
 
-    void queryMarkItems(int menuId){
-        if(menuId == R.id.clearRb){
-            queryClassItems(menuId);
+    void queryMarkItems(){
+        if("放学清场".equals(curMenu.dictLabel)){
+            queryClassItems();
         }
-        else if(menuId == R.id.workingRb){
-            queryRoomItems(menuId);
+        else if("文明办公".equals(curMenu.dictLabel)){
+            queryRoomItems();
         }
         else {
-            queryTeacherItems(menuId);
+            queryTeacherItems();
         }
     }
 
@@ -602,7 +629,7 @@ public class SchoolAffairsFragment extends BaseFragment {
         String token = AppData.getAppData().user.token;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
-        classesManager.queryEvent(loginName,token,date,typeCode);
+        classesManager.queryEvent(loginName,token,date,curMenu.dictLabel);
     }
 
     void setupEventView(QueryEventResponse eventResponse){
@@ -621,44 +648,30 @@ public class SchoolAffairsFragment extends BaseFragment {
         String token = AppData.getAppData().user.token;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
-        String type = "";
-
-        if (menuSa.getCheckedRadioButtonId() == R.id.eventRb){
-            type = typeCode;
-        }
-        else if (menuSa.getCheckedRadioButtonId() == R.id.accidentRb){
-            type = "意外伤害";
-        }
-        else if (menuSa.getCheckedRadioButtonId() == R.id.memoRb){
-            type = "备注";
-        }
-        else if (menuSa.getCheckedRadioButtonId() == R.id.leavingRb){
-            type = "离校巡查";
-        }
         if (eventEt.getTag() != null && eventEt.getTag() instanceof EventText){
             String memId = ((EventText) eventEt.getTag()).memId;
-            classesManager.postEvent(loginName,token,memId,date,type,msg);
+            classesManager.postEvent(loginName,token,memId,date,curMenu.dictLabel,msg);
         }else {
-            classesManager.postEvent(loginName,token,null,date,type,msg);
+            classesManager.postEvent(loginName,token,null,date,curMenu.dictLabel,msg);
         }
     }
 
-    void queryTeacherItems(int checkedId){
+    void queryTeacherItems(){
         String loginName = AppData.getAppData().user.loginName;
         String token = AppData.getAppData().user.token;
-        classesManager.saTeacherList(loginName,token,AppData.saMenuItmMap.get(checkedId).dictLabel);
+        classesManager.saTeacherList(loginName,token,curMenu.dictLabel);
     }
 
-    void queryRoomItems(int checkedId){
+    void queryRoomItems(){
         String loginName = AppData.getAppData().user.loginName;
         String token = AppData.getAppData().user.token;
-        classesManager.saRoomList(loginName,token,AppData.saMenuItmMap.get(checkedId).dictLabel);
+        classesManager.saRoomList(loginName,token,curMenu.dictLabel);
     }
 
-    void queryClassItems(int checkedId){
+    void queryClassItems(){
         String loginName = AppData.getAppData().user.loginName;
         String token = AppData.getAppData().user.token;
-        classesManager.saClassList(loginName,token,AppData.saMenuItmMap.get(checkedId).dictLabel);
+        classesManager.saClassList(loginName,token,curMenu.dictLabel);
     }
 
     void saMark(){
@@ -698,7 +711,7 @@ public class SchoolAffairsFragment extends BaseFragment {
             commName = ((MarkRoomItem) curItem).teacherName;
         }
 
-        classesManager.saMark(loginName,token,curMenu,curItem.grade+"",type,id,commName,badReason);
+        classesManager.saMark(loginName,token,curMenu.dictLabel,curItem.grade+"",type,id,commName,badReason);
     }
 
     void parseMarkTeacherItems(MarkTeacherResponse markTeacherResponse){

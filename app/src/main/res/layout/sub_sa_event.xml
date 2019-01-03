@@ -48,14 +48,23 @@
             android:background="@mipmap/book" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:padding="3dp"
-        android:background="@drawable/shape_white_border_radius10">
-
+        android:orientation="vertical"
+        android:padding="1dp"
+        android:background="@drawable/shape_darkblue_radius10">
+        <TextView
+            android:id="@+id/etSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            android:text=""
+            android:textSize="16sp"
+            android:gravity="center_vertical"/>
         <com.anroidcat.acwidgets.FloatBar
             android:id="@+id/navi_bar"
             android:layout_width="match_parent"
@@ -66,13 +75,14 @@
             tabwidget:slider="@drawable/nav_tab_selected"
             tabwidget:tabArrowEnabled="false"
             tabwidget:tabCount="5"
+            android:visibility="gone"
             />
         <RelativeLayout
             android:layout_below="@+id/navi_bar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:layout_marginTop="-1dp"
-            android:background="@color/gray_item">
+            android:background="@drawable/shape_gray_half_btm_radius10">
             <com.anroidcat.acwidgets.LinedEditText
                 android:id="@+id/msgEt"
                 android:layout_width="match_parent"
@@ -83,7 +93,7 @@
                 android:textSize="18sp"
                  />
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

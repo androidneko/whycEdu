@@ -15,7 +15,6 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidcat.acnet.consts.OptMsgConst;
 import com.androidcat.acnet.entity.Building;
@@ -37,6 +36,7 @@ import com.androidcat.yucaiedu.adapter.EastBuildingRoomAdapter;
 import com.androidcat.yucaiedu.adapter.MyExtendableListViewAdapter;
 import com.androidcat.yucaiedu.adapter.TsBuildingRoomAdapter;
 import com.androidcat.yucaiedu.chart.PercentFormatter;
+import com.androidcat.yucaiedu.ui.listener.OnMenuCheckedListener;
 import com.androidcat.yucaiedu.ui.listener.OnRoomCheckedListener;
 import com.bigkoo.pickerview.OptionsPopupWindow;
 import com.bigkoo.pickerview.TimePopupWindow;
@@ -85,7 +85,7 @@ public class RegularCheckFragment extends BaseFragment {
     //PieChart chartC;
     boolean isHistory;
     ExpandableListView expandableListView;
-    List<MenuItm> parentMenu = AppData.parentMenu;
+    MyExtendableListViewAdapter menuAdapter = new MyExtendableListViewAdapter();
 
     OptionsPopupWindow pwOptions;
     OptionsPopupWindow pwOptions2;
@@ -105,7 +105,7 @@ public class RegularCheckFragment extends BaseFragment {
     private List<ClassMark> classMarks = new ArrayList<>();
     private ClassMarkAdapter classMarkAdapter;
 
-    private String curMenu = "经典诵读";
+    private MenuItm curMenu = AppData.childMenu.get(0).get(0);
     private ClassMark curClass;
     private Room curRoom;
     private String curDate;
@@ -215,6 +215,14 @@ public class RegularCheckFragment extends BaseFragment {
                 default:
                     break;
             }
+        }
+    };
+
+    private OnMenuCheckedListener onMenuCheckedListener = new OnMenuCheckedListener() {
+        @Override
+        public void onMenuChecked(MenuItm item) {
+            curMenu = item;
+            checkMenu();
         }
     };
 
@@ -336,7 +344,8 @@ public class RegularCheckFragment extends BaseFragment {
     @Override
     protected void setListener() {
         pickerLintener();
-        expandableListView.setAdapter(new MyExtendableListViewAdapter());
+        expandableListView.setAdapter(menuAdapter);
+        menuAdapter.setOnMenuCheckedListener(onMenuCheckedListener);
         //设置分组的监听
         /*expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -352,7 +361,7 @@ public class RegularCheckFragment extends BaseFragment {
             }
         });
         //控制他只能打开一个组
-        /*expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
                 int count = new MyExtendableListViewAdapter().getGroupCount();
@@ -362,7 +371,7 @@ public class RegularCheckFragment extends BaseFragment {
                     }
                 }
             }
-        });*/
+        });
         //menuRc.setOnCheckedChangeListener(onCheckedChangeListener);
         viewRg.setOnCheckedChangeListener(onCheckedChangeListener);
         markRg.setOnCheckedChangeListener(onCheckedChangeListener);
@@ -486,7 +495,7 @@ public class RegularCheckFragment extends BaseFragment {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         String mark = item.getItemId()+"";
-        classesManager.postMark(loginName,token,date,curClass.roomId,curMenu,mark);
+        classesManager.postMark(loginName,token,date,curClass.roomId,curMenu.dictLabel,mark);
         return true;
     }
 
@@ -505,7 +514,7 @@ public class RegularCheckFragment extends BaseFragment {
         }
         classesManager.getMenuRc(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
         classesManager.getGradeList(AppData.getAppData().user.loginName,AppData.getAppData().user.token);
-        classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu);
+        classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu.dictLabel);
         //
         loadEmptyRooms();
         //
@@ -527,7 +536,7 @@ public class RegularCheckFragment extends BaseFragment {
         String loginName = AppData.getAppData().user.loginName;
         String token = AppData.getAppData().user.token;
         int classGradeId = AppData.gradeMap.get(gradeTv.getText().toString());
-        String timetable = curMenu;
+        String timetable = curMenu.dictLabel;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         curDate = sdf.format(new Date());
         dateTv.setText(DateUtil.getYMDW(new Date()));
@@ -538,7 +547,7 @@ public class RegularCheckFragment extends BaseFragment {
         String loginName = AppData.getAppData().user.loginName;
         String token = AppData.getAppData().user.token;
         int classGradeId = AppData.gradeMap.get(gradeTv.getText().toString());
-        String timetable = curMenu;
+        String timetable = curMenu.dictLabel;
         classesManager.classMarkList(loginName,token,classGradeId,timetable,curDate);
     }
 
@@ -606,7 +615,7 @@ public class RegularCheckFragment extends BaseFragment {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         String mark = AppData.markMenuMap.get(checkedId)+"";
-        classesManager.postMark(loginName,token,date,curRoom.deptId,curMenu,mark);
+        classesManager.postMark(loginName,token,date,curRoom.deptId,curMenu.dictLabel,mark);
     }
 
     private void setupCharts(){
@@ -737,11 +746,10 @@ public class RegularCheckFragment extends BaseFragment {
         return true;
     }
 
-    void checkMenu(int menuId){
-        curMenu = AppData.rcMenuItmMap.get(menuId).dictLabel;
-        markMenu.setText(curMenu);
+    void checkMenu(){
+        markMenu.setText(curMenu.dictLabel);
         if (viewRg.getCheckedRadioButtonId() == R.id.regularRb){
-            menuParent.setText(AppData.rcMenuItmMap.get(menuId).parent);
+            menuParent.setText(curMenu.parent);
         }
         if (viewRg.getCheckedRadioButtonId() == R.id.statisticRb){
             loadCurrStatistics();

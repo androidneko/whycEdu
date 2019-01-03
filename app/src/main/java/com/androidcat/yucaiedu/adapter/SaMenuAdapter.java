@@ -9,8 +9,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.androidcat.acnet.entity.MenuItm;
-import com.androidcat.acnet.entity.TextMenu;
-import com.androidcat.utilities.LogUtil;
 import com.androidcat.yucaiedu.AppData;
 import com.androidcat.yucaiedu.R;
 import com.androidcat.yucaiedu.ui.listener.OnMenuCheckedListener;
@@ -22,10 +20,10 @@ import java.util.List;
  * Created by androidcat on 2018/12/28.
  */
 
-public class MyExtendableListViewAdapter extends BaseExpandableListAdapter {
+public class SaMenuAdapter extends BaseExpandableListAdapter {
     private Context mcontext;
-    List<MenuItm> parentMenu = AppData.parentMenu;
-    List<ArrayList<MenuItm>> childMenu = AppData.childMenu;
+    List<MenuItm> parentMenu = AppData.parentSaMenu;
+    List<ArrayList<MenuItm>> childMenu = AppData.childSaMenu;
     public OnMenuCheckedListener onMenuCheckedListener;
 
     @Override
@@ -40,7 +38,7 @@ public class MyExtendableListViewAdapter extends BaseExpandableListAdapter {
         return childMenu.get(groupPosition).size();
     }
 
-    //        获取指定的分组数据
+    //获取指定的分组数据
     @Override
     public Object getGroup(int groupPosition) {
         return parentMenu.get(groupPosition);
@@ -103,8 +101,8 @@ public class MyExtendableListViewAdapter extends BaseExpandableListAdapter {
      * @param convertView 重用已有的视图(View)对象
      * @param parent 返回的视图(View)对象始终依附于的视图组
      * @return
-     * @see android.widget.ExpandableListAdapter#getChildView(int, int, boolean, android.view.View,
-     *      android.view.ViewGroup)
+     * @see android.widget.ExpandableListAdapter#getChildView(int, int, boolean, View,
+     *      ViewGroup)
      */
 
     //取得显示给定分组给定子位置的数据用的视图
@@ -140,7 +138,7 @@ public class MyExtendableListViewAdapter extends BaseExpandableListAdapter {
                 if (onMenuCheckedListener != null){
                     onMenuCheckedListener.onMenuChecked(textMenu);
                 }
-                MyExtendableListViewAdapter.this.notifyDataSetChanged();
+                SaMenuAdapter.this.notifyDataSetChanged();
             }
         });
 
