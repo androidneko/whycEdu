@@ -78,7 +78,7 @@
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:background="@mipmap/mark_bg">
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
             android:layout_width="180dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
-            android:background="@mipmap/melon_bean"
+            android:background="@drawable/melon_bean"
             android:layout_marginTop="-50dp"/>
     </LinearLayout>
 </LinearLayout>

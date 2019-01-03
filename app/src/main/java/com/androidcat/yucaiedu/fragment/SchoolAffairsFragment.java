@@ -580,7 +580,8 @@ public class SchoolAffairsFragment extends BaseFragment {
     }
 
     void checkMenu(){
-        editTitleTv.setText(curMenu.dictLabel);
+        editTitleTv.setText(curMenu.parent);
+        etSubTitle.setText(curMenu.dictLabel);
         if (groupPosition == 0){
             eventEt.setText("");
             editSubTitleTv.setVisibility(View.VISIBLE);

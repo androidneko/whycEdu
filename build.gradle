@@ -29,8 +29,8 @@ task clean(type: Delete) {
 // Define versions in a single place
 ext {
     //version
-    appVersion = '0.2'
-    appVersionCode = 1
+    appVersion = '2.0'
+    appVersionCode = 2
 
     javaMaxHeapSize = '1024m'
 

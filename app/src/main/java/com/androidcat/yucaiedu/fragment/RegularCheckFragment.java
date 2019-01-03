@@ -254,6 +254,7 @@ public class RegularCheckFragment extends BaseFragment {
                     gradeTv.setBackgroundResource(R.color.transparent);
                     dateTv.setBackgroundResource(R.color.transparent);
                     dateTv.setClickable(false);
+                    classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu.dictLabel);
                 }
                 if (checkedId == R.id.statisticRb){
                     buildingPicker.setVisibility(View.GONE);
@@ -289,7 +290,7 @@ public class RegularCheckFragment extends BaseFragment {
                     postMark(checkedId);
                 }
                 if (checkedId == R.id.cRb && checkIfRoomChecked()){
-                    markHeart.setBackgroundResource(R.drawable.markb);
+                    markHeart.setBackgroundResource(R.drawable.markc);
                     postMark(checkedId);
                 }
             }
@@ -750,6 +751,7 @@ public class RegularCheckFragment extends BaseFragment {
         markMenu.setText(curMenu.dictLabel);
         if (viewRg.getCheckedRadioButtonId() == R.id.regularRb){
             menuParent.setText(curMenu.parent);
+            classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu.dictLabel);
         }
         if (viewRg.getCheckedRadioButtonId() == R.id.statisticRb){
             loadCurrStatistics();

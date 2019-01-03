@@ -62,7 +62,7 @@
             android:layout_height="45dp"
             android:textColor="@color/white"
             android:layout_marginLeft="15dp"
-            android:text=""
+            android:text="学术交流"
             android:textSize="16sp"
             android:gravity="center_vertical"/>
         <com.anroidcat.acwidgets.FloatBar
@@ -80,13 +80,13 @@
         <RelativeLayout
             android:layout_below="@+id/navi_bar"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="390dp"
             android:layout_marginTop="-1dp"
             android:background="@drawable/shape_gray_half_btm_radius10">
             <com.anroidcat.acwidgets.LinedEditText
                 android:id="@+id/msgEt"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="450dp"
                 android:layout_weight="8"
                 android:inputType="textMultiLine"
                 android:lineSpacingExtra="10dp"
@@ -104,13 +104,19 @@
             android:id="@+id/clear"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:background="@mipmap/clear"/>
+            android:text="清空"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_bg"/>
         <Button
             android:id="@+id/done"
             android:layout_width="80dp"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="50dp"
-            android:background="@mipmap/done"/>
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="完成"
+            android:background="@drawable/btn_bg"/>
     </LinearLayout>
 </LinearLayout>

@@ -19,6 +19,7 @@ import com.androidcat.yucaiedu.adapter.ClassScoreAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ public class ClassesScoresFragment extends BaseFragment {
     private RadioGroup gradeRg;
     private RadioGroup typeRg;
     View sortView;
+    View sortClassView;
     List<ScoreEntity> scoreEntities = new ArrayList<>();
     ClassScoreAdapter adapter;
 
@@ -103,6 +105,15 @@ public class ClassesScoresFragment extends BaseFragment {
                 Collections.sort(scoreEntities);
                 if (adapter != null) adapter.notifyDataSetChanged();
             }
+            if (view == sortClassView){
+                Collections.sort(scoreEntities, new Comparator<ScoreEntity>() {
+                    @Override
+                    public int compare(ScoreEntity scoreEntity, ScoreEntity t1) {
+                        return scoreEntity.classesName.compareTo(t1.classesName);
+                    }
+                });
+                if (adapter != null) adapter.notifyDataSetChanged();
+            }
         }
     };
 
@@ -116,12 +127,14 @@ public class ClassesScoresFragment extends BaseFragment {
         gradeRg = mRootView.findViewById(R.id.gradeRg);
         typeRg = mRootView.findViewById(R.id.typeRg);
         sortView = mRootView.findViewById(R.id.sortView);
+        sortClassView = mRootView.findViewById(R.id.sortClassView);
         scoreList = mRootView.findViewById(R.id.scoreList);
     }
 
     @Override
     protected void setListener() {
         sortView.setOnClickListener(onSingleClickListener);
+        sortClassView.setOnClickListener(onSingleClickListener);
         gradeRg.setOnCheckedChangeListener(onCheckedChangeListener);
         typeRg.setOnCheckedChangeListener(onCheckedChangeListener);
     }
