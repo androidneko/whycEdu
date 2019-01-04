@@ -109,7 +109,7 @@ public class ClassesScoresFragment extends BaseFragment {
                 Collections.sort(scoreEntities, new Comparator<ScoreEntity>() {
                     @Override
                     public int compare(ScoreEntity scoreEntity, ScoreEntity t1) {
-                        return scoreEntity.classesName.compareTo(t1.classesName);
+                        return scoreEntity.classesOrderNum - t1.classesOrderNum;
                     }
                 });
                 if (adapter != null) adapter.notifyDataSetChanged();

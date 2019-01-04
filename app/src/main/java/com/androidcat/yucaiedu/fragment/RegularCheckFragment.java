@@ -25,6 +25,7 @@ import com.androidcat.acnet.entity.response.BuildingsResponse;
 import com.androidcat.acnet.entity.response.ClassMarkListResponse;
 import com.androidcat.acnet.entity.response.MenuResponse;
 import com.androidcat.acnet.manager.ClassesManager;
+import com.androidcat.utilities.Utils;
 import com.androidcat.utilities.date.DateUtil;
 import com.androidcat.utilities.listener.OnSingleClickListener;
 import com.androidcat.utilities.persistence.SpUtil;
@@ -98,7 +99,7 @@ public class RegularCheckFragment extends BaseFragment {
 
     private String building = "钟楼";
     private String curGrade = "一年级";
-    private String curLesson = "第一节课";
+    private String curLesson = "第一节";
     private List<Room> clockBuildingRooms = new ArrayList<>();
     private ClockBuildingRoomAdapter roomAdapter;
     private List<Room> tsBuildingRooms = new ArrayList<>();
@@ -219,7 +220,29 @@ public class RegularCheckFragment extends BaseFragment {
                 case R.id.classTv:
                     backgroundAlpha(1.0f);
                     lessonOptions.showAtLocation(gradeTv, Gravity.BOTTOM, 0, 0);
-                    lessonOptions.setSelectOptions(0);
+                    if ("上午巡堂".equals(curMenu.dictLabel)){
+                        if ("第一节".equals(curLesson)) {
+                            lessonOptions.setSelectOptions(0);
+                        }else if("第二节".equals(curLesson)){
+                            lessonOptions.setSelectOptions(1);
+                        }else if("第三节".equals(curLesson)){
+                            lessonOptions.setSelectOptions(2);
+                        }else if("第四节".equals(curLesson)){
+                            lessonOptions.setSelectOptions(3);
+                        }
+                    }
+                    else if ("下午巡堂".equals(curMenu.dictLabel)){
+                        if ("第五节".equals(curLesson)) {
+                            lessonOptions.setSelectOptions(0);
+                        }else if("第六节".equals(curLesson)){
+                            lessonOptions.setSelectOptions(1);
+                        }else if("第七节".equals(curLesson)){
+                            lessonOptions.setSelectOptions(2);
+                        }
+                    }
+                    else {
+                        lessonOptions.setSelectOptions(0);
+                    }
                     break;
                 default:
                     break;
@@ -259,6 +282,11 @@ public class RegularCheckFragment extends BaseFragment {
                     buildingPicker.setVisibility(View.VISIBLE);
                     buildingView.setVisibility(View.VISIBLE);
                     statisticsView.setVisibility(View.GONE);
+                    if ("上午巡堂".equals(curMenu.dictLabel) || "下午巡堂".equals(curMenu.dictLabel)){
+                        lessonTv.setVisibility(View.VISIBLE);
+                    }else {
+                        lessonTv.setVisibility(View.GONE);
+                    }
                     gradeTv.setVisibility(View.GONE);
                     gradeTv.setBackgroundResource(R.color.transparent);
                     dateTv.setBackgroundResource(R.color.transparent);
@@ -266,6 +294,7 @@ public class RegularCheckFragment extends BaseFragment {
                     classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu.dictLabel);
                 }
                 if (checkedId == R.id.statisticRb){
+                    lessonTv.setVisibility(View.GONE);
                     buildingPicker.setVisibility(View.GONE);
                     buildingView.setVisibility(View.GONE);
                     statisticsView.setVisibility(View.VISIBLE);
@@ -277,6 +306,7 @@ public class RegularCheckFragment extends BaseFragment {
                     loadCurrStatistics();
                 }
                 if (checkedId == R.id.historyRb){
+                    lessonTv.setVisibility(View.GONE);
                     buildingPicker.setVisibility(View.GONE);
                     buildingView.setVisibility(View.GONE);
                     statisticsView.setVisibility(View.VISIBLE);
@@ -500,27 +530,24 @@ public class RegularCheckFragment extends BaseFragment {
 
         //第几节课选择
         lessonOptions = new OptionsPopupWindow(getActivity());
+        lessonTv.setText(curLesson);
     }
 
     private void setLessonPicker(){
         //选项1
         lessonItems.clear();
         if ("上午巡堂".equals(curMenu.dictLabel)){
-            lessonItems.add("第一节课");
-            lessonItems.add("第二节课");
-            lessonItems.add("第三节课");
-            lessonItems.add("第四节课");
-            curLesson = "第一节课";
+            lessonItems.add("第一节");
+            lessonItems.add("第二节");
+            lessonItems.add("第三节");
+            lessonItems.add("第四节");
         }
         if ("下午巡堂".equals(curMenu.dictLabel)){
-            lessonItems.add("第五节课");
-            lessonItems.add("第六节课");
-            lessonItems.add("第七节课");
-            curLesson = "第五节课";
+            lessonItems.add("第五节");
+            lessonItems.add("第六节");
+            lessonItems.add("第七节");
         }
         lessonOptions.setPicker(lessonItems);
-        //设置默认选中的三级项目
-        lessonOptions.setSelectOptions(0);
     }
 
     @Override
@@ -663,12 +690,16 @@ public class RegularCheckFragment extends BaseFragment {
         if (curRoom == null){
             return;
         }
+        String project = curMenu.dictLabel;
+        if ("上午巡堂".equals(curMenu.dictLabel) || "下午巡堂".equals(curMenu.dictLabel)){
+            project = curLesson;
+        }
         String loginName = AppData.getAppData().user.loginName;
         String token = AppData.getAppData().user.token;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
         String mark = AppData.markMenuMap.get(checkedId)+"";
-        classesManager.postMark(loginName,token,date,curRoom.deptId,curMenu.dictLabel,mark);
+        classesManager.postMark(loginName,token,date,curRoom.deptId,project,mark);
     }
 
     private void setupCharts(){
@@ -803,11 +834,20 @@ public class RegularCheckFragment extends BaseFragment {
         markMenu.setText(curMenu.dictLabel);
         if (viewRg.getCheckedRadioButtonId() == R.id.regularRb){
             menuParent.setText(curMenu.parent);
-            if ("上午巡堂".equals(curMenu.dictLabel) || "下午巡堂".equals(curMenu.dictLabel)){
+            if ("上午巡堂".equals(curMenu.dictLabel)){
                 setLessonPicker();
+                curLesson = "第一节";
+                lessonTv.setText(curLesson);
+                lessonTv.setVisibility(View.VISIBLE);
+            }
+            else if("下午巡堂".equals(curMenu.dictLabel)){
+                setLessonPicker();
+                curLesson = "第五节";
+                lessonTv.setText(curLesson);
+                lessonTv.setVisibility(View.VISIBLE);
             }
             else {
-
+                lessonTv.setVisibility(View.GONE);
             }
             classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu.dictLabel);
         }
@@ -822,6 +862,17 @@ public class RegularCheckFragment extends BaseFragment {
     void loadBuildings(){
         List<Building> buildings = AppData.getAppData().buildingsResponse.content.get(0).children;
         for (Building building : buildings){
+
+            //提取project
+            if (building.children != null && building.children.size()>0){
+                for(Room room : building.children){
+                    if (room != null && !Utils.isNull(room.project)){
+                        curLesson = room.project;
+                        lessonTv.setText(curLesson);
+                        break;
+                    }
+                }
+            }
             if ("钟楼".equals(building.deptName)){
                 roomAdapter = new ClockBuildingRoomAdapter(getActivity(),building.children);
                 clockGrid.setAdapter(roomAdapter);

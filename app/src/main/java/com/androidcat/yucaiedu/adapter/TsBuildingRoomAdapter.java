@@ -85,8 +85,8 @@ public class TsBuildingRoomAdapter extends BaseAdapter {
         }else {
             vh.mark.setBackgroundResource(0);
         }
-        if (!Utils.isNull(room.desc)){
-            vh.descTv.setText(room.desc);
+        if (!Utils.isNull(room.teacher)){
+            vh.descTv.setText(room.teacher);
         }
         if (!room.isEmpty){
             //当RadioButton被选中时，将其状态记录进States中，并更新其他RadioButton的状态使它们不被选中

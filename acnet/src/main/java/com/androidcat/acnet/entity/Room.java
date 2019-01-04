@@ -9,7 +9,8 @@ public class Room implements Serializable{
     public String deptName;
     public boolean isEmpty;
     public boolean isChecked;
-    public String desc;
+    public String teacher;
+    public String project;
     public int orderNum;
     public String scores;
     public List<Classroom> classesList;

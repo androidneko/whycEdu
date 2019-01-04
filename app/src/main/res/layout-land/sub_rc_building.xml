@@ -34,19 +34,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </RelativeLayout>
-        <TextView
-            android:id="@+id/classTv"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/class_bg"
-            android:text="请选择"
-            android:gravity="center"
-            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_weight="5">
@@ -55,7 +47,7 @@
             <RelativeLayout
                 android:id="@+id/clockBuilding"
                 android:layout_width="wrap_content"
-                android:layout_height="490dp"
+                android:layout_height="580dp"
                 android:visibility="visible">
                 <LinearLayout
                     android:id="@+id/clockGridHeader"
@@ -64,7 +56,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="190dp"
                         android:background="@drawable/shape_blue_radius10"
                         android:text="3F"
                         android:gravity="center"
@@ -72,7 +64,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="210dp"
+                        android:layout_height="252dp"
                         android:background="@drawable/shape_blue_radius10"
                         android:layout_marginTop="5dp"
                         android:text="2F"
@@ -81,7 +73,7 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="105dp"
+                        android:layout_height="123dp"
                         android:background="@drawable/shape_blue_radius10"
                         android:layout_marginTop="5dp"
                         android:text="1F"
@@ -93,7 +85,7 @@
                     android:id="@+id/clockBuildingGrid"
                     android:layout_toRightOf="@+id/clockGridHeader"
                     android:layout_width="450dp"
-                    android:layout_height="490dp"
+                    android:layout_height="580dp"
                     android:layout_marginLeft="5dp"
                     android:verticalSpacing="5dp"
                     android:horizontalSpacing="5dp"

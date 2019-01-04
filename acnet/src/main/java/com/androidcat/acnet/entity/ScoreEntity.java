@@ -10,6 +10,7 @@ public class ScoreEntity implements Serializable,Comparable<ScoreEntity>{
     public int doumei;
     public int guage;
     public int shengyu;
+    public int classesOrderNum;
 
     @Override
     public int compareTo(@NonNull ScoreEntity scoreEntity) {
