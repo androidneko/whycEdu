@@ -28,4 +28,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         />
+    <TextView
+        android:id="@+id/descTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        android:text=""
+        />
 </RelativeLayout>

@@ -62,6 +62,7 @@ public class RegularCheckFragment extends BaseFragment {
     TextView buildingTv;
     TextView menuParent;
     TextView markMenu;
+    TextView lessonTv;
     int loc = 0;
     //private RadioGroup menuRc;
     private RadioGroup viewRg;
@@ -89,12 +90,15 @@ public class RegularCheckFragment extends BaseFragment {
 
     OptionsPopupWindow pwOptions;
     OptionsPopupWindow pwOptions2;
+    OptionsPopupWindow lessonOptions;
     TimePopupWindow pwTime;
     private ArrayList<String> optionsItems = new ArrayList<String>();
     private ArrayList<String> gradeItems = new ArrayList<String>();
+    private ArrayList<String> lessonItems = new ArrayList<String>();
 
     private String building = "钟楼";
     private String curGrade = "一年级";
+    private String curLesson = "第一节课";
     private List<Room> clockBuildingRooms = new ArrayList<>();
     private ClockBuildingRoomAdapter roomAdapter;
     private List<Room> tsBuildingRooms = new ArrayList<>();
@@ -212,6 +216,11 @@ public class RegularCheckFragment extends BaseFragment {
                         pwOptions2.setSelectOptions(5);
                     }
                     break;
+                case R.id.classTv:
+                    backgroundAlpha(1.0f);
+                    lessonOptions.showAtLocation(gradeTv, Gravity.BOTTOM, 0, 0);
+                    lessonOptions.setSelectOptions(0);
+                    break;
                 default:
                     break;
             }
@@ -313,6 +322,7 @@ public class RegularCheckFragment extends BaseFragment {
         expandableListView = mRootView.findViewById(R.id.expend_list);
         dateTv = mRootView.findViewById(R.id.dateTv);
         gradeTv = mRootView.findViewById(R.id.gradeTv);
+        lessonTv = mRootView.findViewById(R.id.classTv);
         menuParent = mRootView.findViewById(R.id.menuParent);
         markMenu = mRootView.findViewById(R.id.markMenu);
         buildingTv = mRootView.findViewById(R.id.buildingTv);
@@ -378,6 +388,7 @@ public class RegularCheckFragment extends BaseFragment {
         markRg.setOnCheckedChangeListener(onCheckedChangeListener);
         dateTv.setOnClickListener(onClickListener);
         gradeTv.setOnClickListener(onClickListener);
+        lessonTv.setOnClickListener(onClickListener);
         buildingPicker.setOnClickListener(onClickListener);
         //时间选择后回调
         pwTime.setOnTimeSelectListener(new TimePopupWindow.OnTimeSelectListener() {
@@ -433,6 +444,23 @@ public class RegularCheckFragment extends BaseFragment {
                 backgroundAlpha(1.0f);
             }
         });
+
+        //第几节课选择按钮
+        lessonOptions.setOnoptionsSelectListener(new OptionsPopupWindow.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                //返回的分别是三个级别的选中位置
+                String lesson = lessonItems.get(options1);
+                RegularCheckFragment.this.curLesson = lesson;
+                lessonTv.setText(lesson);
+            }
+        });
+        lessonOptions.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0f);
+            }
+        });
     }
 
     /**
@@ -469,6 +497,30 @@ public class RegularCheckFragment extends BaseFragment {
         pwOptions2.setPicker(gradeItems);
         //设置默认选中的三级项目
         pwOptions2.setSelectOptions(0);
+
+        //第几节课选择
+        lessonOptions = new OptionsPopupWindow(getActivity());
+    }
+
+    private void setLessonPicker(){
+        //选项1
+        lessonItems.clear();
+        if ("上午巡堂".equals(curMenu.dictLabel)){
+            lessonItems.add("第一节课");
+            lessonItems.add("第二节课");
+            lessonItems.add("第三节课");
+            lessonItems.add("第四节课");
+            curLesson = "第一节课";
+        }
+        if ("下午巡堂".equals(curMenu.dictLabel)){
+            lessonItems.add("第五节课");
+            lessonItems.add("第六节课");
+            lessonItems.add("第七节课");
+            curLesson = "第五节课";
+        }
+        lessonOptions.setPicker(lessonItems);
+        //设置默认选中的三级项目
+        lessonOptions.setSelectOptions(0);
     }
 
     @Override
@@ -751,6 +803,12 @@ public class RegularCheckFragment extends BaseFragment {
         markMenu.setText(curMenu.dictLabel);
         if (viewRg.getCheckedRadioButtonId() == R.id.regularRb){
             menuParent.setText(curMenu.parent);
+            if ("上午巡堂".equals(curMenu.dictLabel) || "下午巡堂".equals(curMenu.dictLabel)){
+                setLessonPicker();
+            }
+            else {
+
+            }
             classesManager.getBuildings(AppData.getAppData().user.loginName,AppData.getAppData().user.token,curDate,curMenu.dictLabel);
         }
         if (viewRg.getCheckedRadioButtonId() == R.id.statisticRb){
